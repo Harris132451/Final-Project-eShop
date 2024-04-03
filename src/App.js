@@ -3,6 +3,13 @@ import Inputbox from "./Component/input.js";
 import Cart from "./Component/SC.js";
 import { useState } from "react";
 
+//---------------------------------------------
+import { useState, useEffect } from "react";
+import Header from "./components/Header";
+import Promotion from "./components/Promotion";
+import Footer from "./components/Footer";
+//---------------------------------------------
+
 function App() {
   const [cart, setCart] = useState([
     {
@@ -47,6 +54,43 @@ function App() {
   }
   console.log(cart);
 
+  //---------------------------------------------
+  const [location, setLocation] = useState("");
+  const [temperature, setTemperature] = useState("");
+  const [updateTime, setUpdateTime] = useState("");
+  const [weather, setWeather] = useState("");
+
+  useEffect(() => {
+    async function fetchWeatherData() {
+      const weatherAPI =
+        "https://data.weather.gov.hk/weatherAPI/opendata/weather.php?dataType=rhrread&lang=en";
+      const res = await fetch(weatherAPI);
+      const weatherData = await res.json();
+
+      const location = weatherData.temperature.data[1].place;
+      const temperature = weatherData.temperature.data[1].value;
+      const updateTime = weatherData.updateTime;
+      const fomatTime = `${updateTime.slice(0, 10)}, ${updateTime.slice(
+        11,
+        16
+      )}`;
+
+      setLocation(location);
+      setTemperature(temperature);
+      setUpdateTime(fomatTime);
+
+      if (temperature < 15) {
+        setWeather("cold");
+      } else if (temperature > 35) {
+        setWeather("hot");
+      } else {
+        setWeather("normal");
+      }
+    }
+    fetchWeatherData();
+  }, []);
+  //---------------------------------------------
+
   return (
     <>
       <Inputbox />
@@ -58,6 +102,16 @@ function App() {
         {CartWord}
       </button>
       {!OpenCart && <Cart ItemChangeIncart={updateCart} CartItems={cart} />}
+    </>
+  //---------------------------------------------
+       <>
+      <Header temperature={temperature} weather={weather} />
+      <Promotion
+        location={location}
+        temperature={temperature}
+        updateTime={updateTime}
+      />
+      <Footer />
     </>
   );
 }
