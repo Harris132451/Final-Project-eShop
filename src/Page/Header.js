@@ -1,7 +1,7 @@
 import { useState } from "react";
-import Weather from "./Weather.js";
-import Inputbox from "./input.js";
-import Cart from "./SC.js";
+import Weather from "./Component/Weather.js";
+import Inputbox from "./Component/input.js";
+import Cart from "./Component/SC.js";
 
 function Header(props) {
   const temperature = props.temperature;
