@@ -1,13 +1,12 @@
 import "./App.css";
 import Inputbox from "./Component/input.js";
 import Cart from "./Component/SC.js";
-import { useState } from "react";
 
 //---------------------------------------------
 import { useState, useEffect } from "react";
-import Header from "./components/Header";
-import Promotion from "./components/Promotion";
-import Footer from "./components/Footer";
+import Header from "./Component/Header";
+import Promotion from "./Component/Promotion";
+import Footer from "./Component/Footer";
 //---------------------------------------------
 
 function App() {
@@ -102,9 +101,7 @@ function App() {
         {CartWord}
       </button>
       {!OpenCart && <Cart ItemChangeIncart={updateCart} CartItems={cart} />}
-    </>
-  //---------------------------------------------
-       <>
+      //---------------------------------------------
       <Header temperature={temperature} weather={weather} />
       <Promotion
         location={location}
