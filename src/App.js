@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import Header from "./Component/Header.js";
 import Promotion from "./Component/Promotion.js";
 import Footer from "./Component/Footer.js";
-//---------------------------------------------
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 function App() {
   const [cart, setCart] = useState([
@@ -46,7 +46,6 @@ function App() {
   }
   console.log(cart);
 
-  //---------------------------------------------
   const [location, setLocation] = useState("");
   const [temperature, setTemperature] = useState("");
   const [updateTime, setUpdateTime] = useState("");
@@ -81,7 +80,6 @@ function App() {
     }
     fetchWeatherData();
   }, []);
-  //---------------------------------------------
 
   return (
     <>
@@ -97,6 +95,13 @@ function App() {
         updateTime={updateTime}
       />
       <Footer />
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Layout />}>
+            <Route path="pages1" element={<page1 />} />
+          </Route>
+        </Routes>
+      </BrowserRouter>
     </>
   );
 }
