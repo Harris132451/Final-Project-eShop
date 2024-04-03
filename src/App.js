@@ -1,12 +1,8 @@
 import "./App.css";
-import Inputbox from "./Component/input.js";
-import Cart from "./Component/SC.js";
-
-//---------------------------------------------
 import { useState, useEffect } from "react";
-import Header from "./Component/Header";
-import Promotion from "./Component/Promotion";
-import Footer from "./Component/Footer";
+import Header from "./Component/Header.js";
+import Promotion from "./Component/Promotion.js";
+import Footer from "./Component/Footer.js";
 //---------------------------------------------
 
 function App() {
@@ -26,9 +22,6 @@ function App() {
       price: 10,
     },
   ]);
-  const [OpenCart, setOpenCart] = useState(false);
-  let CartWord;
-  OpenCart ? (CartWord = "Cart") : (CartWord = "Cart");
   function updateCart(product) {
     let newCart = [...cart];
     let PNameArr = [];
@@ -92,17 +85,12 @@ function App() {
 
   return (
     <>
-      <Inputbox />
-      <button
-        onClick={() => {
-          setOpenCart(!OpenCart);
-        }}
-      >
-        {CartWord}
-      </button>
-      {!OpenCart && <Cart ItemChangeIncart={updateCart} CartItems={cart} />}
-      //---------------------------------------------
-      <Header temperature={temperature} weather={weather} />
+      <Header
+        temperature={temperature}
+        weather={weather}
+        updateCart={updateCart}
+        CartItem={cart}
+      />
       <Promotion
         location={location}
         temperature={temperature}
