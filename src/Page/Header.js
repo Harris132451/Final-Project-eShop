@@ -39,14 +39,23 @@ function Header(props) {
           Shopping cart
         </button>
         {!OpenCart && (
-          <div>
+          <div style={{ borderStyle: "solid", width: "300px" }}>
             <Cart
               ItemChangeIncart={props.updateCart}
               CartItems={props.CartItem}
             />
             <ButtonLink
               to="Checkout"
-              BtnName={<button className="bg-gray-500">Get Total</button>}
+              BtnName={
+                <button
+                  className="bg-gray-500"
+                  onClick={() => {
+                    setOpenCart(!OpenCart);
+                  }}
+                >
+                  Get Total
+                </button>
+              }
             />
           </div>
         )}

@@ -4,10 +4,9 @@ import { useState } from "react";
 import Header from "./Page/Header.js";
 import Footer from "./Page/Footer.js";
 import Home from "./Page/Home.js";
-import Product from "./Page/Product.js";
+import ProductPage from "./Page/ProductPage.js";
 import Checkout from "./Page/Checkout.js";
 import Account from "./Page/Account.js";
-import ProductPage from "./Page/Component/ProductPage.js";
 
 export default function App() {
   const [cart, setCart] = useState([
@@ -28,7 +27,7 @@ export default function App() {
   ]);
   function updateCart(product) {
     let newCart = [...cart];
-    if ((product = "Paid")) {
+    if (product === "Paid") {
       newCart = [];
     } else {
       let PNameArr = [];
@@ -55,12 +54,11 @@ export default function App() {
   console.log(cart);
   return (
     <>
-     <BrowserRouter>
+      <BrowserRouter>
         <Header updateCart={updateCart} CartItem={cart} />
         <Routes>
           <Route index element={<Home />} />
-          <Route path="Product" element={<Product />} />
-          <Route path="Product" element={<ProductPage />} />
+          <Route path="ProductPage" element={<ProductPage />} />
           <Route
             path="Checkout"
             element={<Checkout updateCart={updateCart} CartItem={cart} />}
