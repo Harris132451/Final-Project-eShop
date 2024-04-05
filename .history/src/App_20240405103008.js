@@ -7,7 +7,6 @@ import Home from "./Page/Home.js";
 import Product from "./Page/Product.js";
 import Checkout from "./Page/Checkout.js";
 import Account from "./Page/Account.js";
-import ProductPage from "./Page/Component/ProductPage.js";
 
 export default function App() {
   const [cart, setCart] = useState([
@@ -28,26 +27,22 @@ export default function App() {
   ]);
   function updateCart(product) {
     let newCart = [...cart];
-    if ((product = "Paid")) {
-      newCart = [];
-    } else {
-      let PNameArr = [];
-      cart.forEach((c) => {
-        PNameArr.push(c.name);
-      });
-      if (!PNameArr.includes(product.name)) {
-        newCart = [...cart, product];
-      }
-      for (let i = 0; i < newCart.length; i++) {
-        if (
-          cart.length > 0 &&
-          newCart[i].name === product.name &&
-          product.qty === 0
-        ) {
-          newCart.splice(i, 1);
-        } else if (cart.length > 0 && newCart[i].name === product.name) {
-          newCart[i].qty = product.qty;
-        }
+    let PNameArr = [];
+    cart.forEach((c) => {
+      PNameArr.push(c.name);
+    });
+    if (!PNameArr.includes(product.name)) {
+      newCart = [...cart, product];
+    }
+    for (let i = 0; i < newCart.length; i++) {
+      if (
+        cart.length > 0 &&
+        newCart[i].name === product.name &&
+        product.qty === 0
+      ) {
+        newCart.splice(i, 1);
+      } else if (cart.length > 0 && newCart[i].name === product.name) {
+        newCart[i].qty = product.qty;
       }
     }
     setCart(newCart);
@@ -55,17 +50,17 @@ export default function App() {
   console.log(cart);
   return (
     <>
-     <BrowserRouter>
-        <Header updateCart={updateCart} CartItem={cart} />
+      <BrowserRouter>
         <Routes>
-          <Route index element={<Home />} />
-          <Route path="Product" element={<Product />} />
-          <Route path="Product" element={<ProductPage />} />
           <Route
-            path="Checkout"
-            element={<Checkout updateCart={updateCart} CartItem={cart} />}
-          />
-          <Route path="Account" element={<Account />} />
+            path="/"
+            element={<Header updateCart={updateCart} CartItem={cart} />}
+          >
+            <Route index element={<Home />} />
+            <Route path="Product" element={<Product />} />
+            <Route path="Checkout" element={<Checkout />} />
+            <Route path="Account" element={<Account />} />
+          </Route>
         </Routes>
       </BrowserRouter>
       <Footer />
