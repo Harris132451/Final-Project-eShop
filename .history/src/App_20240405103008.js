@@ -7,7 +7,6 @@ import Home from "./Page/Home.js";
 import Product from "./Page/Product.js";
 import Checkout from "./Page/Checkout.js";
 import Account from "./Page/Account.js";
-import ProductPage from "./Page/Component/ProductPage.js";
 
 export default function App() {
   const [cart, setCart] = useState([
@@ -52,13 +51,17 @@ export default function App() {
   return (
     <>
       <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Header updateCart={updateCart} CartItem={cart} />} />
-        <Route path="/Product" element={<Product />} />
-        <Route path="/Checkout" element={<Checkout />} />
-        <Route path="/Account" element={<Account />} />
-        <Route path="/ProductPage" element={<ProductPage />} />
-      </Routes>
+        <Routes>
+          <Route
+            path="/"
+            element={<Header updateCart={updateCart} CartItem={cart} />}
+          >
+            <Route index element={<Home />} />
+            <Route path="Product" element={<Product />} />
+            <Route path="Checkout" element={<Checkout />} />
+            <Route path="Account" element={<Account />} />
+          </Route>
+        </Routes>
       </BrowserRouter>
       <Footer />
     </>
