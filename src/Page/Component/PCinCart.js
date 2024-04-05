@@ -39,11 +39,12 @@ const ProductCount = function ({ ItemQtyChangeIncart, ItemInfo }) {
   return (
     <>
       <img src={ItemInfo.photo} width={200} height={200} />
+      <h5>{ItemInfo.name}</h5>
       <button onClick={handleIncrease}>+</button>
       {count}
       <button onClick={handleDecrease}>-</button>
       <button onClick={handleDelete}>X</button>
-      <h6>{TotalPrice}</h6>
+      <h6>${TotalPrice}</h6>
     </>
   );
 };
