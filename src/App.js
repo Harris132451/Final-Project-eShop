@@ -81,6 +81,13 @@ export default function App() {
     setCart(newCart);
   }
   function updateAccountName(Name) {
+    let newCart = cart;
+    if (!Object.keys(newCart).includes(Name)) {
+      newCart[Name] = [];
+    }
+    localStorage.setItem("Cart", JSON.stringify(newCart));
+    SaveCart = newCart;
+    setCart(newCart);
     setAccountName(Name);
   }
   return (
