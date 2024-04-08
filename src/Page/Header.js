@@ -6,25 +6,23 @@ import Cart from "./Component/SC.js";
 import { item } from "./Component/product";
 import { FaCaretDown } from "react-icons/fa";
 
-
 function Header(props) {
   const temperature = props.temperature;
   const weather = props.weather;
-  const [OpenCart, setOpenCart] = useState(false);
   const [OpenLogin, setOpenLogin] = useState(true);
   function ButtonLink({ to, BtnName }) {
     return <Link to={to}>{BtnName}</Link>;
   }
 
-  const dropdownNames = new Set(item.map(data => data.bigcategories));
+  const dropdownNames = new Set(item.map((data) => data.bigcategories));
   const dropdownLinks = [...dropdownNames];
 
   const uniqueSmallCategoriesMap = {};
-  dropdownLinks.forEach(bigcategorie => {
+  dropdownLinks.forEach((bigcategorie) => {
     const smallCategoriesSet = new Set(
       item
-        .filter(item => item.bigcategories === bigcategorie)
-        .map(filteredItem => filteredItem.smallcategories)
+        .filter((item) => item.bigcategories === bigcategorie)
+        .map((filteredItem) => filteredItem.smallcategories)
     );
     uniqueSmallCategoriesMap[bigcategorie] = Array.from(smallCategoriesSet);
   });
@@ -71,44 +69,70 @@ function Header(props) {
         )}
         <button
           onClick={() => {
-            setOpenCart(!OpenCart);
+            props.updateIsOpenCart(!props.OpenCart);
           }}
         >
           Shopping cart
         </button>
-        {OpenCart && !props.Account && (
+        {props.OpenCart && !props.Account && (
           <div style={{ borderStyle: "solid", width: "300px" }}>
+            <h3>Shop Cart</h3>
+            <button
+              onClick={() => {
+                props.updateIsOpenCart(!props.OpenCart);
+              }}
+            >
+              X
+            </button>
             <h5>Please Login First !</h5>
           </div>
         )}
-        {OpenCart && props.Account && (
+        {props.OpenCart && props.Account && (
           <div style={{ borderStyle: "solid", width: "300px" }}>
+            <h3>Shop Cart</h3>
+            <button
+              onClick={() => {
+                props.updateIsOpenCart(!props.OpenCart);
+              }}
+            >
+              X
+            </button>
             <Cart
               ItemChangeIncart={props.updateCart}
               CartItems={props.CartItem}
               CartAccount={props.Account}
             />
-            <ButtonLink
-              to="Checkout"
-              BtnName={
-                <button
-                  className="bg-gray-500"
-                  onClick={() => {
-                    setOpenCart(!OpenCart);
-                  }}
-                >
-                  Get Total
-                </button>
-              }
-            />
+            {props.CartItem[props.Account].length > 0 ? (
+              <ButtonLink
+                to="Checkout"
+                BtnName={
+                  <button
+                    className="bg-gray-500"
+                    onClick={() => {
+                      props.updateIsOpenCart(!props.OpenCart);
+                    }}
+                  >
+                    Get Total
+                  </button>
+                }
+              />
+            ) : (
+              <button className="bg-gray-500">Get Total</button>
+            )}
           </div>
         )}
       </div>
 
       <div className=" shadow-md bg-white dark:bg-gray-900 dark:text-white duration-200 relative z-40 flex justify-evenly">
-        {dropdownLinks.map(bigcategorie => (
-          <li key={bigcategorie} className="list-none group relative cursor-pointer">
-            <Link to={`/${bigcategorie}`} className="flex items-center gap-[2px] py-2">
+        {dropdownLinks.map((bigcategorie) => (
+          <li
+            key={bigcategorie}
+            className="list-none group relative cursor-pointer"
+          >
+            <Link
+              to={`/${bigcategorie}`}
+              className="flex items-center gap-[2px] py-2"
+            >
               {bigcategorie}
               <span>
                 <FaCaretDown className="transition-all duration-200 group-hover:rotate-180" />
@@ -116,13 +140,15 @@ function Header(props) {
             </Link>
             <div className="absolute z-[9999] hidden group-hover:block w-[200px] rounded-md bg-white p-2 text-black shadow-md">
               <ul>
-                {uniqueSmallCategoriesMap[bigcategorie].map((smallCategory, index) => (
-                  <li key={index}>
-                    <Link to={`/${bigcategorie}/${smallCategory}`}>
-                      {smallCategory}
-                    </Link>
-                  </li>
-                ))}
+                {uniqueSmallCategoriesMap[bigcategorie].map(
+                  (smallCategory, index) => (
+                    <li key={index}>
+                      <Link to={`/${bigcategorie}/${smallCategory}`}>
+                        {smallCategory}
+                      </Link>
+                    </li>
+                  )
+                )}
               </ul>
             </div>
           </li>

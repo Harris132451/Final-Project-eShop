@@ -36,7 +36,7 @@ const ProductCount = function ({ ItemQtyChangeIncart, ItemInfo }) {
   let TotalPrice = count * ItemInfo.price;
   return (
     <>
-      <img src={ItemInfo.photo} width={200} height={200} />
+      <img src={ItemInfo.picture} width={200} height={200} />
       <h5>{ItemInfo.name}</h5>
       <button onClick={handleIncrease}>+</button>
       {count}
