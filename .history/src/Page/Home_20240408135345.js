@@ -9,7 +9,6 @@ const Home = function () {
   const [isCartOpen, setIsCartOpen] = useState(false);
   const toggleCart = () => {
     setIsCartOpen(!isCartOpen);
-    console.log(`11`)
   };
   return (
     <>
