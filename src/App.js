@@ -25,6 +25,8 @@ export default function App() {
       price: 10,
     },
   ]);
+  const [AccountName, setAccountName] = useState(null);
+  console.log(AccountName);
   function updateCart(product) {
     let newCart = [...cart];
     if (product === "Paid") {
@@ -52,10 +54,18 @@ export default function App() {
     setCart(newCart);
   }
   console.log(cart);
+  function updateAccountName(Name) {
+    setAccountName(Name);
+  }
   return (
     <>
       <BrowserRouter>
-        <Header updateCart={updateCart} CartItem={cart} />
+        <Header
+          updateCart={updateCart}
+          updateAccountName={updateAccountName}
+          CartItem={cart}
+          Account={AccountName}
+        />
         <Routes>
           <Route index element={<Home />} />
           <Route path="ProductPage" element={<ProductPage />} />
@@ -63,7 +73,10 @@ export default function App() {
             path="Checkout"
             element={<Checkout updateCart={updateCart} CartItem={cart} />}
           />
-          <Route path="Account" element={<Account />} />
+          <Route
+            path="Account"
+            element={<Account updateAccountName={updateAccountName} />}
+          />
         </Routes>
       </BrowserRouter>
       <Footer />
