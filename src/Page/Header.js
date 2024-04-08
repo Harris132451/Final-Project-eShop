@@ -29,20 +29,23 @@ function Header(props) {
         <Inputbox />
         <Weather temperature={temperature} weather={weather} />
         {props.Account ? (
-          <ButtonLink
-            to="/"
-            BtnName={
-              <button
-                className="bg-gray-500"
-                onClick={() => {
-                  setOpenLogin(!OpenLogin);
-                  props.updateAccountName(null);
-                }}
-              >
-                Logout
-              </button>
-            }
-          />
+          <>
+            <div>Welcome,{props.Account}</div>
+            <ButtonLink
+              to="/"
+              BtnName={
+                <button
+                  className="bg-gray-500"
+                  onClick={() => {
+                    setOpenLogin(!OpenLogin);
+                    props.updateAccountName(null);
+                  }}
+                >
+                  Logout
+                </button>
+              }
+            />
+          </>
         ) : (
           <ButtonLink
             to="Account"

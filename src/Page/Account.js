@@ -34,7 +34,7 @@ const Account = function ({ updateAccountName }) {
           setInputPassword(p.target.value);
         }}
       ></input>
-      {AccError && <div>Wrong ID & Password !</div>}
+      {AccError && <div>Wrong ID or Password !</div>}
       {IDName ? (
         <Link to="/">
           <button
