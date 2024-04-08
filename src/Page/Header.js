@@ -56,11 +56,17 @@ function Header(props) {
         >
           Shopping cart
         </button>
-        {OpenCart && (
+        {OpenCart && !props.Account && (
+          <div style={{ borderStyle: "solid", width: "300px" }}>
+            <h5>Please Login First !</h5>
+          </div>
+        )}
+        {OpenCart && props.Account && (
           <div style={{ borderStyle: "solid", width: "300px" }}>
             <Cart
               ItemChangeIncart={props.updateCart}
               CartItems={props.CartItem}
+              CartAccount={props.Account}
             />
             <ButtonLink
               to="Checkout"

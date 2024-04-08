@@ -8,57 +8,91 @@ import ProductPage from "./Page/ProductPage.js";
 import Checkout from "./Page/Checkout.js";
 import Account from "./Page/Account.js";
 
+let savedCart = JSON.parse(localStorage.getItem("Cart"));
+let SaveCart = savedCart;
+
 export default function App() {
-  const [cart, setCart] = useState([
-    {
-      name: "milk",
-      photo:
-        "https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcRlJCcVQhECVkXp_NC1PI1t5z6fLMIFBpoC6tp5iM3mJHETwLfSY-8n8eE6SuyphcZ9rY53jf8Zb_zvDP9_S1oaEJHzQUucVkBN-zfVV5R4taHuEfpkhOHYUMNS0eMxI1mR57d9Y5Q&usqp=CAc",
-      qty: 2,
-      price: 20,
-    },
-    {
-      name: "orange",
-      photo:
-        "https://healthmylifestyle.com/wp-content/uploads/2023/01/Fresh-squeezed-orange-juice-featured-500x500.jpg",
-      qty: 5,
-      price: 10,
-    },
-  ]);
+  const [cart, setCart] = useState({
+    Harris: [
+      {
+        name: "milk",
+        photo:
+          "https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcRlJCcVQhECVkXp_NC1PI1t5z6fLMIFBpoC6tp5iM3mJHETwLfSY-8n8eE6SuyphcZ9rY53jf8Zb_zvDP9_S1oaEJHzQUucVkBN-zfVV5R4taHuEfpkhOHYUMNS0eMxI1mR57d9Y5Q&usqp=CAc",
+        qty: 2,
+        price: 20,
+      },
+      {
+        name: "orange",
+        photo:
+          "https://healthmylifestyle.com/wp-content/uploads/2023/01/Fresh-squeezed-orange-juice-featured-500x500.jpg",
+        qty: 5,
+        price: 10,
+      },
+    ],
+    Leo: [
+      {
+        name: "milk",
+        photo:
+          "https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcRlJCcVQhECVkXp_NC1PI1t5z6fLMIFBpoC6tp5iM3mJHETwLfSY-8n8eE6SuyphcZ9rY53jf8Zb_zvDP9_S1oaEJHzQUucVkBN-zfVV5R4taHuEfpkhOHYUMNS0eMxI1mR57d9Y5Q&usqp=CAc",
+        qty: 30,
+        price: 20,
+      },
+      {
+        name: "orange",
+        photo:
+          "https://healthmylifestyle.com/wp-content/uploads/2023/01/Fresh-squeezed-orange-juice-featured-500x500.jpg",
+        qty: 15,
+        price: 10,
+      },
+    ],
+  });
   const [AccountName, setAccountName] = useState(null);
   console.log(AccountName);
   function updateCart(product) {
-    let newCart = [...cart];
+    let newCart = cart;
+    let acn = AccountName;
     if (product === "Paid") {
-      newCart = [];
+      newCart[acn] = [];
     } else {
       let PNameArr = [];
-      cart.forEach((c) => {
+      newCart[acn].forEach((c) => {
         PNameArr.push(c.name);
       });
       if (!PNameArr.includes(product.name)) {
-        newCart = [...cart, product];
+        newCart[acn] = [...acn, product];
       }
-      for (let i = 0; i < newCart.length; i++) {
+      for (let i = 0; i < newCart[acn].length; i++) {
         if (
-          cart.length > 0 &&
-          newCart[i].name === product.name &&
+          newCart[acn].length > 0 &&
+          newCart[acn][i].name === product.name &&
           product.qty === 0
         ) {
-          newCart.splice(i, 1);
-        } else if (cart.length > 0 && newCart[i].name === product.name) {
-          newCart[i].qty = product.qty;
+          newCart[acn].splice(i, 1);
+        } else if (
+          newCart[acn].length > 0 &&
+          newCart[acn][i].name === product.name
+        ) {
+          newCart[acn][i].qty = product.qty;
         }
       }
     }
+    localStorage.setItem("Cart", JSON.stringify(newCart));
+    SaveCart = newCart;
     setCart(newCart);
   }
-  console.log(cart);
   function updateAccountName(Name) {
     setAccountName(Name);
   }
   return (
     <>
+      <button
+        className={"test"}
+        onClick={() => {
+          console.log(SaveCart);
+        }}
+      >
+        Test Cart
+      </button>
       <BrowserRouter>
         <Header
           updateCart={updateCart}
