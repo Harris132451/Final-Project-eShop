@@ -29,13 +29,11 @@ const ProductCount = function ({ ItemQtyChangeIncart, ItemInfo }) {
   };
 
   const handleDelete = () => {
-    if (productNumState.count > 0) {
-      dispatch({ type: "delete" });
-      ItemInfo.qty = 0;
-      ItemQtyChangeIncart(ItemInfo);
-    }
+    dispatch({ type: "delete" });
+    ItemInfo.qty = 0;
+    ItemQtyChangeIncart(ItemInfo);
   };
-  let TotalPrice = ItemInfo.qty * ItemInfo.price;
+  let TotalPrice = count * ItemInfo.price;
   return (
     <>
       <img src={ItemInfo.photo} width={200} height={200} />

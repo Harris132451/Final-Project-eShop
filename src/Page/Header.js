@@ -8,6 +8,7 @@ function Header(props) {
   const temperature = props.temperature;
   const weather = props.weather;
   const [OpenCart, setOpenCart] = useState(false);
+  const [OpenLogin, setOpenLogin] = useState(true);
   function ButtonLink({ to, BtnName }) {
     return <Link to={to}>{BtnName}</Link>;
   }
@@ -27,10 +28,27 @@ function Header(props) {
         />
         <Inputbox />
         <Weather temperature={temperature} weather={weather} />
-        <ButtonLink
-          to="Account"
-          BtnName={<button className="bg-gray-500">Login</button>}
-        />
+        {props.Account ? (
+          <ButtonLink
+            to="/"
+            BtnName={
+              <button
+                className="bg-gray-500"
+                onClick={() => {
+                  setOpenLogin(!OpenLogin);
+                  props.updateAccountName(null);
+                }}
+              >
+                Logout
+              </button>
+            }
+          />
+        ) : (
+          <ButtonLink
+            to="Account"
+            BtnName={<button className="bg-gray-500">Login</button>}
+          />
+        )}
         <button
           onClick={() => {
             setOpenCart(!OpenCart);
@@ -38,7 +56,7 @@ function Header(props) {
         >
           Shopping cart
         </button>
-        {!OpenCart && (
+        {OpenCart && (
           <div style={{ borderStyle: "solid", width: "300px" }}>
             <Cart
               ItemChangeIncart={props.updateCart}
