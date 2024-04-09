@@ -7,6 +7,7 @@ import Home from "./Page/Home.js";
 import ProductPage from "./Page/ProductPage.js";
 import Checkout from "./Page/Checkout.js";
 import Account from "./Page/Account.js";
+import ScrollButton from "./Page/Component/ScrollBtn.js";
 
 let savedCart = JSON.parse(localStorage.getItem("Cart"));
 let SaveCart = savedCart;
@@ -152,6 +153,7 @@ export default function App() {
         </Routes>
       </BrowserRouter>
       <Footer />
+      <ScrollButton />
     </>
   );
 }
