@@ -13,12 +13,14 @@ function Header(props) {
   return (
     <>
       <div className="flex">
-        <Link to="Product">
+        <Link to="/">
           <img src="favicon.ico" alt="logo" />
         </Link>
         <Inputbox />
         <Weather temperature={temperature} weather={weather} />
-        <button className="bg-gray-500">Login</button>
+        <Link to="/Product">
+          <button className="bg-gray-500">Login</button>
+        </Link>
         <button
           onClick={() => {
             setOpenCart(!OpenCart);
@@ -33,6 +35,7 @@ function Header(props) {
           />
         )}
       </div>
+      <Outlet />
     </>
   );
 }

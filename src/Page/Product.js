@@ -1,5 +1,5 @@
-function Product() {
+const Product = function () {
   return <>Product</>;
-}
+};
 
 export default Product;
