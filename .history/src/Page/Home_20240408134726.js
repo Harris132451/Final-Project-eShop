@@ -1,9 +1,15 @@
 import React from "react";
-import { useState } from "react";
+import { useState } from 'react';
 import { Link } from "react-router-dom";
 import { item } from "./Component/product";
+import Cart from "./Component/SC.js";
 
-const Home = function (props) {
+
+const Home = function () {
+  const [isCartOpen, setIsCartOpen] = useState(false);
+  const toggleCart = () => {
+    setIsCartOpen(!isCartOpen);
+  };
   return (
     <>
       <section className="py-24">
@@ -13,19 +19,20 @@ const Home = function (props) {
           </h2>
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
             {item.map((product) => (
-              <div className="max-w-[384px] mx-auto" key={product.id}>
-                {/* 将 Link 标签移到产品元素内部 */}
-                <Link to={`/ProductPage`}>
-                  <div className="w-full max-w-sm aspect-square relative overflow-hidden">
-                    <div className="w-full h-full rounded-xl overflow-hidden hover:scale-105 transition-transform transition-duration-500">
-                      <img
-                        src={product.picture}
-                        alt={product.name}
-                        className="w-full h-full rounded-xl"
-                      />
-                    </div>
+              <Link
+                to={`/ProductPage`}
+                className="max-w-[384px] mx-auto"
+                key={product.id}
+              >
+                <div className="w-full max-w-sm aspect-square relative overflow-hidden">
+                  <div className="w-full h-full rounded-xl overflow-hidden hover:scale-105 transition-transform transition-duration-500">
+                    <img
+                      src={product.picture}
+                      alt={product.name}
+                      className="w-full h-full rounded-xl"
+                    />
                   </div>
-                </Link>
+                </div>
                 <div className="mt-5 flex items-center justify-between">
                   <div>
                     <h6 className="font-medium text-xl leading-8 text-black mb-2">
@@ -35,13 +42,7 @@ const Home = function (props) {
                       ${product.price}
                     </h6>
                   </div>
-                  <button
-                    onClick={() => {
-                      props.updateCart(product);
-                      props.updateIsOpenCart(true);
-                    }}
-                    className="p-2 min-[400px]:p-4 rounded-full bg-white border border-gray-300 flex items-center justify-center group shadow-sm shadow-transparent transition-all duration-500 hover:shadow-gray-200 hover:border-gray-400 hover:bg-gray-50"
-                  >
+                  <button onClick={toggleCart} className="p-2 min-[400px]:p-4 rounded-full bg-white border border-gray-300 flex items-center justify-center group shadow-sm shadow-transparent transition-all duration-500 hover:shadow-gray-200 hover:border-gray-400 hover:bg-gray-50">
                     <svg
                       className="stroke-gray-900 transition-all duration-500 group-hover:stroke-black"
                       xmlns="http://www.w3.org/2000/svg"
@@ -59,7 +60,7 @@ const Home = function (props) {
                     </svg>
                   </button>
                 </div>
-              </div>
+              </Link>
             ))}
           </div>
         </div>
