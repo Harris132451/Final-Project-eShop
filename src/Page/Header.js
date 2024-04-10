@@ -8,11 +8,9 @@ import { FaCaretDown } from "react-icons/fa";
 import { categories } from './Component/categoriesData.js';
 
 
-
 function Header(props) {
   const temperature = props.temperature;
   const weather = props.weather;
-  const [OpenCart, setOpenCart] = useState(false);
   const [OpenLogin, setOpenLogin] = useState(true);
   function ButtonLink({ to, BtnName }) {
     return <Link to={to}>{BtnName}</Link>;
@@ -37,20 +35,23 @@ function Header(props) {
         <Inputbox />
         <Weather temperature={temperature} weather={weather} />
         {props.Account ? (
-          <ButtonLink
-            to="/"
-            BtnName={
-              <button
-                className="bg-gray-500"
-                onClick={() => {
-                  setOpenLogin(!OpenLogin);
-                  props.updateAccountName(null);
-                }}
-              >
-                Logout
-              </button>
-            }
-          />
+          <>
+            <div>Welcome,{props.Account}</div>
+            <ButtonLink
+              to="/"
+              BtnName={
+                <button
+                  className="bg-gray-500"
+                  onClick={() => {
+                    setOpenLogin(!OpenLogin);
+                    props.updateAccountName(null);
+                  }}
+                >
+                  Logout
+                </button>
+              }
+            />
+          </>
         ) : (
           <ButtonLink
             to="Account"
@@ -59,36 +60,56 @@ function Header(props) {
         )}
         <button
           onClick={() => {
-            setOpenCart(!OpenCart);
+            props.updateIsOpenCart(!props.OpenCart);
           }}
         >
           Shopping cart
         </button>
-        {OpenCart && !props.Account && (
+        {props.OpenCart && !props.Account && (
           <div style={{ borderStyle: "solid", width: "300px" }}>
+            <h3>Shop Cart</h3>
+            <button
+              onClick={() => {
+                props.updateIsOpenCart(!props.OpenCart);
+              }}
+            >
+              X
+            </button>
             <h5>Please Login First !</h5>
           </div>
         )}
-        {OpenCart && props.Account && (
+        {props.OpenCart && props.Account && (
           <div style={{ borderStyle: "solid", width: "300px" }}>
+            <h3>Shop Cart</h3>
+            <button
+              onClick={() => {
+                props.updateIsOpenCart(!props.OpenCart);
+              }}
+            >
+              X
+            </button>
             <Cart
               ItemChangeIncart={props.updateCart}
               CartItems={props.CartItem}
               CartAccount={props.Account}
             />
-            <ButtonLink
-              to="Checkout"
-              BtnName={
-                <button
-                  className="bg-gray-500"
-                  onClick={() => {
-                    setOpenCart(!OpenCart);
-                  }}
-                >
-                  Get Total
-                </button>
-              }
-            />
+            {props.CartItem[props.Account].length > 0 ? (
+              <ButtonLink
+                to="Checkout"
+                BtnName={
+                  <button
+                    className="bg-gray-500"
+                    onClick={() => {
+                      props.updateIsOpenCart(!props.OpenCart);
+                    }}
+                  >
+                    Get Total
+                  </button>
+                }
+              />
+            ) : (
+              <button className="bg-gray-500">Get Total</button>
+            )}
           </div>
         )}
       </div>
