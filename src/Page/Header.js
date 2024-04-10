@@ -29,7 +29,7 @@ function Header(props) {
 
   return (
     <>
-      <div className="flex">
+      <div className="flex bg-blue-600">
         <ButtonLink
           to="/"
           BtnName={
