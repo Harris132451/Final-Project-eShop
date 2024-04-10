@@ -10,7 +10,7 @@ const ProductPage = function () {
   const [amount, setAmount] = useState(1);
   const { productPage } = useParams();
   const decodedProductPage = decodeURIComponent(productPage);
-  const product = item.find(i => i.name === decodedProductPage);
+  const product = item.find(item => item.name === decodedProductPage);
 
   if (!product) {
     return <div>Product not found</div>;

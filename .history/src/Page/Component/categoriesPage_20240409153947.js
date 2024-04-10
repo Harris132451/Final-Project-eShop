@@ -1,32 +1,43 @@
-import React from "react";
-import { useState } from 'react';
-import { Link } from "react-router-dom";
-import { item } from "./Component/product";
-import Cart from "./Component/SC.js";
+import React, { useState } from 'react';
+import { useParams } from 'react-router-dom';
+import { categories } from './categoriesData';
+import { Link } from 'react-router-dom';
+import { item } from './product';
 
+const CategoriesPage = () => {
+  const { categoryName } = useParams();
+  const category = categories.find((cat) => cat.Name === categoryName);
 
-const Home = function () {
-  const [isCartOpen, setIsCartOpen] = useState(false);
-  const toggleCart = () => {
-    setIsCartOpen(!isCartOpen);
-    console.log(`11`)
+  const [currentCategory, setCurrentCategory] = useState(category?.Name || '');
+
+  const handleCategoryClick = (categoryName) => {
+    setCurrentCategory(categoryName);
   };
+
+  if (!category) {
+    return <div>Category not found</div>;
+  }
+
   return (
     <>
-       <section className="py-24">
+      <section className="py-24">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <h2 className="font-manrope font-bold text-3xl min-[400px]:text-4xl text-black mb-8 max-lg:text-center">
-            Products List
-          </h2>
+          <h4 className="font-manrope font-bold text-3xl text-black mb-8 max-lg:text-center">
+            {currentCategory} Products List
+          </h4>
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-            {item.map((product) => (
-              <div className="max-w-[384px] mx-auto" key={product.id}>
-                <Link to={`/products/${product.name}`}>
+            {categories.map((cat) => (
+              <div
+                className="max-w-[384px] mx-auto"
+                key={cat.id}
+                onClick={() => handleCategoryClick(cat.Name)}
+              >
+                <Link to={`/ProductPage`}>
                   <div className="w-full max-w-sm aspect-square relative overflow-hidden">
                     <div className="w-full h-full rounded-xl overflow-hidden hover:scale-105 transition-transform transition-duration-500">
                       <img
-                        src={product.picture}
-                        alt={product.name}
+                        src={cat.picture}
+                        alt={cat.name}
                         className="w-full h-full rounded-xl"
                       />
                     </div>
@@ -34,14 +45,12 @@ const Home = function () {
                 </Link>
                 <div className="mt-5 flex items-center justify-between">
                   <div>
-                    <h6 className="font-medium text-xl leading-8 text-black mb-2">
-                      {product.name}
-                    </h6>
+                    <h6 className="font-medium text-xl leading-8 text-black mb-2">{cat.name}</h6>
                     <h6 className="font-semibold text-xl leading-8 text-indigo-600">
-                      ${product.price}
+                      ${cat.price}
                     </h6>
                   </div>
-                  <button onClick={toggleCart} className="p-2 min-[400px]:p-4 rounded-full bg-white border border-gray-300 flex items-center justify-center group shadow-sm shadow-transparent transition-all duration-500 hover:shadow-gray-200 hover:border-gray-400 hover:bg-gray-50">
+                  <button className="p-2 min-[400px]:p-4 rounded-full bg-white border border-gray-300 flex items-center justify-center group shadow-sm shadow-transparent transition-all duration-500 hover:shadow-gray-200 hover:border-gray-400 hover:bg-gray-50">
                     <svg
                       className="stroke-gray-900 transition-all duration-500 group-hover:stroke-black"
                       xmlns="http://www.w3.org/2000/svg"
@@ -68,4 +77,6 @@ const Home = function () {
   );
 };
 
-export default Home;
+export default CategoriesPage;
+
+

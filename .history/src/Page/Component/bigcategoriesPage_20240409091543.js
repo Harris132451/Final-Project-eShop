@@ -1,19 +1,21 @@
+// BigcategoriesPage.js
 import React from "react";
-import { useState } from 'react';
-import { Link } from "react-router-dom";
-import { item } from "./Component/product";
-import Cart from "./Component/SC.js";
+import { useParams } from "react-router-dom";
+import BreadcrumbsComponent from "./Breadcrumbs";
+import item from "../Component/product"
 
+function BigcategoriesPage() {
+  const { bigcategorie } = useParams();
 
-const Home = function () {
-  const [isCartOpen, setIsCartOpen] = useState(false);
-  const toggleCart = () => {
-    setIsCartOpen(!isCartOpen);
-    console.log(`11`)
-  };
+  const breadcrumbsLinks = [
+    { text: "Allproduct", link: "/Product" },
+    { text: bigcategorie, link: `/categories/${bigcategorie}` },
+  ];
+
   return (
-    <>
-       <section className="py-24">
+    <div>
+      <BreadcrumbsComponent links={breadcrumbsLinks} />
+      <section className="py-24">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <h2 className="font-manrope font-bold text-3xl min-[400px]:text-4xl text-black mb-8 max-lg:text-center">
             Products List
@@ -21,7 +23,7 @@ const Home = function () {
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
             {item.map((product) => (
               <div className="max-w-[384px] mx-auto" key={product.id}>
-                <Link to={`/products/${product.name}`}>
+                <Link to={`/ProductPage`}>
                   <div className="w-full max-w-sm aspect-square relative overflow-hidden">
                     <div className="w-full h-full rounded-xl overflow-hidden hover:scale-105 transition-transform transition-duration-500">
                       <img
@@ -64,8 +66,10 @@ const Home = function () {
           </div>
         </div>
       </section>
-    </>
+    </div>
   );
-};
+}
 
-export default Home;
+export default BigcategoriesPage;
+
+

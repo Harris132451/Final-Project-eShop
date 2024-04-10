@@ -114,7 +114,7 @@ export default function App() {
           />
           <Route path="/:categoryName" element={<CategoriesPage />} />
           <Route path="/:categoryName/:smallCategoriesName" element={<SmallCategoriesPage />}/>
-          <Route path="/products/:productPage" element={<ProductPage />} />
+          <Route path="/:productPage" element={<ProductPage />} />
         </Routes>
       </BrowserRouter>
       <Footer />

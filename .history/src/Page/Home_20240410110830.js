@@ -21,7 +21,7 @@ const Home = function () {
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
             {item.map((product) => (
               <div className="max-w-[384px] mx-auto" key={product.id}>
-                <Link to={`/products/${product.name}`}>
+                <Link to={`/${product.name}`}>
                   <div className="w-full max-w-sm aspect-square relative overflow-hidden">
                     <div className="w-full h-full rounded-xl overflow-hidden hover:scale-105 transition-transform transition-duration-500">
                       <img

@@ -8,7 +8,6 @@ import ProductPage from "./Page/ProductPage.js";
 import Checkout from "./Page/Checkout.js";
 import Account from "./Page/Account.js";
 import CategoriesPage from './Page/Component/categoriesPage.js';
-import SmallCategoriesPage from './Page/Component/smallCategoriesPage.js';
 
 let savedCart = JSON.parse(localStorage.getItem("Cart"));
 let SaveCart = savedCart;
@@ -104,6 +103,7 @@ export default function App() {
         />
         <Routes>
           <Route index element={<Home />} />
+          <Route path="ProductPage" element={<ProductPage />} />
           <Route
             path="Checkout"
             element={<Checkout updateCart={updateCart} CartItem={cart} />}
@@ -112,9 +112,8 @@ export default function App() {
             path="Account"
             element={<Account updateAccountName={updateAccountName} />}
           />
-          <Route path="/:categoryName" element={<CategoriesPage />} />
-          <Route path="/:categoryName/:smallCategoriesName" element={<SmallCategoriesPage />}/>
-          <Route path="/products/:productPage" element={<ProductPage />} />
+          <Route path="/:categoryName" component={CategoriesPage} />
+          <Route path="/:categoryName/:subcategoryName" component={CategoriesPage} />
         </Routes>
       </BrowserRouter>
       <Footer />

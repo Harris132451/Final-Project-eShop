@@ -5,6 +5,8 @@ import Inputbox from "./Component/input.js";
 import Cart from "./Component/SC.js";
 import { item } from "./Component/product";
 import { FaCaretDown } from "react-icons/fa";
+import { categories } from './Component/categoriesData.js';
+
 
 
 function Header(props) {
@@ -16,18 +18,7 @@ function Header(props) {
     return <Link to={to}>{BtnName}</Link>;
   }
 
-  const dropdownNames = new Set(item.map(data => data.bigcategories));
-  const dropdownLinks = [...dropdownNames];
-
-  const uniqueSmallCategoriesMap = {};
-  dropdownLinks.forEach(bigcategorie => {
-    const smallCategoriesSet = new Set(
-      item
-        .filter(item => item.bigcategories === bigcategorie)
-        .map(filteredItem => filteredItem.smallcategories)
-    );
-    uniqueSmallCategoriesMap[bigcategorie] = Array.from(smallCategoriesSet);
-  });
+  const dropdownLinks = categories;
 
   return (
     <>
@@ -102,29 +93,33 @@ function Header(props) {
         )}
       </div>
 
-      <div className=" shadow-md bg-white dark:bg-gray-900 dark:text-white duration-200 relative z-40 flex justify-evenly">
-        {dropdownLinks.map(bigcategorie => (
-          <li key={bigcategorie} className="list-none group relative cursor-pointer">
-            <Link to={`/${bigcategorie}`} className="flex items-center gap-[2px] py-2">
-              {bigcategorie}
-              <span>
-                <FaCaretDown className="transition-all duration-200 group-hover:rotate-180" />
-              </span>
-            </Link>
-            <div className="absolute z-[9999] hidden group-hover:block w-[200px] rounded-md bg-white p-2 text-black shadow-md">
-              <ul>
-                {uniqueSmallCategoriesMap[bigcategorie].map((smallCategory, index) => (
-                  <li key={index}>
-                    <Link to={`/${bigcategorie}/${smallCategory}`}>
-                      {smallCategory}
+      <div className="shadow-md bg-white dark:bg-gray-900 dark:text-white duration-200 relative z-40 flex justify-evenly">
+      {dropdownLinks
+      .filter(item => item.Parent === item.id)
+      .map(bigcategorie => (
+        <li key={bigcategorie.id} className="list-none group relative cursor-pointer">
+          <Link to={`/${bigcategorie.Name}`} className="flex items-center gap-[2px] py-2">
+            <span>
+              <FaCaretDown className="transition-all duration-200 group-hover:rotate-180" />
+            </span>
+            {bigcategorie.Name}
+          </Link>
+          <div className="absolute z-[9999] hidden group-hover:block w-[200px] rounded-md bg-white p-2 text-black shadow-md">
+            <ul>
+              {dropdownLinks
+                .filter(item => item.Parent === bigcategorie.id && item.Parent !== item.id)
+                .map(smallCategory => (
+                  <li key={smallCategory.id}>
+                    <Link to={`/${bigcategorie.Name}/${smallCategory.Name}`}>
+                      {smallCategory.Name}
                     </Link>
                   </li>
                 ))}
-              </ul>
-            </div>
-          </li>
-        ))}
-      </div>
+            </ul>
+          </div>
+        </li>
+      ))}
+    </div>
     </>
   );
 }
