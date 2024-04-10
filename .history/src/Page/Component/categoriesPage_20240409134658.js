@@ -1,13 +1,23 @@
-import React from "react";
-import { useState } from "react";
+import React from 'react';
+import { useParams } from 'react-router-dom';
+import { categories } from './categoriesData';
 import { Link } from "react-router-dom";
 import { item } from "./Component/product";
-import PromotionSlider from "./Component/Slider";
 
-const Home = function (props) {
+const CategoriesPage = () => {
+  const { categoryName } = useParams();
+  const category = categories.find(cat => cat.Name === categoryName);
+
+  if (!category) {
+    return <div>Category not found</div>;
+  }
+
+  const { subcategories } = category;
+
+  // 根据 subcategories 渲染相应的产品内容
+
   return (
     <>
-      <PromotionSlider />
       <section className="py-24">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <h2 className="font-manrope font-bold text-3xl min-[400px]:text-4xl text-black mb-8 max-lg:text-center">
@@ -16,7 +26,7 @@ const Home = function (props) {
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
             {item.map((product) => (
               <div className="max-w-[384px] mx-auto" key={product.id}>
-                <Link to={`/products/${product.name}`}>
+                <Link to={`/ProductPage`}>
                   <div className="w-full max-w-sm aspect-square relative overflow-hidden">
                     <div className="w-full h-full rounded-xl overflow-hidden hover:scale-105 transition-transform transition-duration-500">
                       <img
@@ -36,13 +46,7 @@ const Home = function (props) {
                       ${product.price}
                     </h6>
                   </div>
-                  <button
-                    onClick={() => {
-                      props.updateCart(product);
-                      props.updateIsOpenCart(true);
-                    }}
-                    className="p-2 min-[400px]:p-4 rounded-full bg-white border border-gray-300 flex items-center justify-center group shadow-sm shadow-transparent transition-all duration-500 hover:shadow-gray-200 hover:border-gray-400 hover:bg-gray-50"
-                  >
+                  <button className="p-2 min-[400px]:p-4 rounded-full bg-white border border-gray-300 flex items-center justify-center group shadow-sm shadow-transparent transition-all duration-500 hover:shadow-gray-200 hover:border-gray-400 hover:bg-gray-50">
                     <svg
                       className="stroke-gray-900 transition-all duration-500 group-hover:stroke-black"
                       xmlns="http://www.w3.org/2000/svg"
@@ -69,4 +73,6 @@ const Home = function (props) {
   );
 };
 
-export default Home;
+export default CategoriesPage
+
+

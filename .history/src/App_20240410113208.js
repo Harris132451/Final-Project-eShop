@@ -9,7 +9,6 @@ import Checkout from "./Page/Checkout.js";
 import Account from "./Page/Account.js";
 import CategoriesPage from './Page/Component/categoriesPage.js';
 import SmallCategoriesPage from './Page/Component/smallCategoriesPage.js';
-import ScrollButton from './Page/Component/ScrollBtn.js';
 
 let savedCart = JSON.parse(localStorage.getItem("Cart"));
 let SaveCart = savedCart;
@@ -108,6 +107,14 @@ export default function App() {
 
   return (
     <>
+      <button
+        className={"test"}
+        onClick={() => {
+          console.log(SaveCart);
+        }}
+      >
+        Test Cart
+      </button>
       <BrowserRouter>
         <Header
           updateCart={updateCart}

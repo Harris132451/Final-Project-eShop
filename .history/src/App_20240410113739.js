@@ -108,6 +108,14 @@ export default function App() {
 
   return (
     <>
+      <button
+        className={"test"}
+        onClick={() => {
+          console.log(SaveCart);
+        }}
+      >
+        Test Cart
+      </button>
       <BrowserRouter>
         <Header
           updateCart={updateCart}
