@@ -54,6 +54,13 @@ const Account = function ({ updateAccountName }) {
           Login
         </button>
       )}
+      <button
+        onClick={() => {
+          PassAccountName();
+        }}
+      >
+        Sign Up
+      </button>
     </>
   );
 };

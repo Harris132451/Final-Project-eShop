@@ -29,18 +29,23 @@ function Header(props) {
 
   return (
     <>
-      <div className="flex">
-        <ButtonLink
-          to="/"
-          BtnName={
-            <button>
-              <img
-                src="https://api.pns.hk/medias/PNS-logo-2X.png?context=bWFzdGVyfHBuc2hrL2ltYWdlc3w4MDE0fGltYWdlL3BuZ3xhREZsTDJnNU5DOHhNRFl4TmprNU9EazROVGMxT0M5UVRsTmZiRzluYjE4eVdDNXdibWN8Nzg4ODYyOWY1NDEwM2VhMjNkMjJiN2M5ODkxMzQzMjVkYWNkMWQ1NWJhMDk5OWIwZTgzMGViMGE2YzljNTllZQ"
-                alt="logo"
-              />
-            </button>
-          }
-        />
+      <div class=" bg-blue-600 mx-auto flex max-h-24 items-center p-2 lg:px-4">
+        <div class="h-auto w-48 pt-2 m-4">
+          <ButtonLink
+            to="/"
+            BtnName={
+              <button>
+                <img
+                  src="https://api.pns.hk/medias/PNS-logo-2X.png?context=bWFzdGVyfHBuc2hrL2ltYWdlc3w4MDE0fGltYWdlL3BuZ3xhREZsTDJnNU5DOHhNRFl4TmprNU9EazROVGMxT0M5UVRsTmZiRzluYjE4eVdDNXdibWN8Nzg4ODYyOWY1NDEwM2VhMjNkMjJiN2M5ODkxMzQzMjVkYWNkMWQ1NWJhMDk5OWIwZTgzMGViMGE2YzljNTllZQ"
+                  alt="logo"
+                />
+              </button>
+            }
+          />
+        </div>
+        <div class="h-auto w-6 m-2">
+          <img src="/SerachBtn.png" />
+        </div>
         <Inputbox />
         <Weather temperature={temperature} weather={weather} />
         {props.Account ? (
@@ -50,29 +55,42 @@ function Header(props) {
               to="/"
               BtnName={
                 <button
-                  className="bg-gray-500"
+                  class="flex text-1xl text-white flex-row items-center"
                   onClick={() => {
                     setOpenLogin(!OpenLogin);
                     props.updateAccountName(null);
                   }}
                 >
+                  <div class="h-auto w-4 m-2">
+                    <img src="/AccBtn.png" />
+                  </div>
                   Logout
                 </button>
               }
             />
           </>
         ) : (
-          <ButtonLink
-            to="Account"
-            BtnName={<button className="bg-gray-500">Login</button>}
-          />
+          <>
+            <div>Welcome,Harris</div>
+            <ButtonLink
+              to="Account"
+              BtnName={
+                <button class="flex text-1xl text-white flex-row items-center">
+                  <div class="h-auto w-12 pl-2 pr-2">
+                    <img src="/AccBtn.png" />
+                  </div>
+                  Login
+                </button>
+              }
+            />
+          </>
         )}
         <button
           onClick={() => {
             props.updateIsOpenCart(!props.OpenCart);
           }}
         >
-          Shopping cart
+          <img src="/CartBtn.png" />
         </button>
         {props.OpenCart && !props.Account && (
           <div style={{ borderStyle: "solid", width: "300px" }}>
