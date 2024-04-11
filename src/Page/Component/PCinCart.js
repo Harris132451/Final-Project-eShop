@@ -35,15 +35,32 @@ const ProductCount = function ({ ItemQtyChangeIncart, ItemInfo }) {
   };
   let TotalPrice = count * ItemInfo.price;
   return (
-    <>
-      <img src={ItemInfo.picture} width={200} height={200} />
-      <h5>{ItemInfo.name}</h5>
-      <button onClick={handleIncrease}>+</button>
-      {ItemInfo.qty}
-      <button onClick={handleDecrease}>-</button>
-      <button onClick={handleDelete}>X</button>
+    <div class="flex flex-col w-56 sm:w-72 p-2 text-black">
+      <img src={ItemInfo.picture} class="" width={120} height={120} />
+      <h5 class="text-sm">{ItemInfo.name}</h5>
+      <div class="flex flex-row">
+        <button
+          onClick={handleIncrease}
+          class="mr-2 rounded-full bg-blue-400 text-blue-900 w-4 h-4 mt-2"
+        >
+          +
+        </button>
+        <div class="mt-0.5 mr-2 text-xl">{ItemInfo.qty}</div>
+        <button
+          onClick={handleDecrease}
+          class="mr-3 rounded-full bg-blue-400 text-blue-900  w-4 h-4 mt-2"
+        >
+          -
+        </button>
+        <button
+          onClick={handleDelete}
+          class="mt-2 text-xl rounded-full bg-blue-400 text-blue-900 w-5 h-5"
+        >
+          x
+        </button>
+      </div>
       <h6>${TotalPrice}</h6>
-    </>
+    </div>
   );
 };
 

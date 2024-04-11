@@ -6,7 +6,7 @@ import Footer from "./Page/Footer.js";
 import Home from "./Page/Home.js";
 import ProductPage from "./Page/ProductPage.js";
 import Checkout from "./Page/Checkout.js";
-import Account from "./Page/Account.js";
+import Signin from "./Page/Signin.js";
 import CategoriesPage from "./Page/Component/categoriesPage.js";
 import SmallCategoriesPage from "./Page/Component/smallCategoriesPage.js";
 import ScrollButton from "./Page/Component/ScrollBtn.js";
@@ -143,8 +143,8 @@ export default function App() {
             }
           />
           <Route
-            path="Account"
-            element={<Account updateAccountName={updateAccountName} />}
+            path="Signin"
+            element={<Signin updateAccountName={updateAccountName} />}
           />
           <Route path="/:categoryName" element={<CategoriesPage />} />
           <Route

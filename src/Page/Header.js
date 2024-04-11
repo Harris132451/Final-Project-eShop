@@ -19,134 +19,139 @@ function Header(props) {
 
   return (
     <>
-      <div class=" bg-blue-600 mx-auto flex max-h-24 min-w-auto items-center p-2 lg:px-4">
-        <div>
-          <div class="h-auto w-36 pt-2 ml-1 mr-0 sm:w-48 sm:mx-4">
-            <ButtonLink
-              to="/"
-              BtnName={
-                <button>
-                  <img
-                    src="https://api.pns.hk/medias/PNS-logo-2X.png?context=bWFzdGVyfHBuc2hrL2ltYWdlc3w4MDE0fGltYWdlL3BuZ3xhREZsTDJnNU5DOHhNRFl4TmprNU9EazROVGMxT0M5UVRsTmZiRzluYjE4eVdDNXdibWN8Nzg4ODYyOWY1NDEwM2VhMjNkMjJiN2M5ODkxMzQzMjVkYWNkMWQ1NWJhMDk5OWIwZTgzMGViMGE2YzljNTllZQ"
-                    alt="logo"
+      <div class=" bg-blue-600 grid grid-cols-3 grid-rows-2 mx-auto h-24 p-2 lg:px-3 border-box">
+        <div class=" col-start-1 col-end-2 flex flex-row">
+          <ButtonLink
+            to="/"
+            BtnName={
+              <button class="w-28 pt-4 sm:w-40 sm:pt-1 lg:w-44 lg:pt-0">
+                <img
+                  src="https://api.pns.hk/medias/PNS-logo-2X.png?context=bWFzdGVyfHBuc2hrL2ltYWdlc3w4MDE0fGltYWdlL3BuZ3xhREZsTDJnNU5DOHhNRFl4TmprNU9EazROVGMxT0M5UVRsTmZiRzluYjE4eVdDNXdibWN8Nzg4ODYyOWY1NDEwM2VhMjNkMjJiN2M5ODkxMzQzMjVkYWNkMWQ1NWJhMDk5OWIwZTgzMGViMGE2YzljNTllZQ"
+                  alt="logo"
+                />
+              </button>
+            }
+          />
+          <Inputbox />
+        </div>
+        <div class="col-start-3 col-end-4 row-start-1 row-end-2 flex pt-6 flex-row justify-end">
+          <Weather temperature={temperature} weather={weather} />
+          <div class="mr-0 flex text-1xl text-white flex-row sm:mr-3 lg:mr-5">
+            {props.Account ? (
+              <>
+                <div class="hidden sm:block">
+                  <div class="text-lg w-20 px-0 mr-0 flex sm:mr-20 lg:mr-28">
+                    <div class="text-lg">Welcome,</div>
+                    <div class="font-bold">{props.Account}</div>
+                  </div>
+                </div>
+                <div class="pt-0.5">
+                  <ButtonLink
+                    to="/"
+                    BtnName={
+                      <button
+                        onClick={() => {
+                          setOpenLogin(!OpenLogin);
+                          props.updateAccountName(null);
+                        }}
+                        class="flex text-1xl text-white flex-row mr-2 sm:mr-0"
+                      >
+                        <div class="h-auto w-5 mr-1 hidden sm:block">
+                          <img src="/AccBtn.png" />
+                        </div>
+                        <div>Logout</div>
+                      </button>
+                    }
                   />
-                </button>
-              }
-            />
-          </div>
-        </div>
-        <div>
-          <div class="h-auto w-6 m-2 hidden sm:block">
-            <img src="/SerachBtn.png" />
-          </div>
-        </div>
-        <Inputbox />
-        <Weather temperature={temperature} weather={weather} />
-        <div class="mr-0 flex text-1xl text-white flex-row items-center sm:mr-5">
-          {props.Account ? (
-            <>
-              <div class="w-28 px-0 mr-0 ml-0 sm:mr-6 sm:ml-10 lg:mr-36">
-                Welcome,{props.Account}
-              </div>
-              <ButtonLink
-                to="/"
-                BtnName={
-                  <button
-                    onClick={() => {
-                      setOpenLogin(!OpenLogin);
-                      props.updateAccountName(null);
-                    }}
-                    class="flex text-1xl text-white flex-row items-center"
-                  >
-                    <div class="h-auto w-9 pl-2 pr-2">
-                      <img src="/AccBtn.png" />
-                    </div>
-                    Logout
-                  </button>
-                }
-              />
-            </>
-          ) : (
-            <>
-              <div class="w-0 px-0 mr-0 ml-0 sm:mr-6 sm:ml-10 lg:mr-36"></div>
-              <ButtonLink
-                to="Account"
-                BtnName={
-                  <button class="flex text-1xl text-white flex-row items-center">
-                    <div class="h-auto w-9 pl-2 pr-2">
-                      <img src="/AccBtn.png" />
-                    </div>
-                    <div class="hidden sm:block">Login</div>
-                  </button>
-                }
-              />
-            </>
-          )}
-        </div>
-        <div>
-          <div class="h-auto w-6 ml-1">
-            <img src="/WishBtn.png" />
-          </div>
-        </div>
-        <button
-          onClick={() => {
-            props.updateIsOpenCart(!props.OpenCart);
-          }}
-        >
-          <div class="h-auto w-6 m-2">
-            <img src="/CartBtn.png" />
-          </div>
-        </button>
-        {props.OpenCart && !props.Account && (
-          <div style={{ borderStyle: "solid", width: "300px" }}>
-            <h3>Shop Cart</h3>
-            <button
-              onClick={() => {
-                props.updateIsOpenCart(!props.OpenCart);
-              }}
-            >
-              X
-            </button>
-            <h5>Please Login First !</h5>
-          </div>
-        )}
-        {props.OpenCart && props.Account && (
-          <div style={{ borderStyle: "solid", width: "300px" }} class="z-50">
-            <h3>Shop Cart</h3>
-            <button
-              onClick={() => {
-                props.updateIsOpenCart(!props.OpenCart);
-              }}
-            >
-              X
-            </button>
-            <Cart
-              ItemChangeIncart={props.updateCart}
-              CartItems={props.CartItem}
-              CartAccount={props.Account}
-            />
-            {props.CartItem[props.Account].length > 0 ? (
-              <ButtonLink
-                to="Checkout"
-                BtnName={
-                  <button
-                    className="bg-gray-500"
-                    onClick={() => {
-                      props.updateIsOpenCart(!props.OpenCart);
-                    }}
-                  >
-                    Get Total
-                  </button>
-                }
-              />
+                </div>
+              </>
             ) : (
-              <button className="bg-gray-500">Get Total</button>
+              <div class="pt-0.5">
+                <ButtonLink
+                  to="Signin"
+                  BtnName={
+                    <button class="flex text-1xl text-white flex-row mr-2 sm:mr-0">
+                      <div class="h-auto w-9 pl-2 pr-2 hidden sm:block">
+                        <img src="/AccBtn.png" />
+                      </div>
+                      <div>Login</div>
+                    </button>
+                  }
+                />
+              </div>
             )}
           </div>
-        )}
+          <div>
+            <button class="h-auto w-6 mr-2 pt-0.5 ml-3 sm:ml-0 lg:mr-4">
+              <img src="/WishBtn.png" />
+            </button>
+          </div>
+          <div>
+            <button
+              onClick={() => {
+                props.updateIsOpenCart(!props.OpenCart);
+              }}
+              class="h-auto w-6 ml-3 mr-4 pt-0.5 sm:ml-2 sm:mr-2 lg:mr-3"
+            >
+              <img src="/CartBtn.png" />
+            </button>
+          </div>
+        </div>
+        <div class="col-start-3 col-end-4 row-start-2 row-end-3 z-40 mt-6">
+          <div class="flex justify-end ">
+            {props.OpenCart && !props.Account && (
+              <div class="bg-white rounded-md  p-4 shadow-lg">
+                <h3>Shop Cart</h3>
+                <button
+                  onClick={() => {
+                    props.updateIsOpenCart(!props.OpenCart);
+                  }}
+                >
+                  X
+                </button>
+                <h5>Please Login First !</h5>
+              </div>
+            )}
+
+            {props.OpenCart && props.Account && (
+              <div class="bg-white rounded-md px-4 pb-4 pt-2 shadow-lg w-64 sm:w-80  flex justify-center flex-col text-blue-900">
+                <button
+                  onClick={() => {
+                    props.updateIsOpenCart(!props.OpenCart);
+                  }}
+                >
+                  X
+                </button>
+                <h3 class="text-center text-2xl font-bold">Shop Cart</h3>
+                <Cart
+                  ItemChangeIncart={props.updateCart}
+                  CartItems={props.CartItem}
+                  CartAccount={props.Account}
+                />
+                {props.CartItem[props.Account].length > 0 ? (
+                  <ButtonLink
+                    to="Checkout"
+                    BtnName={
+                      <button
+                        className="bg-gray-500"
+                        onClick={() => {
+                          props.updateIsOpenCart(!props.OpenCart);
+                        }}
+                      >
+                        Get Total
+                      </button>
+                    }
+                  />
+                ) : (
+                  <button className="bg-gray-500">Get Total</button>
+                )}
+              </div>
+            )}
+          </div>
+        </div>
       </div>
 
-      <div className="shadow-md bg-white dark:bg-gray-900 dark:text-white duration-200 relative z-40 flex justify-evenly">
+      <div className="shadow-md bg-white dark:bg-gray-900 dark:text-white duration-200 relative z-20 flex justify-evenly">
         {dropdownLinks
           .filter((item) => item.Parent === item.id)
           .map((bigcategorie) => (
