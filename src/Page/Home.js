@@ -2,10 +2,14 @@ import React from "react";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { item } from "./Component/product";
+import PromotionSlider from "./Component/Slider";
+import { useReducer } from "react";
+import { ControlNumber } from "./Component/controlNum.js";
 
 const Home = function (props) {
   return (
     <>
+      <PromotionSlider />
       <section className="py-24">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <h2 className="font-manrope font-bold text-3xl min-[400px]:text-4xl text-black mb-8 max-lg:text-center">
@@ -14,8 +18,7 @@ const Home = function (props) {
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
             {item.map((product) => (
               <div className="max-w-[384px] mx-auto" key={product.id}>
-                {/* 将 Link 标签移到产品元素内部 */}
-                <Link to={`/ProductPage`}>
+                <Link to={`/products/${product.name}`}>
                   <div className="w-full max-w-sm aspect-square relative overflow-hidden">
                     <div className="w-full h-full rounded-xl overflow-hidden hover:scale-105 transition-transform transition-duration-500">
                       <img
@@ -37,7 +40,26 @@ const Home = function (props) {
                   </div>
                   <button
                     onClick={() => {
-                      props.updateCart(product);
+                      let newCart = { ...props.CartItem };
+                      let acn = props.Account;
+                      console.log(newCart);
+                      if (acn) {
+                        let PNameArr = [];
+                        newCart[acn].forEach((c) => {
+                          PNameArr.push(c.name);
+                        });
+                        console.log(PNameArr);
+                        if (PNameArr.includes(product.name)) {
+                          for (let i = 0; i < newCart[acn].length; i++) {
+                            if (newCart[acn][i].name === product.name) {
+                              newCart[acn][i].qty += 1;
+                              props.updateCart(newCart[acn][i]);
+                            }
+                          }
+                        } else {
+                          props.updateCart(product);
+                        }
+                      }
                       props.updateIsOpenCart(true);
                     }}
                     className="p-2 min-[400px]:p-4 rounded-full bg-white border border-gray-300 flex items-center justify-center group shadow-sm shadow-transparent transition-all duration-500 hover:shadow-gray-200 hover:border-gray-400 hover:bg-gray-50"

@@ -1,17 +1,22 @@
 import ReactDOM from "react-dom/client";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Header from "./Page/Header.js";
 import Footer from "./Page/Footer.js";
 import Home from "./Page/Home.js";
 import ProductPage from "./Page/ProductPage.js";
 import Checkout from "./Page/Checkout.js";
 import Account from "./Page/Account.js";
+import CategoriesPage from "./Page/Component/categoriesPage.js";
+import SmallCategoriesPage from "./Page/Component/smallCategoriesPage.js";
+import ScrollButton from "./Page/Component/ScrollBtn.js";
 
 let savedCart = JSON.parse(localStorage.getItem("Cart"));
 let SaveCart = savedCart;
 let saveAcc = JSON.parse(localStorage.getItem("Account"));
 let SaveAcc = saveAcc;
+
+console.log(SaveCart);
 export default function App() {
   const [cart, setCart] = useState(SaveCart);
   const [AccountName, setAccountName] = useState(SaveAcc);
@@ -65,16 +70,45 @@ export default function App() {
   function updateIsOpenCart(Order) {
     setIsOpenCart(Order);
   }
+
+  //Weather
+  const [location, setLocation] = useState("");
+  const [temperature, setTemperature] = useState("");
+  const [updateTime, setUpdateTime] = useState("");
+  const [weather, setWeather] = useState("");
+
+  useEffect(() => {
+    async function fetchWeatherData() {
+      const weatherAPI =
+        "https://data.weather.gov.hk/weatherAPI/opendata/weather.php?dataType=rhrread&lang=en";
+      const res = await fetch(weatherAPI);
+      const weatherData = await res.json();
+
+      const location = weatherData.temperature.data[1].place;
+      const temperature = weatherData.temperature.data[1].value;
+      const updateTime = weatherData.updateTime;
+      const fomatTime = `${updateTime.slice(0, 10)}, ${updateTime.slice(
+        11,
+        16
+      )}`;
+
+      setLocation(location);
+      setTemperature(temperature);
+      setUpdateTime(fomatTime);
+
+      if (temperature < 15) {
+        setWeather("cold");
+      } else if (temperature > 35) {
+        setWeather("hot");
+      } else {
+        setWeather("normal");
+      }
+    }
+    fetchWeatherData();
+  }, []);
+
   return (
     <>
-      <button
-        className={"test"}
-        onClick={() => {
-          console.log(SaveCart);
-        }}
-      >
-        Test Cart
-      </button>
       <BrowserRouter>
         <Header
           updateCart={updateCart}
@@ -83,6 +117,8 @@ export default function App() {
           CartItem={cart}
           Account={AccountName}
           OpenCart={IsOpenCart}
+          temperature={temperature}
+          weather={weather}
         />
         <Routes>
           <Route
@@ -90,11 +126,12 @@ export default function App() {
             element={
               <Home
                 updateCart={updateCart}
+                CartItem={cart}
                 updateIsOpenCart={updateIsOpenCart}
+                Account={AccountName}
               />
             }
           />
-          <Route path="ProductPage" element={<ProductPage />} />
           <Route
             path="Checkout"
             element={
@@ -109,9 +146,16 @@ export default function App() {
             path="Account"
             element={<Account updateAccountName={updateAccountName} />}
           />
+          <Route path="/:categoryName" element={<CategoriesPage />} />
+          <Route
+            path="/:categoryName/:smallCategoriesName"
+            element={<SmallCategoriesPage />}
+          />
+          <Route path="/products/:productPage" element={<ProductPage />} />
         </Routes>
       </BrowserRouter>
       <Footer />
+      <ScrollButton />
     </>
   );
 }

@@ -39,7 +39,7 @@ const ProductCount = function ({ ItemQtyChangeIncart, ItemInfo }) {
       <img src={ItemInfo.picture} width={200} height={200} />
       <h5>{ItemInfo.name}</h5>
       <button onClick={handleIncrease}>+</button>
-      {count}
+      {ItemInfo.qty}
       <button onClick={handleDecrease}>-</button>
       <button onClick={handleDelete}>X</button>
       <h6>${TotalPrice}</h6>

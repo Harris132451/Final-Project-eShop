@@ -27,7 +27,7 @@ const Inputbox = function () {
   console.log(ResultName);
   return (
     <>
-      <input onChange={(b) => InputName(b)}></input>
+      <input onChange={(b) => InputName(b)} class="hidden sm:block"></input>
       <div>
         {ResultName.length > 0 &&
           ResultName.map((n) => {
@@ -35,7 +35,7 @@ const Inputbox = function () {
               <button
                 key={n}
                 onClick={() => NameButton(n)}
-                style={{ marginRight: 10 }}
+                class="hidden sm:block"
               >
                 {n}
               </button>
