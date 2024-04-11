@@ -7,6 +7,7 @@ import Home from "./Page/Home.js";
 import ProductPage from "./Page/ProductPage.js";
 import Checkout from "./Page/Checkout.js";
 import Signin from "./Page/Signin.js";
+import Signup from "./Page/Signup.js";
 import CategoriesPage from "./Page/Component/categoriesPage.js";
 import SmallCategoriesPage from "./Page/Component/smallCategoriesPage.js";
 import ScrollButton from "./Page/Component/ScrollBtn.js";
@@ -54,6 +55,7 @@ export default function App() {
     console.log(newCart);
     setCart(newCart);
   }
+
   function updateAccountName(Name) {
     let newCart = cart;
     if (!Object.keys(newCart).includes(Name) && Name !== null) {
@@ -142,6 +144,10 @@ export default function App() {
           <Route
             path="Signin"
             element={<Signin updateAccountName={updateAccountName} />}
+          />
+          <Route
+            path="Signup"
+            element={<Signup updateAccountName={updateAccountName} />}
           />
           <Route path="/:categoryName" element={<CategoriesPage />} />
           <Route
