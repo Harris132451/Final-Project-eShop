@@ -1,7 +1,5 @@
 import { Link } from "react-router-dom";
 import TotalPriceCount from "./Component/TPinCart.js";
-import withLoader from "./Component/withLoader"
-
 const Checkout = function ({ updateCart, CartItem, Account }) {
   function PaidDeleteCart() {
     updateCart("Paid");
@@ -40,4 +38,4 @@ const Checkout = function ({ updateCart, CartItem, Account }) {
   );
 };
 
-export default withLoader(Checkout);
+export default Checkout;

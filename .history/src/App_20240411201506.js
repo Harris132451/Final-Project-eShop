@@ -11,7 +11,7 @@ import Signup from "./Page/Signup.js";
 import CategoriesPage from "./Page/Component/categoriesPage.js";
 import SmallCategoriesPage from "./Page/Component/smallCategoriesPage.js";
 import ScrollButton from "./Page/Component/ScrollBtn.js";
-
+import LoadingSpinner from './Page/Component/LoadingSpinner.js';
 
 let savedCart = JSON.parse(localStorage.getItem("Cart"));
 let SaveCart = savedCart;
