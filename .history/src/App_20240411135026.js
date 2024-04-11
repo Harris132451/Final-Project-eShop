@@ -120,6 +120,8 @@ export default function App() {
           weather={weather}
         />
         <Routes>
+        <Route path="/products/:productPage" element={<ProductPage updateCart={updateCart}
+                updateIsOpenCart={updateIsOpenCart}/>} />
           <Route
             index
             element={
@@ -150,8 +152,7 @@ export default function App() {
             element={<SmallCategoriesPage updateCart={updateCart}
             updateIsOpenCart={updateIsOpenCart}/>}
           />
-          <Route path="/products/:productPage" element={<ProductPage updateCart={updateCart}
-                updateIsOpenCart={updateIsOpenCart}/>} />
+          
         </Routes>
       </BrowserRouter>
       <Footer />

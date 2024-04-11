@@ -38,11 +38,10 @@ const ProductPage = (props) => {
             </div>
             <div className="flex mt-6 items-center pb-5 border-b-2 border-gray-200 mb-5">
               <span className="title-font font-medium text-2xl text-gray-900">${product.price}</span>
-              <button className="flex ml-auto text-white bg-blue-500 border-0 py-2 px-6 focus:outline-none rounded hover:bg-white hover:text-blue-500 hover:border-blue-500 hover:scale-110 transition duration-300 ease-in-out"
-               onClick={() => {
-                props.updateCart(product);
-                props.updateIsOpenCart(true);
-              }}>Add to cart</button>
+              <button onClick={() => {
+                  props.updateCart(product);
+                  props.updateIsOpenCart(true);
+                }}> className="flex ml-auto text-white bg-blue-500 border-0 py-2 px-6 focus:outline-none rounded hover:bg-white hover:text-blue-500 hover:border-blue-500 hover:scale-110 transition duration-300 ease-in-out">Add to cart</button>
             </div>
             <div>
               <span>123</span>

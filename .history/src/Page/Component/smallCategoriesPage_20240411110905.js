@@ -38,7 +38,7 @@ const SmallCategoriesPage = (props) => {
                 <h4 class="text-xl text-gray-700 font-bold mt-2">
                   {filteredItem.price}
                 </h4>
-                <button type="button" class="w-full mt-6 px-4 py-3 bg-[#333] hover:bg-[#222] text-white rounded-full"
+                <button type="button" class="w-full mt-6 px-4 py-3 bg-blue hover:bg-[#222] text-white rounded-full"
                 onClick={() => {
                   props.updateCart(filteredItem);
                   props.updateIsOpenCart(true);
