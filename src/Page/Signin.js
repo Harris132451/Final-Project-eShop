@@ -88,7 +88,7 @@ const Signin = function ({ updateAccountName }) {
                         onClick={() => {
                           setAccError(true);
                         }}
-                        className="w-full cursor-pointer rounded-md border border-primary bg-primary px-5 py-3 text-black font-medium transition hover:bg-gray-400"
+                        className="w-full cursor-pointer rounded-md border border-primary bg-primary px-5 py-3 text-black font-medium transition hover:bg-blue-600"
                       >
                         Login
                       </button>
@@ -97,9 +97,12 @@ const Signin = function ({ updateAccountName }) {
                 </div>
                 <p className="text-base text-body-color dark:text-dark-6">
                   <span className="pr-0.5">Not a member yet? </span>
-                  <a href="/Drink" className="text-primary hover:underline">
+                  <Link
+                    to="/Signup"
+                    className="text-primary text-blue-800 hover:underline"
+                  >
                     Sign Up
-                  </a>
+                  </Link>
                 </p>
               </div>
             </div>
