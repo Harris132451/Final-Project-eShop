@@ -1,6 +1,8 @@
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { AccountList } from "./Component/AL.js";
+import { auth } from "../firebase/firebase.js";
+import { createUserWithEmailAndPassword } from "firebase/auth";
 
 function warning() {
   return (
@@ -74,6 +76,17 @@ function Signup() {
       setWarning(true);
     } else {
       localStorage.setItem("NewAccount", JSON.stringify(Account));
+      createUserWithEmailAndPassword(auth, InputID, InputCheckPassword)
+        .then((userCredential) => {
+          const user = userCredential.user;
+          console.log(user);
+        })
+        .catch((error) => {
+          const errorCode = error.code;
+          const errorMessage = error.message;
+          console.log(errorCode);
+          console.log(errorMessage);
+        });
     }
   }
 
