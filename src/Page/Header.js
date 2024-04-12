@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { useState, useRef, useEffect } from "react";
 import Weather from "./Component/Weather.js";
 import Inputbox from "./Component/input.js";
-import Cart from "./Component/SC.js";
+import CartBox from "./Component/SC.js";
 import { item } from "./Component/product";
 import { FaCaretDown } from "react-icons/fa";
 import { categories } from "./Component/categoriesData.js";
@@ -163,12 +163,12 @@ function Header(props) {
                     />
                   </button>
                 </div>
-                <Cart
+                <CartBox
                   ItemChangeIncart={props.updateCart}
-                  CartItems={props.CartItem}
+                  Items={props.items}
                   CartAccount={props.Account}
                 />
-                {props.CartItem[props.Account].length > 0 && (
+                {props.items[props.Account]["Cart"].length > 0 && (
                   <ButtonLink
                     to="Checkout"
                     BtnName={

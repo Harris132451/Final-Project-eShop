@@ -11,64 +11,71 @@ import Signup from "./Page/Signup.js";
 import CategoriesPage from "./Page/Component/categoriesPage.js";
 import SmallCategoriesPage from "./Page/Component/smallCategoriesPage.js";
 import ScrollButton from "./Page/Component/ScrollBtn.js";
+import { collection, doc, setDoc, getDoc } from "firebase/firestore";
+import { db } from "./firebase/firebase.js";
 
+const listRef = collection(db, "List");
+const docRef = doc(db, "List", "PNS");
+const getList = await getDoc(docRef);
 
-let savedCart = JSON.parse(localStorage.getItem("Cart"));
-let SaveCart = savedCart;
+if (getList.exists()) {
+  console.log(getList.data().newData);
+} else {
+  console.log("No such document!");
+}
+
 let saveAcc = JSON.parse(localStorage.getItem("Account"));
 let SaveAcc = saveAcc;
 
-console.log(SaveCart);
 export default function App() {
-  const [cart, setCart] = useState(SaveCart);
+  const [data, setData] = useState(getList.data().newData);
   const [AccountName, setAccountName] = useState(SaveAcc);
   const [IsOpenCart, setIsOpenCart] = useState(false);
 
-  function updateCart(product) {
-    let newCart = { ...cart };
+  async function updateCart(product) {
+    let newData = { ...data };
     let acn = AccountName;
     if (product === "Paid") {
-      newCart[acn] = [];
+      newData[acn]["Cart"] = [];
     } else if (acn) {
       let PNameArr = [];
-      newCart[acn].forEach((c) => {
+      newData[acn]["Cart"].forEach((c) => {
         PNameArr.push(c.name);
       });
       if (!PNameArr.includes(product.name)) {
-        newCart[acn].push({ ...product, qty: 1 });
+        newData[acn]["Cart"].push({ ...product, qty: 1 });
       } else {
-        for (let i = 0; i < newCart[acn].length; i++) {
+        for (let i = 0; i < newData[acn]["Cart"].length; i++) {
           if (
-            newCart[acn].length > 0 &&
-            newCart[acn][i].name === product.name &&
+            newData[acn]["Cart"].length > 0 &&
+            newData[acn]["Cart"][i].name === product.name &&
             product.qty === 0
           ) {
-            newCart[acn].splice(i, 1);
+            newData[acn]["Cart"].splice(i, 1);
           } else if (
-            newCart[acn].length > 0 &&
-            newCart[acn][i].name === product.name
+            newData[acn]["Cart"].length > 0 &&
+            newData[acn]["Cart"][i].name === product.name
           ) {
-            newCart[acn][i].qty = product.qty;
+            newData[acn]["Cart"][i].qty = product.qty;
           }
         }
       }
     }
-    localStorage.setItem("Cart", JSON.stringify(newCart));
-    SaveCart = newCart;
-    console.log(newCart);
-    setCart(newCart);
+    await setDoc(doc(listRef, "PNS"), {
+      newData,
+    });
+    setData(newData);
   }
 
-  function updateAccountName(Name) {
-    let newCart = cart;
-    if (!Object.keys(newCart).includes(Name) && Name !== null) {
-      newCart[Name] = [];
+  async function updateAccountName(Name) {
+    let newData = { ...data };
+    if (!Object.keys(newData).includes(Name) && Name !== null) {
+      newData[Name] = { Cart: [], WishList: [] };
+      await setDoc(doc(listRef, "PNS"), {
+        newData,
+      });
     }
-    localStorage.setItem("Cart", JSON.stringify(newCart));
-    SaveCart = newCart;
-    localStorage.setItem("Account", JSON.stringify(Name));
-    SaveAcc = Name;
-    setCart(newCart);
+    setData(newData);
     setAccountName(Name);
   }
   function updateIsOpenCart(Order) {
@@ -111,16 +118,14 @@ export default function App() {
     fetchWeatherData();
   }, []);
 
-
   return (
     <>
-    
       <BrowserRouter>
         <Header
           updateCart={updateCart}
           updateAccountName={updateAccountName}
           updateIsOpenCart={updateIsOpenCart}
-          CartItem={cart}
+          items={data}
           Account={AccountName}
           OpenCart={IsOpenCart}
           temperature={temperature}
@@ -132,7 +137,7 @@ export default function App() {
             element={
               <Home
                 updateCart={updateCart}
-                CartItem={cart}
+                items={data}
                 updateIsOpenCart={updateIsOpenCart}
                 Account={AccountName}
               />
@@ -143,7 +148,7 @@ export default function App() {
             element={
               <Checkout
                 updateCart={updateCart}
-                CartItem={cart}
+                items={data}
                 Account={AccountName}
               />
             }
