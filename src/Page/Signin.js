@@ -46,18 +46,22 @@ const Signin = function ({ updateAccountName }) {
   }
 
   function handleOnClick() {
+    PassAccountName();
     signInWithEmailAndPassword(auth, InputID, InputPassword)
       .then((userCredential) => {
         const user = userCredential.user;
+        console.log(user);
+        <Link to="/"></Link>;
       })
       .catch((error) => {
+        setAccError(true);
         const errorCode = error.code;
         const errorMessage = error.message;
         console.log(errorCode);
         console.log(errorMessage);
       });
   }
-  console.log(auth.currentUser);
+
   return (
     <>
       <section className="bg-gray-1 py-10 dark:bg-dark lg:py-[120px]">
@@ -88,33 +92,13 @@ const Signin = function ({ updateAccountName }) {
                   ></input>
                   <div className="mb-10">
                     <button
+                      className="w-full cursor-pointer rounded-md border border-primary bg-primary px-5 py-3 text-black font-medium transition hover:bg-blue-600"
                       onClick={() => {
                         handleOnClick();
                       }}
                     >
-                      Firebase
+                      Login in
                     </button>
-                    {IDName ? (
-                      <Link to="/">
-                        <button
-                          onClick={() => {
-                            PassAccountName();
-                          }}
-                          className="w-full cursor-pointer rounded-md border border-primary bg-primary px-5 py-3 text-black font-medium transition hover:bg-gray-400"
-                        >
-                          Login
-                        </button>
-                      </Link>
-                    ) : (
-                      <button
-                        onClick={() => {
-                          setAccError(true);
-                        }}
-                        className="w-full cursor-pointer rounded-md border border-primary bg-primary px-5 py-3 text-black font-medium transition hover:bg-blue-600"
-                      >
-                        Login
-                      </button>
-                    )}
                   </div>
                 </div>
                 <p className="text-base text-body-color dark:text-dark-6">

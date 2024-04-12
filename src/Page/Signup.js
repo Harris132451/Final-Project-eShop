@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { AccountList } from "./Component/AL.js";
 import { auth } from "../firebase/firebase.js";
-import { createUserWithEmailAndPassword } from "firebase/auth";
+import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 
 function warning() {
   return (
@@ -67,19 +67,14 @@ function Signup() {
 
   function handleOnClick() {
     setWarning(false);
-    const Account = {
-      name: InputName,
-      id: InputID,
-      password: InputCheckPassword,
-    };
     if (checkInput() || checkAccount()) {
       setWarning(true);
     } else {
-      localStorage.setItem("NewAccount", JSON.stringify(Account));
       createUserWithEmailAndPassword(auth, InputID, InputCheckPassword)
         .then((userCredential) => {
           const user = userCredential.user;
           console.log(user);
+          <Link to="Signin"></Link>;
         })
         .catch((error) => {
           const errorCode = error.code;
