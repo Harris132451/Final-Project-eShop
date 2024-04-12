@@ -41,20 +41,24 @@ const Home = function (props) {
                   </div>
                   <button
                     onClick={() => {
-                      let newCart = { ...props.CartItem };
+                      let newData = { ...props.items };
                       let acn = props.Account;
-                      console.log(newCart);
+                      console.log(newData);
                       if (acn) {
                         let PNameArr = [];
-                        newCart[acn].forEach((c) => {
+                        newData[acn]["Cart"].forEach((c) => {
                           PNameArr.push(c.name);
                         });
                         console.log(PNameArr);
                         if (PNameArr.includes(product.name)) {
-                          for (let i = 0; i < newCart[acn].length; i++) {
-                            if (newCart[acn][i].name === product.name) {
-                              newCart[acn][i].qty += 1;
-                              props.updateCart(newCart[acn][i]);
+                          for (
+                            let i = 0;
+                            i < newData[acn]["Cart"].length;
+                            i++
+                          ) {
+                            if (newData[acn]["Cart"][i].name === product.name) {
+                              newData[acn]["Cart"][i].qty += 1;
+                              props.updateCart(newData[acn]["Cart"][i]);
                             }
                           }
                         } else {

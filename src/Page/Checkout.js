@@ -2,28 +2,28 @@ import { Link } from "react-router-dom";
 import TotalPriceCount from "./Component/TPinCart.js";
 import withLoader from "./Component/withLoader";
 
-const Checkout = function ({ updateCart, CartItem, Account }) {
+const Checkout = function ({ updateCart, items, Account }) {
   function PaidDeleteCart() {
     updateCart("Paid");
   }
   let PriceSum = 0;
-  if (CartItem[Account].length > 1) {
-    CartItem[Account].map((p) => {
+  if (items[Account]["Cart"].length > 1) {
+    items[Account]["Cart"].map((p) => {
       console.log(PriceSum);
       PriceSum += p.qty * p.price;
     });
-  } else if (CartItem[Account].length === 1) {
-    PriceSum += CartItem[Account][0].qty * CartItem[Account][0].price;
+  } else if (items[Account]["Cart"].length === 1) {
+    PriceSum += items[Account]["Cart"][0].qty * items[Account]["Cart"][0].price;
   }
   return (
     <div>
       <h2>Total Items & Prices</h2>
-      {CartItem[Account].length > 1 &&
-        CartItem[Account].map((p) => {
+      {items[Account]["Cart"].length > 1 &&
+        items[Account]["Cart"].map((p) => {
           return <TotalPriceCount ItemInfo={p} />;
         })}
-      {CartItem[Account].length === 1 && (
-        <TotalPriceCount ItemInfo={CartItem[Account][0]} />
+      {items[Account]["Cart"].length === 1 && (
+        <TotalPriceCount ItemInfo={items[Account]["Cart"][0]} />
       )}
       {PriceSum > 0 ? (
         <h5>Total Prices : {PriceSum}</h5>

@@ -1,16 +1,16 @@
 import ProductCount from "./PCinCart.js";
 
-const Cart = function ({ ItemChangeIncart, CartItems, CartAccount }) {
+const CartBox = function ({ ItemChangeIncart, Items, CartAccount }) {
   return (
     <>
-      {CartItems[CartAccount].length === 0 ? (
+      {Items[CartAccount]["Cart"].length === 0 ? (
         <div class="text-center my-56 sm:my-44 text-xl sm:text-[15px] w-[400px] sm:w-[350px]">
           No Product in Cart !
         </div>
       ) : (
         <div class="overflow-scroll border-solid border-grey border h-[500px]">
-          {CartItems[CartAccount].length > 1 &&
-            CartItems[CartAccount].map((p) => {
+          {Items[CartAccount]["Cart"].length > 1 &&
+            Items[CartAccount]["Cart"].map((p) => {
               return (
                 <ProductCount
                   ItemQtyChangeIncart={ItemChangeIncart}
@@ -18,10 +18,10 @@ const Cart = function ({ ItemChangeIncart, CartItems, CartAccount }) {
                 />
               );
             })}
-          {CartItems[CartAccount].length === 1 && (
+          {Items[CartAccount]["Cart"].length === 1 && (
             <ProductCount
               ItemQtyChangeIncart={ItemChangeIncart}
-              ItemInfo={CartItems[CartAccount][0]}
+              ItemInfo={Items[CartAccount]["Cart"][0]}
             />
           )}
         </div>
@@ -29,4 +29,4 @@ const Cart = function ({ ItemChangeIncart, CartItems, CartAccount }) {
     </>
   );
 };
-export default Cart;
+export default CartBox;
