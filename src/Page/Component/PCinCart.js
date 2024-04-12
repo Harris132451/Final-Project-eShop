@@ -33,33 +33,38 @@ const ProductCount = function ({ ItemQtyChangeIncart, ItemInfo }) {
     ItemInfo.qty = 0;
     ItemQtyChangeIncart(ItemInfo);
   };
-  let TotalPrice = count * ItemInfo.price;
+  let TotalPrice = (count * ItemInfo.price).toFixed(1);
   return (
-    <div class="flex flex-col w-56 sm:w-72 p-2 text-black">
-      <img src={ItemInfo.picture} class="" width={120} height={120} />
-      <h5 class="text-sm">{ItemInfo.name}</h5>
+    <div class="flex flex-col pl-4 w-[400px] sm:w-[330px] px-2 pt-3 sm:py-2 text-black">
+      <div class="flex flex-col items-center justify-center sm:items-start sm:justify-start">
+        <img
+          src={ItemInfo.picture}
+          class="w-[140px] h-[140px] sm:w-[110px] sm:h-[110px] shadow"
+        />
+        <h5 class="mt-1 text-[17px] text-center font-normal sm:text-left sm:mt-0.5 sm:text-[15px] sm:font-light">
+          {ItemInfo.name}
+        </h5>
+      </div>
       <div class="flex flex-row">
-        <button
-          onClick={handleIncrease}
-          class="mr-2 rounded-full bg-blue-400 text-blue-900 w-4 h-4 mt-2"
-        >
-          +
+        <button onClick={handleIncrease} class="w-6 h-6 sm:w-4 sm:h-4 mt-2">
+          <img src="CountPlusBtn.png" />
         </button>
-        <div class="mt-0.5 mr-2 text-xl">{ItemInfo.qty}</div>
+        <div class="mt-1 w-10 text-[20px] text-center sm:mt-0.5 sm:w-8 sm:text-[17px] sm:font-medium">
+          {ItemInfo.qty}
+        </div>
         <button
           onClick={handleDecrease}
-          class="mr-3 rounded-full bg-blue-400 text-blue-900  w-4 h-4 mt-2"
+          class="mr-6  w-6 h-6 sm:mr-3 sm:w-4 sm:h-4 mt-2"
         >
-          -
+          <img src="CountMinusBtn.png" />
         </button>
-        <button
-          onClick={handleDelete}
-          class="mt-2 text-xl rounded-full bg-blue-400 text-blue-900 w-5 h-5"
-        >
-          x
+        <button onClick={handleDelete} class="mt-[8.5px] w-5 h-5 sm:w-3 sm:h-3">
+          <img src="RubbishBinBtn.png" />
         </button>
+        <h6 class="ml-24 w-36 text-[20px] self-center text-right sm:ml-20 sm:w-24 sm:text-[16px]">
+          ${TotalPrice}
+        </h6>
       </div>
-      <h6>${TotalPrice}</h6>
     </div>
   );
 };

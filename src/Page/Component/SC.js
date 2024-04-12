@@ -4,7 +4,7 @@ const Cart = function ({ ItemChangeIncart, CartItems, CartAccount }) {
   return (
     <>
       {CartItems[CartAccount].length === 0 ? (
-        <div class="text-center my-44 pr-14 sm:pr-0 text-xl w-72">
+        <div class="text-center my-56 sm:my-44 text-xl sm:text-[15px] w-[400px] sm:w-[350px]">
           No Product in Cart !
         </div>
       ) : (

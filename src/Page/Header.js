@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import Weather from "./Component/Weather.js";
 import Inputbox from "./Component/input.js";
 import Cart from "./Component/SC.js";
@@ -11,9 +11,25 @@ function Header(props) {
   const temperature = props.temperature;
   const weather = props.weather;
   const [OpenLogin, setOpenLogin] = useState(true);
+
   function ButtonLink({ to, BtnName }) {
     return <Link to={to}>{BtnName}</Link>;
   }
+
+  const boxRef = useRef(null);
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (boxRef.current && !boxRef.current.contains(event.target)) {
+        props.updateIsOpenCart(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [boxRef]);
 
   const dropdownLinks = categories;
 
@@ -59,7 +75,7 @@ function Header(props) {
                         <div class="h-auto w-5 mr-1 hidden sm:block">
                           <img src="/AccBtn.png" />
                         </div>
-                        <div>Logout</div>
+                        <div class="text-lg sm:text-base">Logout</div>
                       </button>
                     }
                   />
@@ -82,7 +98,7 @@ function Header(props) {
             )}
           </div>
           <div>
-            <button class="h-auto w-6 mr-2 pt-0.5 ml-3 sm:ml-0 lg:mr-4">
+            <button class="h-auto w-7 mr-2 pt-0.5 ml-3 sm:w-6 sm:ml-0 lg:mr-4">
               <img src="/WishBtn.png" />
             </button>
           </div>
@@ -91,7 +107,7 @@ function Header(props) {
               onClick={() => {
                 props.updateIsOpenCart(!props.OpenCart);
               }}
-              class="h-auto w-6 ml-3 mr-4 pt-0.5 sm:ml-2 sm:mr-2 lg:mr-3"
+              class="h-auto w-8 ml-3 mr-4 pt-0.5 sm:w-7 sm:ml-2 sm:mr-2 lg:mr-3"
             >
               <img src="/CartBtn.png" />
             </button>
@@ -100,40 +116,64 @@ function Header(props) {
         <div class="col-start-3 col-end-4 row-start-2 row-end-3 z-40 mt-6">
           <div class="flex justify-end ">
             {props.OpenCart && !props.Account && (
-              <div class="bg-white rounded-md  p-4 shadow-lg">
-                <h3>Shop Cart</h3>
-                <button
-                  onClick={() => {
-                    props.updateIsOpenCart(!props.OpenCart);
-                  }}
-                >
-                  X
-                </button>
-                <h5>Please Login First !</h5>
+              <div
+                ref={boxRef}
+                class="bg-white text-blue-900 rounded-md  px-4 pb-4 pt-2 mt-2 shadow-lg"
+              >
+                <div class="grid grid-cols-3">
+                  <h3 class="col-start-2 col-end-3 text-center text-2xl font-bold pb-3">
+                    Shop Cart
+                  </h3>
+                  <button
+                    onClick={() => {
+                      props.updateIsOpenCart(!props.OpenCart);
+                    }}
+                    class="col-start-3 col-end-4 items-center pb-2"
+                  >
+                    <img
+                      src="CloseBtn.png"
+                      class="w-[25px] h-[25px] object-end ml-28 sm:w-[17px] sm:h-[17px] sm:ml-24"
+                    />
+                  </button>
+                </div>
+                <h5 class="text-center my-56 sm:my-44 text-xl sm:text-[15px] w-[400px] sm:w-[350px]">
+                  Please Login First !
+                </h5>
               </div>
             )}
 
             {props.OpenCart && props.Account && (
-              <div class="bg-white rounded-md px-4 pb-4 pt-2 shadow-lg w-64 sm:w-80  flex justify-center flex-col text-blue-900">
-                <button
-                  onClick={() => {
-                    props.updateIsOpenCart(!props.OpenCart);
-                  }}
-                >
-                  X
-                </button>
-                <h3 class="text-center text-2xl font-bold">Shop Cart</h3>
+              <div
+                ref={boxRef}
+                class="bg-white rounded-md px-4 pb-4 pt-2 mt-2 shadow-lg flex justify-center flex-col text-blue-900"
+              >
+                <div class="grid grid-cols-3">
+                  <h3 class="col-start-2 col-end-3 text-center text-2xl font-bold pb-3">
+                    Shop Cart
+                  </h3>
+                  <button
+                    onClick={() => {
+                      props.updateIsOpenCart(!props.OpenCart);
+                    }}
+                    class="col-start-3 col-end-4 items-center pb-2"
+                  >
+                    <img
+                      src="CloseBtn.png"
+                      class="w-[25px] h-[25px] object-end ml-[110px] sm:w-[17px] sm:h-[17px] sm:ml-24"
+                    />
+                  </button>
+                </div>
                 <Cart
                   ItemChangeIncart={props.updateCart}
                   CartItems={props.CartItem}
                   CartAccount={props.Account}
                 />
-                {props.CartItem[props.Account].length > 0 ? (
+                {props.CartItem[props.Account].length > 0 && (
                   <ButtonLink
                     to="Checkout"
                     BtnName={
                       <button
-                        className="bg-gray-500"
+                        class="bg-blue-200 mt-4 ml-[120px] w-[110px] h-[35px] font-bold rounded-xl shadow-md hover:bg-blue-300 hover:shadow-none"
                         onClick={() => {
                           props.updateIsOpenCart(!props.OpenCart);
                         }}
@@ -142,8 +182,6 @@ function Header(props) {
                       </button>
                     }
                   />
-                ) : (
-                  <button className="bg-gray-500">Get Total</button>
                 )}
               </div>
             )}
