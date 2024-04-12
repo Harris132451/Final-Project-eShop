@@ -5,7 +5,7 @@ import { item } from "./Component/product";
 import PromotionSlider from "./Component/Slider";
 import { useReducer } from "react";
 import { ControlNumber } from "./Component/controlNum.js";
-import withLoader from "./Component/withLoader"
+import withLoader from "./Component/withLoader";
 
 const Home = function (props) {
   return (

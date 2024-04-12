@@ -4,32 +4,34 @@ import { AccountList } from "./Component/AL.js";
 import { auth } from "../firebase/firebase.js";
 import { signInWithEmailAndPassword } from "firebase/auth";
 
-function warning() {
-  return (
-    <div className="bg-white py-10 dark:bg-dark">
-      <div className="container">
-        <div className="flex w-full rounded-lg border-l-[6px] border-red bg-red-light-6 p-3 shadow-[0px_2px_10px_0px_rgba(0,0,0,0.08)]">
-          <div className="w-full">
-            <h5 className="mb-3 text-base font-semibold text-[#BC1C21]">
-              ⚠️Uh oh, something went wrong
-            </h5>
-            <ul className="list-inside list-disc">
-              <li className="text-base leading-relaxed text-red-light">
-                Incorrect ID or Password !
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-}
-
 const Signin = function ({ updateAccountName }) {
   const [InputID, setInputID] = useState("");
   const [InputPassword, setInputPassword] = useState("");
   const [IDName, setIDName] = useState(null);
-  const [AccError, setAccError] = useState(false);
+  const [UserName, setUserName] = useState("");
+  const [Warning, setWarning] = useState(false);
+  const [Message, setMessage] = useState("");
+
+  function warning() {
+    return (
+      <div className="bg-white py-10 dark:bg-dark">
+        <div className="container">
+          <div className="flex w-full rounded-lg border-l-[6px] border-red bg-red-light-6 p-3 shadow-[0px_2px_10px_0px_rgba(0,0,0,0.08)]">
+            <div className="w-full">
+              <h5 className="mb-3 text-base font-semibold text-[#BC1C21]">
+                ⚠️Uh oh, something went wrong
+              </h5>
+              <ul className="list-inside list-disc">
+                <li className="text-base leading-relaxed text-red-light">
+                  {Message}
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   useEffect(() => {
     setIDName(null);
@@ -41,24 +43,41 @@ const Signin = function ({ updateAccountName }) {
   }, [InputID, InputPassword]);
 
   function PassAccountName() {
-    updateAccountName(IDName);
+    updateAccountName(UserName);
     setIDName(null);
   }
 
   function handleOnClick() {
-    PassAccountName();
     signInWithEmailAndPassword(auth, InputID, InputPassword)
       .then((userCredential) => {
         const user = userCredential.user;
         console.log(user);
-        <Link to="/"></Link>;
+      })
+      .then(() => {
+        setUserName(auth.currentUser.displayName);
+        console.log(UserName);
+        PassAccountName();
       })
       .catch((error) => {
-        setAccError(true);
+        setWarning(true);
         const errorCode = error.code;
         const errorMessage = error.message;
         console.log(errorCode);
         console.log(errorMessage);
+        switch (error.code) {
+          case "auth/invalid-email":
+            setMessage("Invalid email format");
+            break;
+          case "auth/user-not-found":
+            setMessage("User not found");
+            break;
+          case "auth/wrong-password":
+            setMessage("Wrong password");
+            break;
+          case "auth/invalid-credential":
+            setMessage("Incorrect ID or Password !");
+            break;
+        }
       });
   }
 
@@ -73,7 +92,7 @@ const Signin = function ({ updateAccountName }) {
                   <h1>Sign in to your account</h1>
                 </div>
                 <div>
-                  {AccError && <div>{warning()}</div>}
+                  {Warning && <div>{warning()}</div>}
                   <input
                     onChange={(i) => {
                       setInputID(i.target.value);

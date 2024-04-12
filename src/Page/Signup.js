@@ -1,35 +1,8 @@
 import { Link } from "react-router-dom";
-import { useEffect, useState } from "react";
-import { AccountList } from "./Component/AL.js";
+import { useState } from "react";
 import { auth } from "../firebase/firebase.js";
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
-
-function warning() {
-  return (
-    <div className="bg-white py-10 dark:bg-dark">
-      <div className="container">
-        <div className="flex w-full rounded-lg border-l-[6px] border-red bg-red-light-6 p-3 shadow-[0px_2px_10px_0px_rgba(0,0,0,0.08)]">
-          <div className="w-full">
-            <h5 className="mb-3 text-base font-semibold text-[#BC1C21]">
-              ⚠️Uh oh, something went wrong:
-            </h5>
-            <ul className="list-inside list-disc text-left">
-              <li className="text-base leading-relaxed text-red-light">
-                Missing items
-              </li>
-              <li className="text-base leading-relaxed text-red-light">
-                ID already exist
-              </li>
-              <li className="text-base leading-relaxed text-red-light">
-                Password is not same
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-}
+import { useNavigate } from "react-router-dom";
 
 function Signup() {
   const [InputName, setInputName] = useState("");
@@ -37,16 +10,35 @@ function Signup() {
   const [InputPassword, setInputPassword] = useState("");
   const [InputCheckPassword, setInputCheckPassword] = useState("");
   const [Warning, setWarning] = useState(false);
+  const [Message, setMessage] = useState("");
 
-  //Double check user input password
-  useEffect(() => {
+  function warning() {
+    return (
+      <div className="bg-white py-10 dark:bg-dark">
+        <div className="container">
+          <div className="flex w-full rounded-lg border-l-[6px] border-red bg-red-light-6 p-3 shadow-[0px_2px_10px_0px_rgba(0,0,0,0.08)]">
+            <div className="w-full">
+              <h5 className="mb-3 text-base font-semibold text-[#BC1C21]">
+                ⚠️Uh oh, something went wrong:
+              </h5>
+              <ul>
+                <li className="text-base leading-relaxed text-red-light">
+                  {Message}
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  function checkPassword() {
     if (InputCheckPassword !== "" && InputPassword !== InputCheckPassword) {
       setWarning(true);
-      warning("");
-    } else {
-      setWarning(false);
+      setMessage("Password do not match");
     }
-  }, [InputPassword, InputCheckPassword]);
+  }
 
   function checkInput() {
     if (
@@ -55,32 +47,53 @@ function Signup() {
       InputPassword === "" ||
       InputCheckPassword === ""
     ) {
-      return true;
-    }
-  }
-
-  function checkAccount() {
-    if (AccountList.findIndex((el) => el.id === InputID) > -1) {
-      return true;
+      setWarning(true);
+      setMessage("Missing items");
     }
   }
 
   function handleOnClick() {
     setWarning(false);
-    if (checkInput() || checkAccount()) {
-      setWarning(true);
+    if (checkInput() || checkPassword()) {
+      return;
     } else {
       createUserWithEmailAndPassword(auth, InputID, InputCheckPassword)
         .then((userCredential) => {
           const user = userCredential.user;
+          console.log("Sign up success!");
           console.log(user);
-          <Link to="Signin"></Link>;
+          console.log(auth.currentUser);
+        })
+        .then(() => {
+          //Update Username
+          updateProfile(auth.currentUser, { displayName: InputName })
+            .then(() => {
+              console.log(
+                "Update usename success: ",
+                auth.currentUser.displayName
+              );
+            })
+            .catch((error) => console.log(error));
         })
         .catch((error) => {
           const errorCode = error.code;
           const errorMessage = error.message;
           console.log(errorCode);
           console.log(errorMessage);
+          setWarning(true);
+          switch (error.code) {
+            case "auth/invalid-email":
+              setMessage("Invalid email format");
+              break;
+            case "auth/email-already-in-use":
+              setMessage("Email already in use");
+              break;
+            case "auth/weak-password":
+              setMessage("Weak password: At least 6 digits");
+              break;
+            default:
+              setMessage("Default");
+          }
         });
     }
   }
@@ -106,15 +119,15 @@ function Signup() {
                     }}
                     className="w-full rounded-md border border-stroke bg-transparent mb-6 px-5 py-3 text-base text-black outline-none focus:border-primary focus-visible:shadow-none"
                     type="text"
-                    placeholder="Enter name here"
+                    placeholder="Enter username here"
                   ></input>
                   <input
                     onChange={(el) => {
                       setInputID(el.target.value);
                     }}
                     className="w-full rounded-md border border-stroke bg-transparent mb-6 px-5 py-3 text-base text-black outline-none focus:border-primary focus-visible:shadow-none"
-                    type="text"
-                    placeholder="Enter ID here"
+                    type="email"
+                    placeholder="Enter Email here"
                   ></input>
                   <input
                     onChange={(el) => {
@@ -122,7 +135,7 @@ function Signup() {
                     }}
                     className="w-full rounded-md border border-stroke bg-transparent mb-6 px-5 py-3 text-base text-black outline-none focus:border-primary focus-visible:shadow-none"
                     type="password"
-                    placeholder="Enter Password here"
+                    placeholder="Enter Password here (At least 6 digits)"
                   ></input>
                   <input
                     onChange={(el) => {
@@ -130,7 +143,7 @@ function Signup() {
                     }}
                     className="w-full rounded-md border border-stroke bg-transparent mb-6 px-5 py-3 text-base text-black outline-none focus:border-primary focus-visible:shadow-none"
                     type="password"
-                    placeholder="Enter Password here again"
+                    placeholder="Enter Password here again (At least 6 digits)"
                   ></input>
                   <div className="mb-10">
                     <button
