@@ -56,8 +56,8 @@ const Home = function (props) {
                             i < newData[acn]["Cart"].length;
                             i++
                           ) {
-                            if (newData[acn]["Cart"].name === product.name) {
-                              newData[acn]["Cart"].qty += 1;
+                            if (newData[acn]["Cart"][i].name === product.name) {
+                              newData[acn]["Cart"][i].qty += 1;
                               props.updateCart(newData[acn]["Cart"][i]);
                             }
                           }
