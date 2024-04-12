@@ -18,12 +18,12 @@ const ProductPage = (props) => {
   const breadcrumbItems = [
     { text: 'Home', href: '/' },
     { text: product.bigcategories, href: `/${product.bigcategories}` },
-    { text: product.smallcategories, href: `/product/${product.smallcategories}` },
+    { text: product.smallcategories, href: `/${product.smallcategories}` },
     { text: product.name }
   ];
 
   return (
-    <section className="text-gray-700 overflow-hidden bg-white font-[sans-serif]">
+    <section className="text-gray-700 body-font overflow-hidden bg-white">
       
       <div className="container px-5 py-24 mx-auto">
       <div className="text-4xl font-extrabold text-gray-800 mb-12">

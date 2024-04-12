@@ -18,6 +18,7 @@ let SaveCart = savedCart;
 let saveAcc = JSON.parse(localStorage.getItem("Account"));
 let SaveAcc = saveAcc;
 
+console.log(SaveCart);
 export default function App() {
   const [cart, setCart] = useState(SaveCart);
   const [AccountName, setAccountName] = useState(SaveAcc);
@@ -131,7 +132,9 @@ export default function App() {
             element={
               <Home
                 updateCart={updateCart}
+                CartItem={cart}
                 updateIsOpenCart={updateIsOpenCart}
+                Account={AccountName}
               />
             }
           />

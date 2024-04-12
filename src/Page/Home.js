@@ -3,6 +3,8 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { item } from "./Component/product";
 import PromotionSlider from "./Component/Slider";
+import { useReducer } from "react";
+import { ControlNumber } from "./Component/controlNum.js";
 import withLoader from "./Component/withLoader"
 
 const Home = function (props) {
@@ -39,7 +41,26 @@ const Home = function (props) {
                   </div>
                   <button
                     onClick={() => {
-                      props.updateCart(product);
+                      let newCart = { ...props.CartItem };
+                      let acn = props.Account;
+                      console.log(newCart);
+                      if (acn) {
+                        let PNameArr = [];
+                        newCart[acn].forEach((c) => {
+                          PNameArr.push(c.name);
+                        });
+                        console.log(PNameArr);
+                        if (PNameArr.includes(product.name)) {
+                          for (let i = 0; i < newCart[acn].length; i++) {
+                            if (newCart[acn][i].name === product.name) {
+                              newCart[acn][i].qty += 1;
+                              props.updateCart(newCart[acn][i]);
+                            }
+                          }
+                        } else {
+                          props.updateCart(product);
+                        }
+                      }
                       props.updateIsOpenCart(true);
                     }}
                     className="p-2 min-[400px]:p-4 rounded-full bg-white border border-gray-300 flex items-center justify-center group shadow-sm shadow-transparent transition-all duration-500 hover:shadow-gray-200 hover:border-gray-400 hover:bg-gray-50"
