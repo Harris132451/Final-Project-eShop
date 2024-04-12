@@ -21,7 +21,7 @@ const SmallCategoriesPage = (props) => {
 
       const breadcrumbItems = [
         { text: 'Home', href: '/' },
-        { text: parentCategoryName, href: `/${parentCategoryName}` },
+        { text: parentCategoryName, href: '/:categoryName' },
         { text: smallcategories.Name }
       ];
 
