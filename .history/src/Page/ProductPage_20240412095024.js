@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { item } from './Component/product';
 import withLoader from "./Component/withLoader"
-import Breadcrumb from "./Component/Breadcrumb"
+
 
 
 const ProductPage = (props) => {
@@ -15,20 +15,9 @@ const ProductPage = (props) => {
     return <div>Product not found</div>;
   }
 
-  const breadcrumbItems = [
-    { text: 'Home', href: '/' },
-    { text: product.bigcategories, href: `/${product.bigcategories}` },
-    { text: product.smallcategories, href: `/product/${product.smallcategories}` },
-    { text: product.name }
-  ];
-
   return (
-    <section className="text-gray-700 overflow-hidden bg-white font-[sans-serif]">
-      
+    <section className="text-gray-700 body-font overflow-hidden bg-white">
       <div className="container px-5 py-24 mx-auto">
-      <div className="text-4xl font-extrabold text-gray-800 mb-12">
-        <Breadcrumb items={breadcrumbItems} />
-      </div>
         <div className="lg:w-4/5 mx-auto flex flex-wrap">
           <img
             alt="ecommerce"
