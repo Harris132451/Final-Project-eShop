@@ -1,6 +1,8 @@
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { AccountList } from "./Component/AL.js";
+import { auth } from "../firebase/firebase.js";
+import { signInWithEmailAndPassword } from "firebase/auth";
 
 function warning() {
   return (
@@ -43,6 +45,19 @@ const Signin = function ({ updateAccountName }) {
     setIDName(null);
   }
 
+  function handleOnClick() {
+    signInWithEmailAndPassword(auth, InputID, InputPassword)
+      .then((userCredential) => {
+        const user = userCredential.user;
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        console.log(errorCode);
+        console.log(errorMessage);
+      });
+  }
+  console.log(auth.currentUser);
   return (
     <>
       <section className="bg-gray-1 py-10 dark:bg-dark lg:py-[120px]">
@@ -72,6 +87,13 @@ const Signin = function ({ updateAccountName }) {
                     placeholder="Password"
                   ></input>
                   <div className="mb-10">
+                    <button
+                      onClick={() => {
+                        handleOnClick();
+                      }}
+                    >
+                      Firebase
+                    </button>
                     {IDName ? (
                       <Link to="/">
                         <button

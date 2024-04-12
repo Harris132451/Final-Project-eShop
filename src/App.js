@@ -11,7 +11,8 @@ import Signup from "./Page/Signup.js";
 import CategoriesPage from "./Page/Component/categoriesPage.js";
 import SmallCategoriesPage from "./Page/Component/smallCategoriesPage.js";
 import ScrollButton from "./Page/Component/ScrollBtn.js";
-
+import { getDatabase, ref, set } from "firebase/database";
+const database = getDatabase();
 
 let savedCart = JSON.parse(localStorage.getItem("Cart"));
 let SaveCart = savedCart;
@@ -53,6 +54,13 @@ export default function App() {
         }
       }
     }
+    set(ref(database, "cart/"), newCart)
+      .then(() => {
+        console.log(newCart);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
     localStorage.setItem("Cart", JSON.stringify(newCart));
     SaveCart = newCart;
     console.log(newCart);
@@ -64,6 +72,13 @@ export default function App() {
     if (!Object.keys(newCart).includes(Name) && Name !== null) {
       newCart[Name] = [];
     }
+    set(ref(database, "cart/"), newCart)
+      .then(() => {
+        console.log(newCart);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
     localStorage.setItem("Cart", JSON.stringify(newCart));
     SaveCart = newCart;
     localStorage.setItem("Account", JSON.stringify(Name));
@@ -111,10 +126,8 @@ export default function App() {
     fetchWeatherData();
   }, []);
 
-
   return (
     <>
-    
       <BrowserRouter>
         <Header
           updateCart={updateCart}
@@ -156,15 +169,33 @@ export default function App() {
             path="Signup"
             element={<Signup updateAccountName={updateAccountName} />}
           />
-          <Route path="/:categoryName" element={<CategoriesPage updateCart={updateCart}
-                updateIsOpenCart={updateIsOpenCart}/>} />
+          <Route
+            path="/:categoryName"
+            element={
+              <CategoriesPage
+                updateCart={updateCart}
+                updateIsOpenCart={updateIsOpenCart}
+              />
+            }
+          />
           <Route
             path="/:categoryName/:smallCategoriesName"
-             element={<SmallCategoriesPage updateCart={updateCart}
-            updateIsOpenCart={updateIsOpenCart}/>}
+            element={
+              <SmallCategoriesPage
+                updateCart={updateCart}
+                updateIsOpenCart={updateIsOpenCart}
+              />
+            }
           />
-            <Route path="/products/:productPage" element={<ProductPage updateCart={updateCart}
-                updateIsOpenCart={updateIsOpenCart}/>} />
+          <Route
+            path="/products/:productPage"
+            element={
+              <ProductPage
+                updateCart={updateCart}
+                updateIsOpenCart={updateIsOpenCart}
+              />
+            }
+          />
         </Routes>
       </BrowserRouter>
       <Footer />
