@@ -11,6 +11,7 @@ import Signup from "./Page/Signup.js";
 import CategoriesPage from "./Page/Component/categoriesPage.js";
 import SmallCategoriesPage from "./Page/Component/smallCategoriesPage.js";
 import ScrollButton from "./Page/Component/ScrollBtn.js";
+import './App.scss';
 
 
 let savedCart = JSON.parse(localStorage.getItem("Cart"));
@@ -153,33 +154,15 @@ export default function App() {
             path="Signup"
             element={<Signup updateAccountName={updateAccountName} />}
           />
-          <Route
-            path="/:categoryName"
-            element={
-              <CategoriesPage
-                updateCart={updateCart}
-                updateIsOpenCart={updateIsOpenCart}
-              />
-            }
-          />
+          <Route path="/:categoryName" element={<CategoriesPage updateCart={updateCart}
+                updateIsOpenCart={updateIsOpenCart}/>} />
           <Route
             path="/:categoryName/:smallCategoriesName"
-            element={
-              <SmallCategoriesPage
-                updateCart={updateCart}
-                updateIsOpenCart={updateIsOpenCart}
-              />
-            }
+             element={<SmallCategoriesPage updateCart={updateCart}
+            updateIsOpenCart={updateIsOpenCart}/>}
           />
-          <Route
-            path="/products/:productPage"
-            element={
-              <ProductPage
-                updateCart={updateCart}
-                updateIsOpenCart={updateIsOpenCart}
-              />
-            }
-          />
+            <Route path="/products/:productPage" element={<ProductPage updateCart={updateCart}
+                updateIsOpenCart={updateIsOpenCart}/>} />
         </Routes>
       </BrowserRouter>
       <Footer />

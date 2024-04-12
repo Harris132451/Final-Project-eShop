@@ -7,10 +7,10 @@ import Home from "./Page/Home.js";
 import ProductPage from "./Page/ProductPage.js";
 import Checkout from "./Page/Checkout.js";
 import Signin from "./Page/Signin.js";
-import Signup from "./Page/Signup.js";
 import CategoriesPage from "./Page/Component/categoriesPage.js";
 import SmallCategoriesPage from "./Page/Component/smallCategoriesPage.js";
 import ScrollButton from "./Page/Component/ScrollBtn.js";
+import LoadingSpinner from "./Page/Component/LoadingSpinner.js"
 
 
 let savedCart = JSON.parse(localStorage.getItem("Cart"));
@@ -22,7 +22,6 @@ export default function App() {
   const [cart, setCart] = useState(SaveCart);
   const [AccountName, setAccountName] = useState(SaveAcc);
   const [IsOpenCart, setIsOpenCart] = useState(false);
-
   function updateCart(product) {
     let newCart = { ...cart };
     let acn = AccountName;
@@ -57,7 +56,6 @@ export default function App() {
     console.log(newCart);
     setCart(newCart);
   }
-
   function updateAccountName(Name) {
     let newCart = cart;
     if (!Object.keys(newCart).includes(Name) && Name !== null) {
@@ -110,80 +108,100 @@ export default function App() {
     fetchWeatherData();
   }, []);
 
+  const [isLoading, setIsLoading] = useState(true); 
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsLoading(false); 
+    }, 2000);
+
+    return () => clearTimeout(timer); 
+  }, []);
+
 
   return (
     <>
-    
-      <BrowserRouter>
-        <Header
-          updateCart={updateCart}
-          updateAccountName={updateAccountName}
-          updateIsOpenCart={updateIsOpenCart}
-          CartItem={cart}
-          Account={AccountName}
-          OpenCart={IsOpenCart}
-          temperature={temperature}
-          weather={weather}
-        />
-        <Routes>
-          <Route
-            index
-            element={
+          <BrowserRouter>
+      <Header
+        updateCart={updateCart}
+        updateAccountName={updateAccountName}
+        updateIsOpenCart={updateIsOpenCart}
+        CartItem={cart}
+        Account={AccountName}
+        OpenCart={IsOpenCart}
+        temperature={temperature}
+        weather={weather}
+      />
+      <Routes>
+        <Route
+          index
+          element={
+            isLoading ? <LoadingSpinner /> : (
               <Home
                 updateCart={updateCart}
                 updateIsOpenCart={updateIsOpenCart}
               />
-            }
-          />
-          <Route
-            path="Checkout"
-            element={
+            )
+          }
+        />
+        <Route
+          path="Checkout"
+          element={
+            isLoading ? <LoadingSpinner /> : (
               <Checkout
                 updateCart={updateCart}
                 CartItem={cart}
                 Account={AccountName}
               />
-            }
-          />
-          <Route
-            path="Signin"
-            element={<Signin updateAccountName={updateAccountName} />}
-          />
-          <Route
-            path="Signup"
-            element={<Signup updateAccountName={updateAccountName} />}
-          />
-          <Route
-            path="/:categoryName"
-            element={
+            )
+          }
+        />
+        <Route
+          path="Signin"
+          element={
+            isLoading ? <LoadingSpinner /> : (
+              <Signin updateAccountName={updateAccountName} />
+            )
+          }
+        />
+        <Route
+          path="/:categoryName"
+          element={
+            isLoading ? <LoadingSpinner /> : (
               <CategoriesPage
                 updateCart={updateCart}
                 updateIsOpenCart={updateIsOpenCart}
               />
-            }
-          />
-          <Route
-            path="/:categoryName/:smallCategoriesName"
-            element={
+            )
+          }
+        />
+        <Route
+          path="/:categoryName/:smallCategoriesName"
+          element={
+            isLoading ? <LoadingSpinner /> : (
               <SmallCategoriesPage
                 updateCart={updateCart}
                 updateIsOpenCart={updateIsOpenCart}
               />
-            }
-          />
-          <Route
-            path="/products/:productPage"
-            element={
+            )
+          }
+        />
+        <Route
+          path="/products/:productPage"
+          element={
+            isLoading ? <LoadingSpinner /> : (
               <ProductPage
                 updateCart={updateCart}
                 updateIsOpenCart={updateIsOpenCart}
               />
-            }
-          />
-        </Routes>
-      </BrowserRouter>
-      <Footer />
-      <ScrollButton />
+            )
+          }
+        />
+      </Routes>
+    </BrowserRouter>
+    <Footer />
+    <ScrollButton />
+
     </>
   );
 }

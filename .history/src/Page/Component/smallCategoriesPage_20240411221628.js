@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 import { categories } from './categoriesData';
 import { Link } from "react-router-dom";
 import { item } from "./product"
-import withLoader from "./withLoader"
+import withLoader from "./Component/withLoader"
 
 
 const SmallCategoriesPage = (props) => {

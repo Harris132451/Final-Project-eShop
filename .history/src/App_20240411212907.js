@@ -153,33 +153,15 @@ export default function App() {
             path="Signup"
             element={<Signup updateAccountName={updateAccountName} />}
           />
-          <Route
-            path="/:categoryName"
-            element={
-              <CategoriesPage
-                updateCart={updateCart}
-                updateIsOpenCart={updateIsOpenCart}
-              />
-            }
-          />
+          <Route path="/:categoryName" element={<CategoriesPage updateCart={updateCart}
+                updateIsOpenCart={updateIsOpenCart}/>} />
           <Route
             path="/:categoryName/:smallCategoriesName"
-            element={
-              <SmallCategoriesPage
-                updateCart={updateCart}
-                updateIsOpenCart={updateIsOpenCart}
-              />
-            }
+             element={<SmallCategoriesPage updateCart={updateCart}
+            updateIsOpenCart={updateIsOpenCart}/>}
           />
-          <Route
-            path="/products/:productPage"
-            element={
-              <ProductPage
-                updateCart={updateCart}
-                updateIsOpenCart={updateIsOpenCart}
-              />
-            }
-          />
+            <Route path="/products/:productPage" element={<ProductPage updateCart={updateCart}
+                updateIsOpenCart={updateIsOpenCart}/>} />
         </Routes>
       </BrowserRouter>
       <Footer />
@@ -188,5 +170,5 @@ export default function App() {
   );
 }
 
-const root = ReactDOM.createRoot(document.getElementById("root"));
-root.render(<App />);
+// const root = ReactDOM.createRoot(document.getElementById("root"));
+// root.render(<App />);
