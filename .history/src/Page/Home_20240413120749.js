@@ -34,17 +34,15 @@ const Home = function (props) {
       } else {
         setWeather("normal");
       }
+
+      const category = getRecommendedCategory();
+      const filteredItems = item.filter((item) => item.bigcategories === category);
+      const randomItems = filteredItems.sort(() => Math.random() - 0.5).slice(0, 6);
+      setRandomItems(randomItems);
     }
 
     fetchWeatherData();
   }, []);
-
-  useEffect(() => {
-    const category = getRecommendedCategory();
-    const filteredItems = item.filter((item) => item.bigcategories === category);
-    const randomItems = filteredItems.sort(() => Math.random() - 0.5).slice(0, 6);
-    setRandomItems(randomItems);
-  }, [weather]); // Update randomItems when weather changes
 
   const getRecommendedCategory = () => {
     if (weather === "normal") {

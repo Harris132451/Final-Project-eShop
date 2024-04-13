@@ -4,13 +4,16 @@ import withLoader from "./Component/withLoader";
 import { Link } from "react-router-dom";
 import { item } from "./Component/product";
 
+
 const Home = function (props) {
+  console.log()
+  // Weather state
   const [location, setLocation] = useState("");
   const [temperature, setTemperature] = useState("");
   const [updateTime, setUpdateTime] = useState("");
   const [weather, setWeather] = useState("");
-  const [randomItems, setRandomItems] = useState([]);
 
+  // Fetch weather data
   useEffect(() => {
     async function fetchWeatherData() {
       const weatherAPI =
@@ -35,17 +38,10 @@ const Home = function (props) {
         setWeather("normal");
       }
     }
-
     fetchWeatherData();
   }, []);
 
-  useEffect(() => {
-    const category = getRecommendedCategory();
-    const filteredItems = item.filter((item) => item.bigcategories === category);
-    const randomItems = filteredItems.sort(() => Math.random() - 0.5).slice(0, 6);
-    setRandomItems(randomItems);
-  }, [weather]); // Update randomItems when weather changes
-
+  // Get recommended products based on weather
   const getRecommendedCategory = () => {
     if (weather === "normal") {
       return "Drink";
@@ -58,15 +54,19 @@ const Home = function (props) {
 
   const getRecommendedTitle = () => {
     if (weather === "normal") {
-      return <h3 className="mb-6 text-lg font-normal text-gray-500 lg:text-xl sm:px-16  dark:text-gray-400">Your location is {location}, today's temperature is {temperature}°C, and today's weather is {weather}. It's suitable to have something to drink at home...</h3>;
+      return <h3 class="mb-6 text-lg font-normal text-gray-500 lg:text-xl sm:px-16  dark:text-gray-400">Your location is {location}, today's temperature is {temperature}°C, and today's weather is {weather}. It's suitable to have something to drink at home...</h3>;
     } else if (weather === "cold") {
-      return <h3 className="mb-6 text-lg font-normal text-gray-500 lg:text-xl sm:px-16  dark:text-gray-400">Your location is {location}, today's temperature is {temperature}°C, and today's weather is {weather}, suitable for eating snacks at home...</h3>;
+      return <h3 class="mb-6 text-lg font-normal text-gray-500 lg:text-xl sm:px-16  dark:text-gray-400">Your location is {location}, today's temperature is {temperature}°C, and today's weather is {weather}, suitable for eating snacks at home...</h3>;
     } else {
-      return <h3 className="mb-6 text-lg font-normal text-gray-500 lg:text-xl sm:px-16  dark:text-gray-400">Your location is {location}, today's temperature is {temperature}°C, and today's weather is {weather}, which is suitable for stocking up on food at home...</h3>;
+      return <h3 class="mb-6 text-lg font-normal text-gray-500 lg:text-xl sm:px-16  dark:text-gray-400">Your location is {location}, today's temperature is {temperature}°C, and today's weather is {weather}, which is suitable for stocking up on food at home...</h3>;
     }
-  };
+  }
 
   const renderRecommendedProducts = () => {
+    const category = getRecommendedCategory(); 
+    const filteredItems = item.filter((item) => item.bigcategories === category);
+    const randomItems = filteredItems.sort(() => Math.random() - 0.5).slice(0, 6);
+
     return (
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 p-4 mx-auto lg:max-w-6xl max-w-xl md:max-w-full">
         {randomItems.map((filteredItem) => (
