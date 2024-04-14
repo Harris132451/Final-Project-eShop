@@ -53,33 +53,7 @@ const ProductPage = (props) => {
             <div className="flex mt-6 items-center pb-5 border-b-2 border-gray-200 mb-5">
               <span className="title-font font-medium text-2xl text-gray-900">${product.price}</span>
               <button className="flex ml-auto text-white bg-blue-500 border-0 py-2 px-6 focus:outline-none rounded hover:bg-white hover:text-blue-500 hover:border-blue-500 hover:scale-110 transition duration-300 ease-in-out"
-               onClick={() => {
-                let newData = { ...props.items };
-                let acn = props.Account;
-                console.log(newData);
-                if (acn) {
-                  let PNameArr = [];
-                  newData[acn]["Cart"].forEach((c) => {
-                    PNameArr.push(c.name);
-                  });
-                  console.log(PNameArr);
-                  if (PNameArr.includes(product.name)) {
-                    for (
-                      let i = 0;
-                      i < newData[acn]["Cart"].length;
-                      i++
-                    ) {
-                      if (newData[acn]["Cart"][i].name === product.name) {
-                        newData[acn]["Cart"][i].qty += 1;
-                        props.updateCart(newData[acn]["Cart"][i]);
-                      }
-                    }
-                  } else {
-                    props.updateCart(product);
-                  }
-                }
-                props.updateIsOpenCart(true);
-              }} >Add to cart</button>
+               >Add to cart</button>
             </div>
             <div className="flex items-center justify-between mt-6 pb-5 border-b-2 border-gray-200 mb-5">
               <div className="flex items-center space-x-2">
@@ -96,9 +70,9 @@ const ProductPage = (props) => {
         </div>
       </div>
       
-      <div className="flex flex-col items-center justify-center mt-8 space-y-10">
-        <div className="flex flex-col items-center justify-center px-10 py-10 mx-auto bg-gray-200 shadow-lg max-w-4xl truncate inline-block rounded-xl">
-          <h2 className="text-xl font-semibold py-5">Promotion</h2>
+      <div className="flex flex-col items-center justify-center mt-8 space-y-8">
+        <div className="container px-5 py-24 mx-auto bg-gray-200 shadow-lg max-w-4xl truncate inline-block">
+          <h2 className="text-xl font-semibold">Promotion</h2>
           <ProductPromotion />
         </div>
         <div className="text-lg font-semibold">Description</div>

@@ -5,7 +5,6 @@ import withLoader from "./Component/withLoader"
 import Breadcrumb from "./Component/Breadcrumb"
 import deliver from "./deliver-food-svgrepo-com.svg"
 import gift from "./gift-svgrepo-com.svg"
-import ProductPromotion from "./Component/productPromotion";
 
 const ProductPage = (props) => {
   const [amount, setAmount] = useState(1);
@@ -79,7 +78,7 @@ const ProductPage = (props) => {
                   }
                 }
                 props.updateIsOpenCart(true);
-              }} >Add to cart</button>
+              }}>Add to cart</button>
             </div>
             <div className="flex items-center justify-between mt-6 pb-5 border-b-2 border-gray-200 mb-5">
               <div className="flex items-center space-x-2">
@@ -96,11 +95,10 @@ const ProductPage = (props) => {
         </div>
       </div>
       
-      <div className="flex flex-col items-center justify-center mt-8 space-y-10">
-        <div className="flex flex-col items-center justify-center px-10 py-10 mx-auto bg-gray-200 shadow-lg max-w-4xl truncate inline-block rounded-xl">
-          <h2 className="text-xl font-semibold py-5">Promotion</h2>
-          <ProductPromotion />
-        </div>
+      <div className="flex flex-col items-center justify-center mt-8 space-y-8">
+      <div className="bg-gray-200 shadow-lg p-4 rounded-md">
+        <p className="text-lg font-semibold">Promotion</p>
+      </div>
         <div className="text-lg font-semibold">Description</div>
         <div className="text-lg font-semibold">Reviews</div>
       </div>

@@ -8,6 +8,7 @@ import Breadcrumb from "./Breadcrumb";
 
 
 const CategoriesPage = (props) => {
+  console.log("props",props)
   const { categoryName } = useParams();
   const category = categories.find(cat => cat.Name === categoryName);
 
@@ -19,8 +20,6 @@ const CategoriesPage = (props) => {
     { text: 'Home', href: '/' ,icon: 'M10 18l-9.25-6L2 9V3h16v6l1.25 3-2.75 1.75L10 18z'},
     { text: category.Name, icon: 'M4 14l6-6 6 6' },
   ];
-
- 
 
   return (
     <>
@@ -78,7 +77,7 @@ const CategoriesPage = (props) => {
                     }
                   }
                   props.updateIsOpenCart(true);
-                }} >
+                }}>
                   Add to cart
                 </button>
               </div>

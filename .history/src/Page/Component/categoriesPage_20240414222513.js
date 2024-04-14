@@ -7,7 +7,7 @@ import withLoader from "./withLoader"
 import Breadcrumb from "./Breadcrumb";
 
 
-const CategoriesPage = (props) => {
+const CategoriesPage = ({ updateCart }) => {
   const { categoryName } = useParams();
   const category = categories.find(cat => cat.Name === categoryName);
 
@@ -20,7 +20,9 @@ const CategoriesPage = (props) => {
     { text: category.Name, icon: 'M4 14l6-6 6 6' },
   ];
 
- 
+  const addToCart = (product) => {
+    updateCart(product);
+  };
 
   return (
     <>
@@ -52,33 +54,7 @@ const CategoriesPage = (props) => {
                   {filteredItem.price}
                 </h4>
                 <button type="button" class="w-full mt-6 px-4 py-3 bg-[#333] hover:bg-[#222] text-white rounded-full"
-                 onClick={() => {
-                  let newData = { ...props.items };
-                  let acn = props.Account;
-                  console.log(newData);
-                  if (acn) {
-                    let PNameArr = [];
-                    newData[acn]["Cart"].forEach((c) => {
-                      PNameArr.push(c.name);
-                    });
-                    console.log(PNameArr);
-                    if (PNameArr.includes(filteredItem.name)) {
-                      for (
-                        let i = 0;
-                        i < newData[acn]["Cart"].length;
-                        i++
-                      ) {
-                        if (newData[acn]["Cart"][i].name === filteredItem.name) {
-                          newData[acn]["Cart"][i].qty += 1;
-                          props.updateCart(newData[acn]["Cart"][i]);
-                        }
-                      }
-                    } else {
-                      props.updateCart(filteredItem);
-                    }
-                  }
-                  props.updateIsOpenCart(true);
-                }} >
+                 onClick={() => addToCart(filteredItem)} >
                   Add to cart
                 </button>
               </div>
