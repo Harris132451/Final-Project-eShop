@@ -54,33 +54,7 @@ const SmallCategoriesPage = (props) => {
                   {filteredItem.price}
                 </h4>
                 <button type="button" class="w-full mt-6 px-4 py-3 bg-[#333] hover:bg-[#222] text-white rounded-full"
-                onClick={() => {
-                  let newData = { ...props.items };
-                  let acn = props.Account;
-                  console.log(newData);
-                  if (acn) {
-                    let PNameArr = [];
-                    newData[acn]["Cart"].forEach((c) => {
-                      PNameArr.push(c.name);
-                    });
-                    console.log(PNameArr);
-                    if (PNameArr.includes(filteredItem.name)) {
-                      for (
-                        let i = 0;
-                        i < newData[acn]["Cart"].length;
-                        i++
-                      ) {
-                        if (newData[acn]["Cart"][i].name === filteredItem.name) {
-                          newData[acn]["Cart"][i].qty += 1;
-                          props.updateCart(newData[acn]["Cart"][i]);
-                        }
-                      }
-                    } else {
-                      props.updateCart(filteredItem);
-                    }
-                  }
-                  props.updateIsOpenCart(true);
-                }} >
+                >
                   Add to cart
                 </button>
               </div>

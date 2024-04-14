@@ -96,9 +96,9 @@ const ProductPage = (props) => {
         </div>
       </div>
       
-      <div className="flex flex-col items-center justify-center mt-8 space-y-10">
-        <div className="flex flex-col items-center justify-center px-10 py-10 mx-auto bg-gray-200 shadow-lg max-w-4xl truncate inline-block rounded-xl">
-          <h2 className="text-xl font-semibold py-5">Promotion</h2>
+      <div className="flex flex-col items-center justify-center mt-8 space-y-8">
+        <div className="container px-5 py-24 mx-auto bg-gray-200 shadow-lg max-w-4xl truncate inline-block rounded-xl">
+          <h2 className="text-xl font-semibold">Promotion</h2>
           <ProductPromotion />
         </div>
         <div className="text-lg font-semibold">Description</div>

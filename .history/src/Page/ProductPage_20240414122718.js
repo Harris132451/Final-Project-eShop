@@ -5,7 +5,6 @@ import withLoader from "./Component/withLoader"
 import Breadcrumb from "./Component/Breadcrumb"
 import deliver from "./deliver-food-svgrepo-com.svg"
 import gift from "./gift-svgrepo-com.svg"
-import ProductPromotion from "./Component/productPromotion";
 
 const ProductPage = (props) => {
   const [amount, setAmount] = useState(1);
@@ -79,7 +78,7 @@ const ProductPage = (props) => {
                   }
                 }
                 props.updateIsOpenCart(true);
-              }} >Add to cart</button>
+              }}>Add to cart</button>
             </div>
             <div className="flex items-center justify-between mt-6 pb-5 border-b-2 border-gray-200 mb-5">
               <div className="flex items-center space-x-2">
@@ -96,10 +95,28 @@ const ProductPage = (props) => {
         </div>
       </div>
       
-      <div className="flex flex-col items-center justify-center mt-8 space-y-10">
-        <div className="flex flex-col items-center justify-center px-10 py-10 mx-auto bg-gray-200 shadow-lg max-w-4xl truncate inline-block rounded-xl">
-          <h2 className="text-xl font-semibold py-5">Promotion</h2>
-          <ProductPromotion />
+      <div className="flex flex-col items-center justify-center mt-8 space-y-8">
+        <div className="container px-5 py-24 mx-auto">
+          <h3 className="text-lg font-semibold">Promotion</h3>
+          <p>Points Rewards: Accumulate points with every purchase, which can be redeemed for future discounts or product exchanges.
+
+            Birthday Privileges: Special offers or gifts are provided to members on their birthdays to express care and appreciation.
+
+            Exclusive Discounts: Members enjoy regular exclusive discount events on specific products or entire shopping carts.
+
+            Early Access: Members have the privilege to purchase new or limited edition products in advance, avoiding product shortages or waiting times.
+
+            Free Delivery: Members benefit from free delivery services, regardless of purchase amount, ensuring convenience with doorstep delivery.
+
+            VIP Customer Service: Providing faster and superior customer service to members, including dedicated hotlines or online support.
+
+            Rebate Programs: Earn a certain percentage of rebates on purchases, which can be used for future shopping or cashed out.
+
+            Double Points Day: Regularly hold double or multiple points days, where members receive double or more points for purchases during this period.
+
+            Eligibility for Member Activities: Participation in specific promotions, gifts, or draw events is limited to members.
+
+            Exclusive Events and Packages: Periodically host member-exclusive events and provide exclusive gift packages or gifts.</p>
         </div>
         <div className="text-lg font-semibold">Description</div>
         <div className="text-lg font-semibold">Reviews</div>

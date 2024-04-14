@@ -134,7 +134,7 @@ export default function App() {
           temperature={temperature}
           weather={weather}
         />
-      
+        <Routes>
         <Routes>
           <Route
             index
@@ -169,10 +169,8 @@ export default function App() {
             path="/:categoryName"
             element={
               <CategoriesPage
-              updateCart={updateCart}
-              items={data}
-              updateIsOpenCart={updateIsOpenCart}
-              Account={AccountName}
+                updateCart={updateCart}
+                updateIsOpenCart={updateIsOpenCart}
               />
             }
           />
@@ -180,10 +178,8 @@ export default function App() {
             path="/:categoryName/:smallCategoriesName"
             element={
               <SmallCategoriesPage
-              updateCart={updateCart}
-              items={data}
-              updateIsOpenCart={updateIsOpenCart}
-              Account={AccountName}
+                updateCart={updateCart}
+                updateIsOpenCart={updateIsOpenCart}
               />
             }
           />
@@ -191,13 +187,13 @@ export default function App() {
             path="/products/:productPage"
             element={
               <ProductPage
-              updateCart={updateCart}
-              items={data}
-              updateIsOpenCart={updateIsOpenCart}
-              Account={AccountName}
+                updateCart={updateCart}
+                updateIsOpenCart={updateIsOpenCart}
               />
             }
           />
+        </Routes>
+
         </Routes>
       </BrowserRouter>
       <Footer />

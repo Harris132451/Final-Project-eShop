@@ -20,8 +20,6 @@ const CategoriesPage = (props) => {
     { text: category.Name, icon: 'M4 14l6-6 6 6' },
   ];
 
- 
-
   return (
     <>
     <div class="font-[sans-serif]">
@@ -78,7 +76,7 @@ const CategoriesPage = (props) => {
                     }
                   }
                   props.updateIsOpenCart(true);
-                }} >
+                }}>
                   Add to cart
                 </button>
               </div>
