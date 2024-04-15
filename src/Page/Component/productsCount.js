@@ -87,17 +87,17 @@ const ProductCount = function ({
         </div>
       )}
       {!isOpenCart && (
-        <div>
+        <div class="flex justify-end mt-1 sm:justify-start">
           <button
             onClick={deleteWishList}
-            class="mt-[8.5px] w-5 h-5 sm:w-3 sm:h-3"
+            class="mt-[8.5px] w-7 h-7 sm:w-4 sm:h-4"
           >
-            <img src="RubbishBinBtn.png" />
+            <img src="https://www.svgrepo.com/show/499798/delete.svg" />
           </button>
           <div>
             <button
               onClick={WishListToCart}
-              class="bg-blue-300 mt-1 p-1 rounded-lg text-[12px] hover:bg-blue-400"
+              class="bg-blue-200 mt-1 ml-5 mr-2 p-1 rounded-lg text-[20px] sm:ml-2 sm:mr-0 sm:mt-1 sm:text-[12px] hover:bg-blue-300 active:bg-blue-400"
             >
               Add to Cart
             </button>
