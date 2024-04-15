@@ -51,7 +51,8 @@ const Box = function ({
                 WishItems[CartAccount].map((p) => {
                   return (
                     <ProductCount
-                      ItemQtyChangeIncart={ItemChangeInwishlist}
+                      ItemQtyChangeIncart={ItemChangeIncart}
+                      ItemChangeInwishlist={ItemChangeInwishlist}
                       ItemInfo={p}
                       isOpenCart={OpenCart}
                     />
@@ -60,6 +61,7 @@ const Box = function ({
               {WishItems[CartAccount].length === 1 && (
                 <ProductCount
                   ItemQtyChangeIncart={ItemChangeIncart}
+                  ItemChangeInwishlist={ItemChangeInwishlist}
                   ItemInfo={WishItems[CartAccount][0]}
                   isOpenCart={OpenCart}
                 />

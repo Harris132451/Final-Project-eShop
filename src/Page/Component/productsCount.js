@@ -1,7 +1,13 @@
 import { useReducer } from "react";
 import { ControlNumber } from "./controlNum.js";
 
-const ProductCount = function ({ ItemQtyChangeIncart, ItemInfo, isOpenCart }) {
+const ProductCount = function ({
+  ItemQtyChangeIncart,
+  ItemChangeInwishlist,
+  ItemInfo,
+  isOpenCart,
+}) {
+  console.log(ItemInfo);
   const createInitialState = () => {
     return {
       count: ItemInfo.qty,
@@ -33,6 +39,15 @@ const ProductCount = function ({ ItemQtyChangeIncart, ItemInfo, isOpenCart }) {
     ItemInfo.qty = 0;
     ItemQtyChangeIncart(ItemInfo);
   };
+
+  const deleteWishList = () => {
+    ItemChangeInwishlist(ItemInfo, "Delete");
+  };
+
+  const WishListToCart = () => {
+    ItemQtyChangeIncart(ItemInfo);
+  };
+
   let TotalPrice = (count * ItemInfo.price).toFixed(1);
   return (
     <div class="flex flex-col border-t-grey border-t-[1px] mx-2 w-[400px] sm:w-[330px] px-2 pt-3 pb-2 sm:pt-3 text-black">
@@ -72,7 +87,17 @@ const ProductCount = function ({ ItemQtyChangeIncart, ItemInfo, isOpenCart }) {
       )}
       {!isOpenCart && (
         <div>
-          <button class="bg-blue-300">Add</button>
+          <button
+            onClick={deleteWishList}
+            class="mt-[8.5px] w-5 h-5 sm:w-3 sm:h-3"
+          >
+            <img src="RubbishBinBtn.png" />
+          </button>
+          <div>
+            <button onClick={WishListToCart} class="bg-blue-300">
+              Add
+            </button>
+          </div>
         </div>
       )}
     </div>

@@ -57,7 +57,6 @@ export default function App() {
   const [wishListData, setWishListData] = useState(getWishList["Data"]);
   const [AccountName, setAccountName] = useState(SaveAcc);
   const [IsOpenCart, setIsOpenCart] = useState(false);
-  const [IsOpenWishList, setIsOpenWishList] = useState(false);
   const [temperature, setTemperature] = useState("");
   const [weather, setWeather] = useState("");
 
@@ -130,34 +129,6 @@ export default function App() {
     setCartData(Data);
   }
 
-  // WishList
-
-  async function updateWishList(product, order) {
-    let Data = { ...wishListData };
-    let acn = AccountName;
-    if (!Data[acn]) {
-      Data[acn] = [{ ...product }];
-    } else if (acn) {
-      let PNameArr = [];
-      Data[acn].forEach((c) => {
-        PNameArr.push(c.name);
-      });
-      if (!PNameArr.includes(product.name)) {
-        Data[acn].push({ ...product });
-      } else {
-        for (let i = 0; i < Data[acn].length; i++) {
-          if (order === "Delete") {
-            Data[acn].splice(i, 1);
-          }
-        }
-      }
-    }
-    await setDoc(doc(listRef, "WishList"), {
-      Data,
-    });
-    setWishListData(Data);
-  }
-
   // Account
 
   async function updateAccountName(Name) {
@@ -188,24 +159,16 @@ export default function App() {
     setIsOpenCart(Order);
   }
 
-  function updateIsOpenWishList(Order) {
-    setIsOpenWishList(Order);
-  }
-
   return (
     <>
       <BrowserRouter>
         <Header
           updateCart={updateCart}
-          updateWishList={updateWishList}
           updateAccountName={updateAccountName}
           updateIsOpenCart={updateIsOpenCart}
-          updateIsOpenWishList={updateIsOpenWishList}
           items={cartData}
-          wishItems={wishListData}
           Account={AccountName}
           OpenCart={IsOpenCart}
-          OpenWishList={IsOpenWishList}
           temperature={temperature}
           weather={weather}
         />
@@ -216,12 +179,8 @@ export default function App() {
             element={
               <Home
                 updateCart={updateCart}
-                updateWishList={updateWishList}
-                updateAccountName={updateAccountName}
                 items={cartData}
-                wishItems={wishListData}
                 updateIsOpenCart={updateIsOpenCart}
-                updateIsOpenWishList={updateIsOpenWishList}
                 Account={AccountName}
               />
             }
@@ -249,12 +208,8 @@ export default function App() {
             element={
               <CategoriesPage
                 updateCart={updateCart}
-                updateWishList={updateWishList}
-                updateAccountName={updateAccountName}
                 items={cartData}
-                wishItems={wishListData}
                 updateIsOpenCart={updateIsOpenCart}
-                updateIsOpenWishList={updateIsOpenWishList}
                 Account={AccountName}
               />
             }
@@ -264,12 +219,8 @@ export default function App() {
             element={
               <SmallCategoriesPage
                 updateCart={updateCart}
-                updateWishList={updateWishList}
-                updateAccountName={updateAccountName}
                 items={cartData}
-                wishItems={wishListData}
                 updateIsOpenCart={updateIsOpenCart}
-                updateIsOpenWishList={updateIsOpenWishList}
                 Account={AccountName}
               />
             }
@@ -279,12 +230,8 @@ export default function App() {
             element={
               <ProductPage
                 updateCart={updateCart}
-                updateWishList={updateWishList}
-                updateAccountName={updateAccountName}
                 items={cartData}
-                wishItems={wishListData}
                 updateIsOpenCart={updateIsOpenCart}
-                updateIsOpenWishList={updateIsOpenWishList}
                 Account={AccountName}
               />
             }

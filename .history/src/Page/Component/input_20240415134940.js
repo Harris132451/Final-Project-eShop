@@ -1,9 +1,9 @@
 import { useEffect, useState, useRef } from "react";
-import { Link } from "react-router-dom";
 import { item } from "./product.js";
 import { useHistory } from "react-router-dom";
 
 const Inputbox = function () {
+  const history = useHistory();
   const [Word, setWord] = useState("");
   const [BtnWord, setBtnWord] = useState("");
   const [IsBtnVisible, setIsBtnVisible] = useState(false);
@@ -11,6 +11,11 @@ const Inputbox = function () {
   const [ResultName, setResultName] = useState([]);
   const [BtnResultName, setBtnResultName] = useState([]);
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+
+  function NameButton(n) {
+    console.log(n);
+    history.push(`/products/${encodeURIComponent(n)}`);
+  } 
 
   function InputName(name) {
     setWord(name.target.value);
@@ -118,6 +123,7 @@ const Inputbox = function () {
                         return (
                           <button
                             key={n}
+                            onClick={() => NameButton(n)}
                             class="w-72 m-1 p-2 rounded-md text-blue-900 hover:bg-blue-200"
                           >
                             <div class="text-left">{n}</div>
@@ -146,6 +152,7 @@ const Inputbox = function () {
                       return (
                         <button
                           key={n}
+                          onClick={() => NameButton(n)}
                           class="w-96 m-1 p-2 rounded-md text-blue-900 hover:bg-blue-200"
                         >
                           <div class="text-left">{n}</div>

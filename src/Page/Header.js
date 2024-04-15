@@ -201,7 +201,7 @@ function Header(props) {
                     class="col-start-3 col-end-4 items-center pb-2"
                   >
                     <img
-                      src="CloseBtn.png"
+                      src="https://www.svgrepo.com/show/506172/cross.svg"
                       class="w-[25px] h-[25px] object-end ml-28 sm:w-[17px] sm:h-[17px] sm:ml-24"
                     />
                   </button>
@@ -228,7 +228,7 @@ function Header(props) {
                     class="col-start-3 col-end-4 items-center pb-2"
                   >
                     <img
-                      src="CloseBtn.png"
+                      src="https://www.svgrepo.com/show/506172/cross.svg"
                       class="w-[25px] h-[25px] object-end ml-[110px] sm:w-[17px] sm:h-[17px] sm:ml-24"
                     />
                   </button>
