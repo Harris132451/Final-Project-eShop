@@ -2,9 +2,8 @@ import { Link } from "react-router-dom";
 import { useState } from "react";
 import { auth } from "../firebase/firebase.js";
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
-import { useNavigate } from "react-router-dom";
 
-function Signup() {
+function Signup({ updateAccountName }) {
   const [InputName, setInputName] = useState("");
   const [InputID, setInputID] = useState("");
   const [InputPassword, setInputPassword] = useState("");
@@ -72,6 +71,7 @@ function Signup() {
                 "Update usename success: ",
                 auth.currentUser.displayName
               );
+              updateAccountName(auth.currentUser.displayName);
             })
             .catch((error) => console.log(error));
         })
