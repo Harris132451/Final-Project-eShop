@@ -1,4 +1,5 @@
 import { useEffect, useState, useRef } from "react";
+import { Link } from "react-router-dom";
 import { item } from "./product.js";
 
 function NameButton(n) {
@@ -13,6 +14,7 @@ const Inputbox = function () {
   const [ResultName, setResultName] = useState([]);
   const [BtnResultName, setBtnResultName] = useState([]);
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+
   function InputName(name) {
     setWord(name.target.value);
   }
@@ -116,13 +118,16 @@ const Inputbox = function () {
                   {BtnResultName.length > 0 && (
                     <div class="overflow-scroll h-96">
                       {BtnResultName.map((n) => {
+                        console.log(n);
                         return (
                           <button
                             key={n}
                             onClick={() => NameButton(n)}
                             class="w-72 m-1 p-2 rounded-md text-blue-900 hover:bg-blue-200"
                           >
-                            <div class="text-left">{n}</div>
+                            <Link to={`/products/${n}`}>
+                              <div class="text-left">{n}</div>
+                            </Link>
                           </button>
                         );
                       })}
