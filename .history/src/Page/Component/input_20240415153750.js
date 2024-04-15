@@ -1,7 +1,6 @@
 import { useEffect, useState, useRef } from "react";
-import { Link } from "react-router-dom";
 import { item } from "./product.js";
-
+import { Link } from "react-router-dom";
 
 const Inputbox = function () {
   const [Word, setWord] = useState("");
@@ -108,39 +107,31 @@ const Inputbox = function () {
             </div>
           </button>
           {IsSerachBtn && window.innerWidth < 1024 && (
-            <div class="flex flex-col pt-6 ">
-            <input
-              onChange={(b) => InputName(b)}
-              class="w-72 border-2 border-blue-700  rounded-full bg-blue-800 text-white px-5 opacity-80 text-lg"
-            ></input>
-            {ResultName.length > 0 && IsBtnVisible && (
-              <div class="bg-white z-50 rounded-md shadow-lg pt-2 ">
+            <div class="flex flex-col pt-2 ">
+              <div class="bg-white rounded-md shadow-lg">
                 <div class="flex flex-wrap">
-                  <div class="overflow-scroll h-96">
-                  {ResultName.length > 0 && (
-                    
-                      <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownDelayButton">
-                      {ResultName.map((n) => {
+                  <input
+                    onChange={(b) => InputBtnName(b)}
+                    class="h-8 w-72 m-1 p-2 border rounded-md border-blue-900"
+                  ></input>
+                  {BtnResultName.length > 0 && (
+                    <div class="overflow-scroll h-96">
+                      {BtnResultName.map((n) => {
                         return (
-                          <li>
-                            <Link
-                              key={n}
-                              to={`/products/${n}`}
-                              class="block px-4 py-2 text-gray-700 hover:bg-gray-100 active:bg-blue-100 cursor-pointer rounded-md"
-                            >
-                              {n}
-                            </Link>
-                        </li>
-
+                          <Link
+                            key={n}
+                            to={`/products/${n}`}
+                            class="w-72 m-1 p-2 rounded-md text-blue-900 hover:bg-blue-200"
+                          >
+                            <div class="text-left">{n}</div>
+                          </Link>
                         );
                       })}
-                      </ul>
+                    </div>
                   )}
-                  </div>
                 </div>
               </div>
-            )}
-          </div>
+            </div>
           )}
         </div>
         {window.innerWidth >= 1024 && (
@@ -153,25 +144,17 @@ const Inputbox = function () {
               <div class="bg-white z-50 rounded-md shadow-lg pt-2 ">
                 <div class="flex flex-wrap">
                   <div class="overflow-scroll h-96">
-                  {ResultName.length > 0 && (
-                    
-                      <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownDelayButton">
-                      {ResultName.map((n) => {
-                        return (
-                          <li>
-                            <Link
-                              key={n}
-                              to={`/products/${n}`}
-                              class="block px-4 py-2 text-gray-700 hover:bg-gray-100 active:bg-blue-100 cursor-pointer rounded-md"
-                            >
-                              {n}
-                            </Link>
-                        </li>
-
-                        );
-                      })}
-                      </ul>
-                  )}
+                    {ResultName.map((n) => {
+                      return (
+                        <Link
+                          key={n}
+                          to={`/products/${n}`}
+                          class="w-96 m-1 p-2 rounded-md text-blue-900 hover:bg-blue-200"
+                        >
+                          <div class="text-left">{n}</div>
+                        </Link>
+                      );
+                    })}
                   </div>
                 </div>
               </div>
