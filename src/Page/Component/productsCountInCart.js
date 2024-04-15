@@ -35,11 +35,11 @@ const ProductCount = function ({ ItemQtyChangeIncart, ItemInfo }) {
   };
   let TotalPrice = (count * ItemInfo.price).toFixed(1);
   return (
-    <div class="flex flex-col pl-4 w-[400px] sm:w-[330px] px-2 pt-3 sm:py-2 text-black">
+    <div class="flex flex-col border-t-grey border-t-[1px] mx-2 w-[400px] sm:w-[330px] px-2 pt-3 pb-2 sm:pt-3 text-black">
       <div class="flex flex-col items-center justify-center sm:items-start sm:justify-start">
         <img
           src={ItemInfo.picture}
-          class="w-[140px] h-[140px] sm:w-[110px] sm:h-[110px] shadow"
+          class="w-[140px] h-[140px] sm:w-[110px] sm:h-[110px] shadow rounded"
         />
         <h5 class="mt-1 text-[17px] text-center font-normal sm:text-left sm:mt-0.5 sm:text-[15px] sm:font-light">
           {ItemInfo.name}

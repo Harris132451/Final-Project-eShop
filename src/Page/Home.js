@@ -21,7 +21,10 @@ const Home = function (props) {
       const location = weatherData.temperature.data[1].place;
       const temperature = weatherData.temperature.data[1].value;
       const updateTime = weatherData.updateTime;
-      const fomatTime = `${updateTime.slice(0, 10)}, ${updateTime.slice(11, 16)}`;
+      const fomatTime = `${updateTime.slice(0, 10)}, ${updateTime.slice(
+        11,
+        16
+      )}`;
 
       setLocation(location);
       setTemperature(temperature);
@@ -41,8 +44,12 @@ const Home = function (props) {
 
   useEffect(() => {
     const category = getRecommendedCategory();
-    const filteredItems = item.filter((item) => item.bigcategories === category);
-    const randomItems = filteredItems.sort(() => Math.random() - 0.5).slice(0, 6);
+    const filteredItems = item.filter(
+      (item) => item.bigcategories === category
+    );
+    const randomItems = filteredItems
+      .sort(() => Math.random() - 0.5)
+      .slice(0, 6);
     setRandomItems(randomItems);
   }, [weather]); // Update randomItems when weather changes
 
@@ -58,11 +65,29 @@ const Home = function (props) {
 
   const getRecommendedTitle = () => {
     if (weather === "normal") {
-      return <h3 className="mb-6 text-lg font-normal text-gray-500 lg:text-xl sm:px-16  dark:text-gray-400">Your location is {location}, today's temperature is {temperature}°C, and today's weather is {weather}. It's suitable to have something to drink at home...</h3>;
+      return (
+        <h3 className="mb-6 text-lg font-normal text-gray-500 lg:text-xl sm:px-16  dark:text-gray-400">
+          Your location is {location}, today's temperature is {temperature}°C,
+          and today's weather is {weather}. It's suitable to have something to
+          drink at home...
+        </h3>
+      );
     } else if (weather === "cold") {
-      return <h3 className="mb-6 text-lg font-normal text-gray-500 lg:text-xl sm:px-16  dark:text-gray-400">Your location is {location}, today's temperature is {temperature}°C, and today's weather is {weather}, suitable for eating snacks at home...</h3>;
+      return (
+        <h3 className="mb-6 text-lg font-normal text-gray-500 lg:text-xl sm:px-16  dark:text-gray-400">
+          Your location is {location}, today's temperature is {temperature}°C,
+          and today's weather is {weather}, suitable for eating snacks at
+          home...
+        </h3>
+      );
     } else {
-      return <h3 className="mb-6 text-lg font-normal text-gray-500 lg:text-xl sm:px-16  dark:text-gray-400">Your location is {location}, today's temperature is {temperature}°C, and today's weather is {weather}, which is suitable for stocking up on food at home...</h3>;
+      return (
+        <h3 className="mb-6 text-lg font-normal text-gray-500 lg:text-xl sm:px-16  dark:text-gray-400">
+          Your location is {location}, today's temperature is {temperature}°C,
+          and today's weather is {weather}, which is suitable for stocking up on
+          food at home...
+        </h3>
+      );
     }
   };
 
@@ -70,8 +95,14 @@ const Home = function (props) {
     return (
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 p-4 mx-auto lg:max-w-6xl max-w-xl md:max-w-full">
         {randomItems.map((filteredItem) => (
-          <div key={filteredItem.id} className="bg-gray-100 rounded-2xl p-6 cursor-pointer hover:-translate-y-2 transition-all relative flex flex-col justify-between">
-            <Link to={`/products/${filteredItem.name}`} className="max-lg:w-11/12 w-4/5 h-[220px] overflow-hidden mx-auto aspect-w-16 aspect-h-8">
+          <div
+            key={filteredItem.id}
+            className="bg-gray-100 rounded-2xl p-6 cursor-pointer hover:-translate-y-2 transition-all relative flex flex-col justify-between"
+          >
+            <Link
+              to={`/products/${filteredItem.name}`}
+              className="max-lg:w-11/12 w-4/5 h-[220px] overflow-hidden mx-auto aspect-w-16 aspect-h-8"
+            >
               <img
                 src={filteredItem.picture}
                 alt={filteredItem.name}
@@ -85,34 +116,38 @@ const Home = function (props) {
               <h4 className="text-xl text-gray-700 font-bold mt-2">
                 ${filteredItem.price}
               </h4>
-              <button type="button" className="w-full mt-6 px-4 py-3 bg-[#333] hover:bg-[#222] text-white rounded-full"
+              <button
+                type="button"
+                className="w-full mt-6 px-4 py-3 bg-[#333] hover:bg-[#222] text-white rounded-full"
                 onClick={() => {
                   let newData = { ...props.items };
                   let acn = props.Account;
-                  console.log(newData);
-                  if (acn) {
+                  if (!newData[acn] && acn) {
+                    newData[acn] = [{ ...filteredItem, qty: 1 }];
+                    props.updateCart(newData[acn][0]);
+                  } else if (acn) {
                     let PNameArr = [];
-                    newData[acn]["Cart"].forEach((c) => {
+                    newData[acn].forEach((c) => {
                       PNameArr.push(c.name);
                     });
-                    console.log(PNameArr);
                     if (PNameArr.includes(filteredItem.name)) {
-                      for (
-                        let i = 0;
-                        i < newData[acn]["Cart"].length;
-                        i++
-                      ) {
-                        if (newData[acn]["Cart"][i].name === filteredItem.name) {
-                          newData[acn]["Cart"][i].qty += 1;
-                          props.updateCart(newData[acn]["Cart"][i]);
+                      for (let i = 0; i < newData[acn].length; i++) {
+                        if (newData[acn][i].name === filteredItem.name) {
+                          newData[acn][i].qty += 1;
+                          props.updateCart(newData[acn][i]);
                         }
                       }
                     } else {
                       props.updateCart(filteredItem);
                     }
                   }
-                  props.updateIsOpenCart(true);
-                }}>
+                  if (!acn) {
+                    props.updateIsOpenCart(true);
+                  } else if (window.innerWidth >= 1024) {
+                    props.updateIsOpenCart(true);
+                  }
+                }}
+              >
                 Add to cart
               </button>
             </div>
@@ -128,7 +163,7 @@ const Home = function (props) {
       {/* Weather component */}
       <div className="animate-bounce p-4 mx-auto lg:max-w-6xl max-w-xl md:max-w-full mt-8 bg-blue-100 text-white rounded-lg shadow-md flex items-center justify-center">
         {getRecommendedTitle()}
-      </div>  
+      </div>
       {/* Render recommended products */}
       {renderRecommendedProducts()}
     </>

@@ -14,7 +14,7 @@ export default function PromotionSlider() {
     autoplaySpeed: 3000,
   };
   return (
-    <div className="slider-container mx-auto max-w-7xl px-4 py-5 sm:px-6 lg:px-8 z-50">
+    <div className="slider-container mx-auto max-w-7xl px-4 pt-[20px]  pb-5 sm:px-6 lg:px-8 z-50">
       <Slider {...settings}>
         <div>
           <img
