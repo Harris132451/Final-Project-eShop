@@ -45,6 +45,7 @@ const ProductCount = function ({
   };
 
   const WishListToCart = () => {
+    ItemInfo.qty = 1;
     ItemQtyChangeIncart(ItemInfo);
   };
 
