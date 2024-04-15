@@ -14,8 +14,6 @@ import ScrollButton from "./Page/Component/ScrollBtn.js";
 import { collection, doc, setDoc, getDoc } from "firebase/firestore";
 import { db } from "./firebase/firebase.js";
 
-import { auth } from "./firebase/firebase.js";
-
 const listRef = collection(db, "List");
 const docRef = doc(db, "List", "PNS");
 const getList = await getDoc(docRef);
@@ -30,8 +28,6 @@ let saveAcc = JSON.parse(localStorage.getItem("Account"));
 let SaveAcc = saveAcc;
 
 export default function App() {
-  console.log(auth.currentUser.displayName);
-
   const [data, setData] = useState(getList.data().newData);
   const [AccountName, setAccountName] = useState(SaveAcc);
   const [IsOpenCart, setIsOpenCart] = useState(false);
