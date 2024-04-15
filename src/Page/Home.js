@@ -1,10 +1,7 @@
 import React from "react";
-import { useState } from "react";
 import { Link } from "react-router-dom";
 import { item } from "./Component/product";
 import PromotionSlider from "./Component/Slider";
-import { useReducer } from "react";
-import { ControlNumber } from "./Component/controlNum.js";
 import withLoader from "./Component/withLoader";
 
 const Home = function (props) {
@@ -43,29 +40,30 @@ const Home = function (props) {
                     onClick={() => {
                       let newData = { ...props.items };
                       let acn = props.Account;
-                      console.log(newData);
-                      if (acn) {
+                      if (!newData[acn] && acn) {
+                        newData[acn] = [{ ...product, qty: 1 }];
+                        props.updateCart(newData[acn][0]);
+                      } else if (acn) {
                         let PNameArr = [];
-                        newData[acn]["Cart"].forEach((c) => {
+                        newData[acn].forEach((c) => {
                           PNameArr.push(c.name);
                         });
-                        console.log(PNameArr);
                         if (PNameArr.includes(product.name)) {
-                          for (
-                            let i = 0;
-                            i < newData[acn]["Cart"].length;
-                            i++
-                          ) {
-                            if (newData[acn]["Cart"][i].name === product.name) {
-                              newData[acn]["Cart"][i].qty += 1;
-                              props.updateCart(newData[acn]["Cart"][i]);
+                          for (let i = 0; i < newData[acn].length; i++) {
+                            if (newData[acn][i].name === product.name) {
+                              newData[acn][i].qty += 1;
+                              props.updateCart(newData[acn][i]);
                             }
                           }
                         } else {
                           props.updateCart(product);
                         }
                       }
-                      props.updateIsOpenCart(true);
+                      if (!acn) {
+                        props.updateIsOpenCart(true);
+                      } else if (window.innerWidth >= 1024) {
+                        props.updateIsOpenCart(true);
+                      }
                     }}
                     className="p-2 min-[400px]:p-4 rounded-full bg-white border border-gray-300 flex items-center justify-center group shadow-sm shadow-transparent transition-all duration-500 hover:shadow-gray-200 hover:border-gray-400 hover:bg-gray-50"
                   >

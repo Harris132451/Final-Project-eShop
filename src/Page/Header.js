@@ -2,8 +2,7 @@ import { Link } from "react-router-dom";
 import { useState, useRef, useEffect } from "react";
 import Weather from "./Component/Weather.js";
 import Inputbox from "./Component/input.js";
-import CartBox from "./Component/SC.js";
-import { item } from "./Component/product";
+import CartBox from "./Component/shopCart.js";
 import { FaCaretDown } from "react-icons/fa";
 import { categories } from "./Component/categoriesData.js";
 
@@ -34,7 +33,7 @@ function Header(props) {
   const dropdownLinks = categories;
 
   return (
-    <>
+    <div class="fixed z-50">
       <div class=" bg-blue-600 grid grid-cols-3 grid-rows-2 mx-auto h-24 p-2 lg:px-3 border-box">
         <div class=" col-start-1 col-end-2 flex flex-row">
           <ButtonLink
@@ -87,10 +86,10 @@ function Header(props) {
                   to="Signin"
                   BtnName={
                     <button class="flex text-1xl text-white flex-row mr-2 sm:mr-0">
-                      <div class="h-auto w-9 pl-2 pr-2 hidden sm:block">
+                      <div class="h-auto w-5 mr-1 hidden sm:block">
                         <img src="/AccBtn.png" />
                       </div>
-                      <div>Login</div>
+                      <div class="text-lg sm:text-base">Login</div>
                     </button>
                   }
                 />
@@ -118,7 +117,7 @@ function Header(props) {
             {props.OpenCart && !props.Account && (
               <div
                 ref={boxRef}
-                class="bg-white text-blue-900 rounded-md  px-4 pb-4 pt-2 mt-2 shadow-lg"
+                class="bg-white border-solid border-blue-100 border text-blue-900 rounded-md  px-4 pb-4 pt-2 mt-2 shadow-lg"
               >
                 <div class="grid grid-cols-3">
                   <h3 class="col-start-2 col-end-3 text-center text-2xl font-bold pb-3">
@@ -145,7 +144,7 @@ function Header(props) {
             {props.OpenCart && props.Account && (
               <div
                 ref={boxRef}
-                class="bg-white rounded-md px-4 pb-4 pt-2 mt-2 shadow-lg flex justify-center flex-col text-blue-900"
+                class="bg-white border-solid border-blue-100 border rounded-md px-4 pb-4 pt-2 mt-2 shadow-lg flex justify-center flex-col text-blue-900"
               >
                 <div class="grid grid-cols-3">
                   <h3 class="col-start-2 col-end-3 text-center text-2xl font-bold pb-3">
@@ -163,25 +162,29 @@ function Header(props) {
                     />
                   </button>
                 </div>
-                <CartBox
-                  ItemChangeIncart={props.updateCart}
-                  Items={props.items}
-                  CartAccount={props.Account}
-                />
-                {props.items[props.Account]["Cart"].length > 0 && (
-                  <ButtonLink
-                    to="Checkout"
-                    BtnName={
-                      <button
-                        class="bg-blue-200 mt-4 ml-[120px] w-[110px] h-[35px] font-bold rounded-xl shadow-md hover:bg-blue-300 hover:shadow-none"
-                        onClick={() => {
-                          props.updateIsOpenCart(!props.OpenCart);
-                        }}
-                      >
-                        Get Total
-                      </button>
-                    }
-                  />
+                {props.items[props.Account] && (
+                  <>
+                    <CartBox
+                      ItemChangeIncart={props.updateCart}
+                      Items={props.items}
+                      CartAccount={props.Account}
+                    />
+                    {props.items[props.Account].length > 0 && (
+                      <ButtonLink
+                        to="Checkout"
+                        BtnName={
+                          <button
+                            class="bg-blue-200 mt-4 ml-[120px] w-[110px] h-[35px] font-bold rounded-xl shadow-md hover:bg-blue-300 hover:shadow-none"
+                            onClick={() => {
+                              props.updateIsOpenCart(!props.OpenCart);
+                            }}
+                          >
+                            Get Total
+                          </button>
+                        }
+                      />
+                    )}
+                  </>
                 )}
               </div>
             )}
@@ -228,7 +231,7 @@ function Header(props) {
             </li>
           ))}
       </div>
-    </>
+    </div>
   );
 }
 
