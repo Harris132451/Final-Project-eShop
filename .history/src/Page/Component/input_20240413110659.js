@@ -1,9 +1,11 @@
 import { useEffect, useState, useRef } from "react";
 import { item } from "./product.js";
-import { useHistory } from "react-router-dom";
+
+function NameButton(n) {
+  console.log(n);
+}
 
 const Inputbox = function () {
-  const history = useHistory();
   const [Word, setWord] = useState("");
   const [BtnWord, setBtnWord] = useState("");
   const [IsBtnVisible, setIsBtnVisible] = useState(false);
@@ -11,12 +13,6 @@ const Inputbox = function () {
   const [ResultName, setResultName] = useState([]);
   const [BtnResultName, setBtnResultName] = useState([]);
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
-
-  function NameButton(n) {
-    console.log(n);
-    history.push(`/products/${encodeURIComponent(n)}`);
-  } 
-
   function InputName(name) {
     setWord(name.target.value);
   }
