@@ -47,7 +47,7 @@ const ProductCount = function ({ ItemQtyChangeIncart, ItemInfo }) {
       </div>
       <div class="flex flex-row">
         <button onClick={handleIncrease} class="w-6 h-6 sm:w-4 sm:h-4 mt-2">
-          <img src="https://www.svgrepo.com/show/469059/increase-circle.svg" />
+          <img src="CountMinusBtn.png" />
         </button>
         <div class="mt-1 w-10 text-[20px] text-center sm:mt-0.5 sm:w-8 sm:text-[17px] sm:font-medium">
           {ItemInfo.qty}

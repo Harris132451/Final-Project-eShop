@@ -38,7 +38,7 @@ const ProductCount = function ({ ItemQtyChangeIncart, ItemInfo }) {
     <div class="flex flex-col border-t-grey border-t-[1px] mx-2 w-[400px] sm:w-[330px] px-2 pt-3 pb-2 sm:pt-3 text-black">
       <div class="flex flex-col items-center justify-center sm:items-start sm:justify-start">
         <img
-          src={ItemInfo.picture}
+          src={"CountPlusBtn.png"}
           class="w-[140px] h-[140px] sm:w-[110px] sm:h-[110px] shadow rounded"
         />
         <h5 class="mt-1 text-[17px] text-center font-normal sm:text-left sm:mt-0.5 sm:text-[15px] sm:font-light">
@@ -47,7 +47,7 @@ const ProductCount = function ({ ItemQtyChangeIncart, ItemInfo }) {
       </div>
       <div class="flex flex-row">
         <button onClick={handleIncrease} class="w-6 h-6 sm:w-4 sm:h-4 mt-2">
-          <img src="https://www.svgrepo.com/show/469059/increase-circle.svg" />
+          <img src={CountPlusBtn} />
         </button>
         <div class="mt-1 w-10 text-[20px] text-center sm:mt-0.5 sm:w-8 sm:text-[17px] sm:font-medium">
           {ItemInfo.qty}

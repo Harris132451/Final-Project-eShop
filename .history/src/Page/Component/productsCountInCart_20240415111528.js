@@ -47,7 +47,7 @@ const ProductCount = function ({ ItemQtyChangeIncart, ItemInfo }) {
       </div>
       <div class="flex flex-row">
         <button onClick={handleIncrease} class="w-6 h-6 sm:w-4 sm:h-4 mt-2">
-          <img src="https://www.svgrepo.com/show/469059/increase-circle.svg" />
+          <img src="CountPlusBtn.png" />
         </button>
         <div class="mt-1 w-10 text-[20px] text-center sm:mt-0.5 sm:w-8 sm:text-[17px] sm:font-medium">
           {ItemInfo.qty}
@@ -56,10 +56,10 @@ const ProductCount = function ({ ItemQtyChangeIncart, ItemInfo }) {
           onClick={handleDecrease}
           class="mr-6  w-6 h-6 sm:mr-3 sm:w-4 sm:h-4 mt-2"
         >
-          <img src="https://www.svgrepo.com/show/468532/decrease-circle.svg" />
+          <img src="CountMinusBtn.png" />
         </button>
         <button onClick={handleDelete} class="mt-[8.5px] w-5 h-5 sm:w-3 sm:h-3">
-          <img src="https://www.svgrepo.com/show/499798/delete.svg" />
+          <img src="RubbishBinBtn.png" />
         </button>
         <h6 class="ml-24 w-36 text-[20px] self-center text-right sm:ml-20 sm:w-24 sm:text-[16px]">
           ${TotalPrice}
