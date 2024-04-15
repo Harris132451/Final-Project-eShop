@@ -33,7 +33,7 @@ function Header(props) {
   const dropdownLinks = categories;
 
   return (
-    <div class="fixed z-50">
+    <div className="sticky top-0 bg-white z-10">
       <div class=" bg-blue-600 grid grid-cols-3 grid-rows-2 mx-auto h-24 p-2 lg:px-3 border-box">
         <div class=" col-start-1 col-end-2 flex flex-row">
           <ButtonLink
@@ -202,14 +202,14 @@ function Header(props) {
             >
               <Link
                 to={`/${bigcategorie.Name}`}
-                className="flex items-center gap-[2px] py-2"
+                className="flex items-center gap-[2px] py-2flex items-center gap-[2px] py-2 font-bold text-lg bg-white text-black px-3 rounded-md transition-colors duration-300 hover:bg-blue-500 hover:text-white transition-delay-150"
               >
                 <span>
                   <FaCaretDown className="transition-all duration-200 group-hover:rotate-180" />
                 </span>
                 {bigcategorie.Name}
               </Link>
-              <div className="absolute z-[9999] hidden group-hover:block w-[200px] rounded-md bg-white p-2 text-black shadow-md">
+              <div className="absolute z-[9999] hidden group-hover:block w-[400px] rounded-md bg-white p-2 text-black shadow-md">
                 <ul>
                   {dropdownLinks
                     .filter(
@@ -220,6 +220,7 @@ function Header(props) {
                     .map((smallCategory) => (
                       <li key={smallCategory.id}>
                         <Link
+                          className="font-bold text-lg text-gray-500 hover:text-blue-500"
                           to={`/${bigcategorie.Name}/${smallCategory.Name}`}
                         >
                           {smallCategory.Name}

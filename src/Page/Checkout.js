@@ -16,7 +16,7 @@ const Checkout = function ({ updateCart, items, Account }) {
     PriceSum += items[Account][0].qty * items[Account][0].price;
   }
   return (
-    <div class="pt-[150px]">
+    <div class="pt-[20px]">
       <h2>Total Items & Prices</h2>
       {items[Account].length > 1 &&
         items[Account].map((p) => {

@@ -1,4 +1,3 @@
-import ReactDOM from "react-dom/client";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { useState, useEffect } from "react";
 import Header from "./Page/Header.js";
@@ -58,6 +57,38 @@ export default function App() {
   const [wishListData, setWishListData] = useState(getWishList["Data"]);
   const [AccountName, setAccountName] = useState(SaveAcc);
   const [IsOpenCart, setIsOpenCart] = useState(false);
+  const [temperature, setTemperature] = useState("");
+  const [weather, setWeather] = useState("");
+
+  //Weather
+
+  useEffect(() => {
+    async function fetchData() {
+      const weatherAPI =
+        "https://data.weather.gov.hk/weatherAPI/opendata/weather.php?dataType=rhrread&lang=en";
+      const res = await fetch(weatherAPI);
+      const weatherData = await res.json();
+
+      const location = weatherData.temperature.data[1].place;
+      const temperature = weatherData.temperature.data[1].value;
+      const updateTime = weatherData.updateTime;
+      const fomatTime = `${updateTime.slice(0, 10)}, ${updateTime.slice(
+        11,
+        16
+      )}`;
+
+      setTemperature(temperature);
+      if (temperature < 15) {
+        setWeather("cold");
+      } else if (temperature > 35) {
+        setWeather("hot");
+      } else {
+        setWeather("normal");
+      }
+    }
+
+    fetchData();
+  }, []);
 
   // Cart
 
@@ -123,45 +154,10 @@ export default function App() {
     SaveAcc = Name;
     setAccountName(Name);
   }
+
   function updateIsOpenCart(Order) {
     setIsOpenCart(Order);
   }
-
-  //Weather
-  const [location, setLocation] = useState("");
-  const [temperature, setTemperature] = useState("");
-  const [updateTime, setUpdateTime] = useState("");
-  const [weather, setWeather] = useState("");
-
-  useEffect(() => {
-    async function fetchWeatherData() {
-      const weatherAPI =
-        "https://data.weather.gov.hk/weatherAPI/opendata/weather.php?dataType=rhrread&lang=en";
-      const res = await fetch(weatherAPI);
-      const weatherData = await res.json();
-
-      const location = weatherData.temperature.data[1].place;
-      const temperature = weatherData.temperature.data[1].value;
-      const updateTime = weatherData.updateTime;
-      const fomatTime = `${updateTime.slice(0, 10)}, ${updateTime.slice(
-        11,
-        16
-      )}`;
-
-      setLocation(location);
-      setTemperature(temperature);
-      setUpdateTime(fomatTime);
-
-      if (temperature < 15) {
-        setWeather("cold");
-      } else if (temperature > 35) {
-        setWeather("hot");
-      } else {
-        setWeather("normal");
-      }
-    }
-    fetchWeatherData();
-  }, []);
 
   return (
     <>
@@ -176,6 +172,7 @@ export default function App() {
           temperature={temperature}
           weather={weather}
         />
+
         <Routes>
           <Route
             index
@@ -211,7 +208,9 @@ export default function App() {
             element={
               <CategoriesPage
                 updateCart={updateCart}
+                items={cartData}
                 updateIsOpenCart={updateIsOpenCart}
+                Account={AccountName}
               />
             }
           />
@@ -220,7 +219,9 @@ export default function App() {
             element={
               <SmallCategoriesPage
                 updateCart={updateCart}
+                items={cartData}
                 updateIsOpenCart={updateIsOpenCart}
+                Account={AccountName}
               />
             }
           />
@@ -242,6 +243,3 @@ export default function App() {
     </>
   );
 }
-
-const root = ReactDOM.createRoot(document.getElementById("root"));
-root.render(<App />);
