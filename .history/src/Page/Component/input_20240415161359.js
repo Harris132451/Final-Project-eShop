@@ -1,7 +1,7 @@
 import { useEffect, useState, useRef } from "react";
 import { Link } from "react-router-dom";
 import { item } from "./product.js";
-
+import { Link } from "react-router-dom";
 
 const Inputbox = function () {
   const [Word, setWord] = useState("");

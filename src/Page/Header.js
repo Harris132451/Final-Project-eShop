@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { useState, useRef, useEffect } from "react";
 import Weather from "./Component/Weather.js";
 import Inputbox from "./Component/input.js";
-import CartBox from "./Component/shopCart.js";
+import Box from "./Component/ListProductsInBox.js";
 import { FaCaretDown } from "react-icons/fa";
 import { categories } from "./Component/categoriesData.js";
 
@@ -20,6 +20,7 @@ function Header(props) {
     const handleClickOutside = (event) => {
       if (boxRef.current && !boxRef.current.contains(event.target)) {
         props.updateIsOpenCart(false);
+        props.updateIsOpenWishList(false);
       }
     };
 
@@ -97,13 +98,20 @@ function Header(props) {
             )}
           </div>
           <div>
-            <button class="h-auto w-7 mr-2 pt-0.5 ml-3 sm:w-6 sm:ml-0 lg:mr-4">
+            <button
+              onClick={() => {
+                props.updateIsOpenWishList(!props.OpenWishList);
+                props.updateIsOpenCart(false);
+              }}
+              class="h-auto w-7 mr-2 pt-0.5 ml-3 sm:w-6 sm:ml-0 lg:mr-4"
+            >
               <img src="/WishBtn.png" />
             </button>
           </div>
           <div>
             <button
               onClick={() => {
+                props.updateIsOpenWishList(false);
                 props.updateIsOpenCart(!props.OpenCart);
               }}
               class="h-auto w-8 ml-3 mr-4 pt-0.5 sm:w-7 sm:ml-2 sm:mr-2 lg:mr-3"
@@ -114,6 +122,69 @@ function Header(props) {
         </div>
         <div class="col-start-3 col-end-4 row-start-2 row-end-3 z-40 mt-6">
           <div class="flex justify-end ">
+            {props.OpenWishList && !props.Account && (
+              <div
+                ref={boxRef}
+                class="bg-white border-solid border-blue-100 border text-blue-900 rounded-md  px-4 pb-4 pt-2 mt-2 shadow-lg"
+              >
+                <div class="grid grid-cols-3">
+                  <h3 class="col-start-2 col-end-3 text-center text-2xl font-bold pb-3">
+                    Wish List
+                  </h3>
+                  <button
+                    onClick={() => {
+                      props.updateIsOpenWishList(!props.OpenWishList);
+                    }}
+                    class="col-start-3 col-end-4 items-center pb-2"
+                  >
+                    <img
+                      src="CloseBtn.png"
+                      class="w-[25px] h-[25px] object-end ml-28 sm:w-[17px] sm:h-[17px] sm:ml-24"
+                    />
+                  </button>
+                </div>
+                <h5 class="text-center my-56 sm:my-44 text-xl sm:text-[15px] w-[400px] sm:w-[350px]">
+                  Please Login First !
+                </h5>
+              </div>
+            )}
+
+            {props.OpenWishList && props.Account && (
+              <div
+                ref={boxRef}
+                class="bg-white border-solid border-blue-100 border rounded-md px-4 pb-4 pt-2 mt-2 shadow-lg flex justify-center flex-col text-blue-900"
+              >
+                <div class="grid grid-cols-3">
+                  <h3 class="col-start-2 col-end-3 text-center text-2xl font-bold pb-3">
+                    Wish List
+                  </h3>
+                  <button
+                    onClick={() => {
+                      props.updateIsOpenWishList(!props.OpenWishList);
+                    }}
+                    class="col-start-3 col-end-4 items-center pb-2"
+                  >
+                    <img
+                      src="CloseBtn.png"
+                      class="w-[25px] h-[25px] object-end ml-[110px] sm:w-[17px] sm:h-[17px] sm:ml-24"
+                    />
+                  </button>
+                </div>
+                {props.items[props.Account] && (
+                  <>
+                    <Box
+                      ItemChangeIncart={props.updateCart}
+                      Items={props.items}
+                      ItemChangeInwishlist={props.updateWishList}
+                      WishItems={props.wishItems}
+                      CartAccount={props.Account}
+                      OpenCart={props.OpenCart}
+                    />
+                  </>
+                )}
+              </div>
+            )}
+
             {props.OpenCart && !props.Account && (
               <div
                 ref={boxRef}
@@ -164,10 +235,13 @@ function Header(props) {
                 </div>
                 {props.items[props.Account] && (
                   <>
-                    <CartBox
+                    <Box
                       ItemChangeIncart={props.updateCart}
                       Items={props.items}
+                      ItemChangeInwishlist={props.updateWishList}
+                      WishItems={props.wishItems}
                       CartAccount={props.Account}
+                      OpenCart={props.OpenCart}
                     />
                     {props.items[props.Account].length > 0 && (
                       <ButtonLink
