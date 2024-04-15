@@ -15,7 +15,7 @@ const Inputbox = function () {
   function NameButton(n) {
     console.log(n);
     history.push(`/products/${encodeURIComponent(n)}`);
-  } 
+  }
 
   function InputName(name) {
     setWord(name.target.value);
