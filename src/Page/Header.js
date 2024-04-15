@@ -138,7 +138,7 @@ function Header(props) {
                     class="col-start-3 col-end-4 items-center pb-2"
                   >
                     <img
-                      src="CloseBtn.png"
+                      src="https://www.svgrepo.com/show/506172/cross.svg"
                       class="w-[25px] h-[25px] object-end ml-28 sm:w-[17px] sm:h-[17px] sm:ml-24"
                     />
                   </button>
@@ -165,7 +165,7 @@ function Header(props) {
                     class="col-start-3 col-end-4 items-center pb-2"
                   >
                     <img
-                      src="CloseBtn.png"
+                      src="https://www.svgrepo.com/show/506172/cross.svg"
                       class="w-[25px] h-[25px] object-end ml-[110px] sm:w-[17px] sm:h-[17px] sm:ml-24"
                     />
                   </button>
@@ -248,7 +248,7 @@ function Header(props) {
                         to="Checkout"
                         BtnName={
                           <button
-                            class="bg-blue-200 mt-4 ml-[120px] w-[110px] h-[35px] font-bold rounded-xl shadow-md hover:bg-blue-300 hover:shadow-none"
+                            class="bg-blue-200 mt-4 ml-[120px] w-[110px] h-[35px] font-bold rounded-xl shadow-md hover:bg-blue-300 hover:shadow-none active:bg-blue-400"
                             onClick={() => {
                               props.updateIsOpenCart(!props.OpenCart);
                             }}
