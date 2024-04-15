@@ -59,7 +59,7 @@ const ProductCount = function ({ ItemQtyChangeIncart, ItemInfo }) {
           <img src="https://www.svgrepo.com/show/468532/decrease-circle.svg" />
         </button>
         <button onClick={handleDelete} class="mt-[8.5px] w-5 h-5 sm:w-3 sm:h-3">
-          <img src="https://www.svgrepo.com/show/499798/delete.svg" />
+          <img src="RubbishBinBtn.png" />
         </button>
         <h6 class="ml-24 w-36 text-[20px] self-center text-right sm:ml-20 sm:w-24 sm:text-[16px]">
           ${TotalPrice}

@@ -38,7 +38,7 @@ const ProductCount = function ({ ItemQtyChangeIncart, ItemInfo }) {
     <div class="flex flex-col border-t-grey border-t-[1px] mx-2 w-[400px] sm:w-[330px] px-2 pt-3 pb-2 sm:pt-3 text-black">
       <div class="flex flex-col items-center justify-center sm:items-start sm:justify-start">
         <img
-          src={ItemInfo.picture}
+          src={"https://www.svgrepo.com/show/522086/cross.svg"}
           class="w-[140px] h-[140px] sm:w-[110px] sm:h-[110px] shadow rounded"
         />
         <h5 class="mt-1 text-[17px] text-center font-normal sm:text-left sm:mt-0.5 sm:text-[15px] sm:font-light">

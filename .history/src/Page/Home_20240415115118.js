@@ -123,7 +123,7 @@ const Home = function (props) {
               </h4>
                 <button
                   type="button"
-                  className="w-full mt-6 px-4 py-3 bg-[#333] hover:bg-[#222] text-white rounded-full"
+                  className="w-auto mt-6 px-4 py-3 bg-[#333] hover:bg-[#222] text-white rounded-full"
                   onClick={() => {
                     let newData = { ...props.items };
                     let acn = props.Account;

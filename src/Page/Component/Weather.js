@@ -9,7 +9,7 @@ function Weather(props) {
           {temperature}°C
         </div>
         <div className="h-8 w-8 sm:h-7 sm:w-7">
-          {weather === "normal" && <img src="normal.png" alt="normal" />}
+          {weather === "normal" && <img src="https://www.svgrepo.com/show/503805/sun.svg" alt="normal" />}
           {weather === "cold" && <img src="cold.png" alt="cold" />}
           {weather === "hot" && <img src="hot.png" alt="hot" />}
         </div>
