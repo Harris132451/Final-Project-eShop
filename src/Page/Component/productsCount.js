@@ -95,8 +95,11 @@ const ProductCount = function ({
             <img src="RubbishBinBtn.png" />
           </button>
           <div>
-            <button onClick={WishListToCart} class="bg-blue-300">
-              Add
+            <button
+              onClick={WishListToCart}
+              class="bg-blue-300 mt-1 p-1 rounded-lg text-[12px] hover:bg-blue-400"
+            >
+              Add to Cart
             </button>
           </div>
         </div>
