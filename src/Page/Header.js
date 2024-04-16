@@ -254,7 +254,7 @@ function Header(props) {
                         to="Checkout"
                         BtnName={
                           <button
-                            class="bg-blue-200 mt-4 ml-[120px] w-[110px] h-[35px] font-bold rounded-xl shadow-md hover:bg-blue-300 hover:shadow-none active:bg-blue-400"
+                            class="bg-blue-200 mt-4 ml-[150px] w-[110px] h-[35px] sm:ml-[125px] font-bold rounded-xl shadow-md hover:bg-blue-300 hover:shadow-none active:bg-blue-400"
                             onClick={() => {
                               props.updateIsOpenCart(!props.OpenCart);
                             }}
