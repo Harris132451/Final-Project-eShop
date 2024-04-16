@@ -3,6 +3,7 @@ import PromotionSlider from "./Component/Slider";
 import withLoader from "./Component/withLoader";
 import { Link } from "react-router-dom";
 import { item } from "./Component/product";
+import PromotionBlock from "./Component/PromotionBlock";
 
 const Home = function (props) {
   const [location, setLocation] = useState("");
@@ -196,9 +197,12 @@ const Home = function (props) {
   return (
     <>
       <PromotionSlider />
-      <div>
-        {getRecommendedTitle()}
-      </div>
+      
+      
+      {getRecommendedTitle()}
+      
+      <PromotionBlock />
+     
       {renderRecommendedProducts()}
     </>
   );

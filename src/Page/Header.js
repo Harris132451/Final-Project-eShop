@@ -107,9 +107,10 @@ function Header(props) {
                 props.updateIsOpenWishList(!props.OpenWishList);
                 props.updateIsOpenCart(false);
               }}
-              class="h-auto w-7 mr-2 pt-0.5 ml-3 sm:w-6 sm:ml-0 lg:mr-4"
+              class="flex flex-row h-auto w-7 mr-2 pt-0.5 ml-3 sm:w-6 sm:ml-0 lg:mr-4 xl:mr-12 xl:ml-3"
             >
               <img src="/WishBtn.png" />
+              <div class="ml-1 hidden xl:block text-white">WISH</div>
             </button>
           </div>
           <div>
@@ -118,9 +119,10 @@ function Header(props) {
                 props.updateIsOpenWishList(false);
                 props.updateIsOpenCart(!props.OpenCart);
               }}
-              class="h-auto w-8 ml-3 mr-4 pt-0.5 sm:w-7 sm:ml-2 sm:mr-2 lg:mr-3"
+              class="flex flex-row h-auto w-8 ml-3 mr-4 pt-0.5 sm:w-7 sm:ml-2 sm:mr-2 lg:mr-3 xl:mr-12 xl:ml-5"
             >
               <img src="/CartBtn.png" />
+              <div class="ml-1 hidden xl:block text-white">CART</div>
             </button>
           </div>
         </div>
@@ -252,7 +254,7 @@ function Header(props) {
                         to="Checkout"
                         BtnName={
                           <button
-                            class="bg-blue-200 mt-4 ml-[120px] w-[110px] h-[35px] font-bold rounded-xl shadow-md hover:bg-blue-300 hover:shadow-none active:bg-blue-400"
+                            class="bg-blue-200 mt-4 ml-[150px] w-[110px] h-[35px] sm:ml-[125px] font-bold rounded-xl shadow-md hover:bg-blue-300 hover:shadow-none active:bg-blue-400"
                             onClick={() => {
                               props.updateIsOpenCart(!props.OpenCart);
                             }}

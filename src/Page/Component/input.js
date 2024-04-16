@@ -4,23 +4,15 @@ import { item } from "./product.js";
 
 const Inputbox = function () {
   const [Word, setWord] = useState("");
-  const [BtnWord, setBtnWord] = useState("");
   const [IsBtnVisible, setIsBtnVisible] = useState(false);
   const [IsSerachBtn, setIsSerachBtn] = useState(false);
   const [ResultName, setResultName] = useState([]);
-  const [BtnResultName, setBtnResultName] = useState([]);
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
-
-  function NameButton(n) {
-    console.log(n);
-  }
 
   function InputName(name) {
     setWord(name.target.value);
   }
-  function InputBtnName(name) {
-    setBtnWord(name.target.value);
-  }
+
   useEffect(() => {
     const InputKey = Word.replace(" ", "").toLowerCase();
     const NameArr = [];
@@ -36,26 +28,10 @@ const Inputbox = function () {
     setResultName(NameArr);
   }, [Word]);
 
-  useEffect(() => {
-    const InputKey = BtnWord.replace(" ", "").toLowerCase();
-    const NameArr = [];
-    item.map((p) => {
-      if (
-        p.name.replace(" ", "").toLowerCase().indexOf(InputKey) !== -1 &&
-        InputKey !== ""
-      ) {
-        NameArr.push(p.name);
-      }
-    });
-    setBtnResultName(NameArr);
-  }, [BtnWord]);
-
   const inputRef = useRef(null);
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (inputRef.current && !inputRef.current.contains(event.target)) {
-        setBtnWord("");
-        setBtnResultName([]);
         setWord("");
         setResultName([]);
         setIsBtnVisible(false);
@@ -77,8 +53,6 @@ const Inputbox = function () {
     window.addEventListener("resize", handleResize);
     if (window.innerWidth >= 1024) {
       setIsSerachBtn(false);
-      setBtnWord("");
-      setBtnResultName([]);
     } else {
       setWord("");
       setResultName([]);
@@ -110,7 +84,8 @@ const Inputbox = function () {
             <div class="flex flex-col pt-1">
               <input
                 onChange={(b) => InputName(b)}
-                class="h-8 w-[300px] mx-1 mt-1 p-2 border rounded border-blue-900"
+                placeholder="Serach here . . ."
+                class="text-lg h-10 w-[300px] mx-1 p-2 border-2 rounded border-blue-700"
               ></input>
               {ResultName.length > 0 && IsBtnVisible && (
                 <div class="bg-white z-50 rounded-md shadow-lg pt-2 ">
@@ -118,7 +93,7 @@ const Inputbox = function () {
                     <div class="overflow-scroll h-96">
                       {ResultName.length > 0 && (
                         <ul
-                          class="py-2 text-sm text-gray-700 dark:text-gray-200"
+                          class="text-lg text-gray-700 dark:text-gray-200"
                           aria-labelledby="dropdownDelayButton"
                         >
                           {ResultName.map((n) => {
@@ -127,7 +102,7 @@ const Inputbox = function () {
                                 <Link
                                   key={n}
                                   to={`/products/${n}`}
-                                  class="block w-72 px-4 py-2 text-blue-900 hover:bg-blue-100 active:bg-blue-200 cursor-pointer rounded-md"
+                                  class="pb-2 border-b-2 border-grey block w-72 px-4 py-2 text-blue-900 hover:bg-blue-100 active:bg-blue-200 cursor-pointer rounded-md"
                                 >
                                   {n}
                                 </Link>
@@ -147,7 +122,8 @@ const Inputbox = function () {
           <div class="flex flex-col pt-6 ">
             <input
               onChange={(b) => InputName(b)}
-              class="w-72 border-2 border-blue-700  rounded-full bg-blue-800 text-white px-5 opacity-80 text-lg"
+              placeholder="Serach here . . ."
+              class="w-72 border-2 border-blue-700  rounded-full bg-blue-800 text-white px-5 py-1 opacity-80 text"
             ></input>
             {ResultName.length > 0 && IsBtnVisible && (
               <div class="bg-white z-50 rounded-md shadow-lg pt-2 ">

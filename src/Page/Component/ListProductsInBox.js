@@ -17,7 +17,7 @@ const Box = function ({
               No Product in Cart !
             </div>
           ) : (
-            <div class="overflow-scroll bg-white rounded border-solid border-grey shadow-inner border-[0.5px] mt-2 h-[500px]">
+            <div class="overflow-scroll bg-white rounded border-solid border-grey shadow-inner border-[0.5px] mt-2 h-[500px] sm:h-[380px]">
               {Items[CartAccount].length > 1 &&
                 Items[CartAccount].map((p) => {
                   return (
@@ -46,7 +46,7 @@ const Box = function ({
               No Product in Wish List !
             </div>
           ) : (
-            <div class="overflow-scroll bg-white rounded border-solid border-grey shadow-inner border-[0.5px] mt-2 h-[500px]">
+            <div class="overflow-scroll bg-white rounded border-solid border-grey shadow-inner border-[0.5px] mt-2 h-[520px] sm:h-[420px]">
               {WishItems[CartAccount].length > 1 &&
                 WishItems[CartAccount].map((p) => {
                   return (

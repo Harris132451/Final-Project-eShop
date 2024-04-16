@@ -1,4 +1,4 @@
-import { useReducer } from "react";
+import { useReducer, useState } from "react";
 import { ControlNumber } from "./controlNum.js";
 
 const ProductCount = function ({
@@ -7,7 +7,6 @@ const ProductCount = function ({
   ItemInfo,
   isOpenCart,
 }) {
-  console.log(ItemInfo);
   const createInitialState = () => {
     return {
       count: ItemInfo.qty,
@@ -19,7 +18,7 @@ const ProductCount = function ({
     createInitialState
   );
   const { count } = productNumState;
-  console.log(productNumState);
+
   const handleIncrease = () => {
     dispatch({ type: "increase" });
     ItemInfo.qty += 1;
@@ -79,7 +78,7 @@ const ProductCount = function ({
             onClick={handleDelete}
             class="mt-[8.5px] w-5 h-5 sm:w-3 sm:h-3"
           >
-            <img src="https://www.svgrepo.com/show/499798/delete.svg" />
+            <img src="https://uxwing.com/wp-content/themes/uxwing/download/user-interface/red-trash-can-icon.png" />
           </button>
           <h6 class="ml-24 w-36 text-[20px] self-center text-right sm:ml-20 sm:w-24 sm:text-[16px]">
             ${TotalPrice}
@@ -90,9 +89,9 @@ const ProductCount = function ({
         <div class="flex justify-end mt-1 sm:justify-start">
           <button
             onClick={deleteWishList}
-            class="mt-[8.5px] w-7 h-7 sm:w-4 sm:h-4"
+            class="mt-[6.5px] w-7 h-7 sm:w-4 sm:h-4"
           >
-            <img src="https://www.svgrepo.com/show/499798/delete.svg" />
+            <img src="https://uxwing.com/wp-content/themes/uxwing/download/user-interface/red-trash-can-icon.png" />
           </button>
           <div>
             <button
