@@ -66,27 +66,27 @@ const Home = function (props) {
   const getRecommendedTitle = () => {
     if (weather === "normal") {
       return (
-        <h3 className="mb-6 text-lg font-normal text-gray-500 lg:text-xl sm:px-16  dark:text-gray-400">
-          Your location is {location}, today's temperature is {temperature}°C,
-          and today's weather is {weather}. It's suitable to have something to
-          drink at home...
-        </h3>
+        <img 
+        src={"https://firebasestorage.googleapis.com/v0/b/generation-group-eshop.appspot.com/o/hot.png?alt=media&token=e465f209-fd0b-4da6-9d1f-922e22a521ae"}
+        alt={"Hot"}
+        className="w-full max-w-4xl mx-auto mt-6 mb-6"
+        />
       );
     } else if (weather === "cold") {
       return (
-        <h3 className="mb-6 text-lg font-normal text-gray-500 lg:text-xl sm:px-16  dark:text-gray-400">
-          Your location is {location}, today's temperature is {temperature}°C,
-          and today's weather is {weather}, suitable for eating snacks at
-          home...
-        </h3>
+        <img
+        src={"https://firebasestorage.googleapis.com/v0/b/generation-group-eshop.appspot.com/o/cold.png?alt=media&token=ece45a25-13a1-450b-a5d5-853f580d310b"}
+        alt={"Cold"}
+        className="w-full max-w-5xl mx-auto mt-6 mb-6"
+        />
       );
     } else {
       return (
-        <h3 className="mb-6 text-lg font-normal text-gray-500 lg:text-xl sm:px-16  dark:text-gray-400">
-          Your location is {location}, today's temperature is {temperature}°C,
-          and today's weather is {weather}, which is suitable for stocking up on
-          food at home...
-        </h3>
+        <img
+        src={"https://firebasestorage.googleapis.com/v0/b/generation-group-eshop.appspot.com/o/normal.png?alt=media&token=b8929798-e887-4ec7-9b93-4d9ae961cb3f"}
+        alt={"Cloudy"}
+        className="w-full max-w-5xl mx-auto mt-6 mb-6"
+        />
       );
     }
   };
@@ -196,11 +196,9 @@ const Home = function (props) {
   return (
     <>
       <PromotionSlider />
-      {/* Weather component */}
-      <div className="p-4 mx-auto lg:max-w-6xl max-w-xl md:max-w-full mt-8 bg-blue-100 text-white rounded-lg shadow-md flex items-center justify-center">
+      <div>
         {getRecommendedTitle()}
       </div>
-      {/* Render recommended products */}
       {renderRecommendedProducts()}
     </>
   );

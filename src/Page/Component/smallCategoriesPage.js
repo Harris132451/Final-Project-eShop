@@ -99,7 +99,7 @@ const SmallCategoriesPage = (props) => {
                       {filteredItem.name}
                     </h3>
                     <h4 class="text-xl text-gray-700 font-bold mt-2">
-                      {filteredItem.price}
+                      ${filteredItem.price}
                     </h4>
                     <button
                       type="button"
