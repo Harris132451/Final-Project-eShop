@@ -17,7 +17,7 @@ const Box = function ({
               No Product in Cart !
             </div>
           ) : (
-            <div class="overflow-scroll bg-white rounded border-solid border-grey shadow-inner border-[0.5px] mt-2 h-[500px]">
+            <div class="overflow-scroll bg-white rounded border-solid border-grey shadow-inner border-[0.5px] mt-2 min-h-[380px] max-h-full">
               {Items[CartAccount].length > 1 &&
                 Items[CartAccount].map((p) => {
                   return (
