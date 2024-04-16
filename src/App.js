@@ -95,7 +95,6 @@ export default function App() {
 
   async function updateCart(product) {
     let Data = { ...cartData };
-    let wishlistData = { ...wishListData };
     let acn = AccountName;
     if (product === "Paid") {
       Data[acn] = [];
