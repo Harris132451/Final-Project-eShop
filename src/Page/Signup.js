@@ -68,7 +68,7 @@ function Signup({ updateAccountName }) {
           updateAccountName(auth.currentUser.displayName);
         })
         .then(() => {
-          nav("/");
+          nav("/Signin");
         })
         .catch((error) => {
           const errorCode = error.code;
