@@ -216,6 +216,8 @@ export default function App() {
     setIsOpenCart(Order);
   }
 
+  console.log(SaveAcc);
+
   return (
     <>
       <BrowserRouter>

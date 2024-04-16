@@ -1,16 +1,16 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { AccountList } from "./Component/AL.js";
 import { auth } from "../firebase/firebase.js";
-import { signInWithEmailAndPassword } from "firebase/auth";
+import { signInWithEmailAndPassword, signOut } from "firebase/auth";
 
 const Signin = function ({ updateAccountName }) {
   const [InputID, setInputID] = useState("");
   const [InputPassword, setInputPassword] = useState("");
   const [IDName, setIDName] = useState(null);
-  const [UserName, setUserName] = useState("");
   const [Warning, setWarning] = useState(false);
   const [Message, setMessage] = useState("");
+  const nav = useNavigate();
 
   function warning() {
     return (
@@ -42,21 +42,14 @@ const Signin = function ({ updateAccountName }) {
     });
   }, [InputID, InputPassword]);
 
-  function PassAccountName() {
-    updateAccountName(UserName);
-    setIDName(null);
-  }
-
   function handleOnClick() {
+    signOut(auth);
     signInWithEmailAndPassword(auth, InputID, InputPassword)
-      .then((userCredential) => {
-        const user = userCredential.user;
-        console.log(user);
+      .then(() => {
+        updateAccountName(auth.currentUser.displayName);
       })
       .then(() => {
-        setUserName(auth.currentUser.displayName);
-        console.log(UserName);
-        PassAccountName();
+        nav("/");
       })
       .catch((error) => {
         setWarning(true);
@@ -83,11 +76,11 @@ const Signin = function ({ updateAccountName }) {
 
   return (
     <>
-      <section className="bg-gray-1 py-10 dark:bg-dark lg:py-[120px]">
+      <section className="bg-gray-100 dark:bg-dark lg:py-[120px]">
         <div className="container mx-auto">
           <div className="-mx-4 flex flex-wrap">
             <div className="w-full px-4">
-              <div className="relative mx-auto max-w-[525px] overflow-hidden rounded-lg bg-white px-10 py-16 text-center dark:bg-dark-2 sm:px-12 md:px-[60px]">
+              <div className="relative mx-auto max-w-[525px] overflow-hidden rounded-lg bg-white px-10 py-4 text-center dark:bg-dark-2 sm:px-12 md:px-[60px]">
                 <div className="my-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
                   <h1>Sign in to your account</h1>
                 </div>
@@ -116,7 +109,7 @@ const Signin = function ({ updateAccountName }) {
                         handleOnClick();
                       }}
                     >
-                      Login in
+                      Login
                     </button>
                   </div>
                 </div>

@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { auth } from "../firebase/firebase.js";
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
@@ -10,6 +10,7 @@ function Signup({ updateAccountName }) {
   const [InputCheckPassword, setInputCheckPassword] = useState("");
   const [Warning, setWarning] = useState(false);
   const [Message, setMessage] = useState("");
+  const nav = useNavigate();
 
   function warning() {
     return (
@@ -34,9 +35,11 @@ function Signup({ updateAccountName }) {
 
   function checkPassword() {
     if (InputCheckPassword !== "" && InputPassword !== InputCheckPassword) {
+      setMessage("Password does not match");
       setWarning(true);
-      setMessage("Password do not match");
+      return true;
     }
+    return false;
   }
 
   function checkInput() {
@@ -46,41 +49,32 @@ function Signup({ updateAccountName }) {
       InputPassword === "" ||
       InputCheckPassword === ""
     ) {
-      setWarning(true);
       setMessage("Missing items");
+      setWarning(true);
+      return true;
     }
+    return false;
   }
 
   function handleOnClick() {
     setWarning(false);
-    if (checkInput() || checkPassword()) {
-      return;
-    } else {
+    if (!checkInput() && !checkPassword()) {
       createUserWithEmailAndPassword(auth, InputID, InputCheckPassword)
-        .then((userCredential) => {
-          const user = userCredential.user;
-          console.log("Sign up success!");
-          console.log(user);
-          console.log(auth.currentUser);
-        })
         .then(() => {
           //Update Username
-          updateProfile(auth.currentUser, { displayName: InputName })
-            .then(() => {
-              console.log(
-                "Update usename success: ",
-                auth.currentUser.displayName
-              );
-              updateAccountName(auth.currentUser.displayName);
-            })
-            .catch((error) => console.log(error));
+          updateProfile(auth.currentUser, { displayName: InputName });
+        })
+        .then(() => {
+          updateAccountName(auth.currentUser.displayName);
+        })
+        .then(() => {
+          nav("/");
         })
         .catch((error) => {
           const errorCode = error.code;
           const errorMessage = error.message;
           console.log(errorCode);
           console.log(errorMessage);
-          setWarning(true);
           switch (error.code) {
             case "auth/invalid-email":
               setMessage("Invalid email format");
@@ -94,17 +88,18 @@ function Signup({ updateAccountName }) {
             default:
               setMessage("Default");
           }
+          setWarning(true);
         });
     }
   }
 
   return (
     <>
-      <section className="bg-gray-1 py-10 dark:bg-dark lg:py-[120px]">
+      <section className="bg-gray-100 dark:bg-dark lg:py-[120px]">
         <div className="container mx-auto">
           <div className="-mx-4 flex flex-wrap">
             <div className="w-full px-4">
-              <div className="relative mx-auto max-w-[525px] overflow-hidden rounded-lg bg-white px-10 py-16 text-center dark:bg-dark-2 sm:px-12 md:px-[60px]">
+              <div className="relative mx-auto max-w-[525px] overflow-hidden rounded-lg bg-white px-10 py-4 text-center dark:bg-dark-2 sm:px-12 md:px-[60px]">
                 <div className="my-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
                   <h1>Sign up account here</h1>
                 </div>
