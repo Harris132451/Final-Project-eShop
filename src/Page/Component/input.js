@@ -116,20 +116,6 @@ const Inputbox = function () {
                 <div class="bg-white z-50 rounded-md shadow-lg pt-2 ">
                   <div class="flex flex-wrap">
                     <div class="overflow-scroll h-96">
-<<<<<<< HEAD
-                      {BtnResultName.map((n) => {
-                        return (
-                          <button
-                            key={n}
-                            onClick={() => NameButton(n)}
-                            class="w-72 m-1 p-2 rounded-md text-blue-900 hover:bg-blue-200"
-                          >
-                            {n}
-                            <div class="text-left">{n}</div>
-                          </button>
-                        );
-                      })}
-=======
                       {ResultName.length > 0 && (
                         <ul
                           class="py-2 text-sm text-gray-700 dark:text-gray-200"
@@ -150,7 +136,6 @@ const Inputbox = function () {
                           })}
                         </ul>
                       )}
->>>>>>> f70af53e61bcbf70a0b216f06887b4348645ed84
                     </div>
                   </div>
                 </div>
