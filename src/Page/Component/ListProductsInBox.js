@@ -54,7 +54,6 @@ const Box = function ({
                       ItemQtyChangeIncart={ItemChangeIncart}
                       ItemChangeInwishlist={ItemChangeInwishlist}
                       ItemInfo={p}
-                      CartList={Items[CartAccount]}
                       isOpenCart={OpenCart}
                     />
                   );
@@ -64,7 +63,6 @@ const Box = function ({
                   ItemQtyChangeIncart={ItemChangeIncart}
                   ItemChangeInwishlist={ItemChangeInwishlist}
                   ItemInfo={WishItems[CartAccount][0]}
-                  CartList={Items[CartAccount]}
                   isOpenCart={OpenCart}
                 />
               )}

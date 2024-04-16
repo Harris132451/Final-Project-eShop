@@ -48,11 +48,6 @@ const ProductCount = function ({
     ItemQtyChangeIncart(ItemInfo);
   };
 
-  const WishListRemoveInCart = () => {
-    ItemInfo.qty = 0;
-    ItemQtyChangeIncart(ItemInfo);
-  };
-
   let TotalPrice = (count * ItemInfo.price).toFixed(1);
   return (
     <div class="flex flex-col border-t-grey border-t-[1px] mx-2 w-[400px] sm:w-[330px] px-2 pt-3 pb-2 sm:pt-3 text-black">
@@ -99,12 +94,6 @@ const ProductCount = function ({
             <img src="https://uxwing.com/wp-content/themes/uxwing/download/user-interface/red-trash-can-icon.png" />
           </button>
           <div>
-            <button
-              onClick={WishListRemoveInCart}
-              class="bg-blue-200 mt-1 ml-5 mr-2 p-1 rounded-lg text-[20px] sm:ml-2 sm:mr-0 sm:mt-1 sm:text-[12px] hover:bg-blue-300 active:bg-blue-400"
-            >
-              Remove from Cart
-            </button>
             <button
               onClick={WishListToCart}
               class="bg-blue-200 mt-1 ml-5 mr-2 p-1 rounded-lg text-[20px] sm:ml-2 sm:mr-0 sm:mt-1 sm:text-[12px] hover:bg-blue-300 active:bg-blue-400"
