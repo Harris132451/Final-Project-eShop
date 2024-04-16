@@ -1,6 +1,6 @@
 import { useEffect, useState, useRef } from "react";
-import { Link } from "react-router-dom";
 import { item } from "./product.js";
+import { Link } from "react-router-dom";
 
 const Inputbox = function () {
   const [Word, setWord] = useState("");
@@ -12,7 +12,7 @@ const Inputbox = function () {
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
   function NameButton(n) {
-    console.log(n);
+    console.log(n)
   }
 
   function InputName(name) {
@@ -107,54 +107,33 @@ const Inputbox = function () {
             </div>
           </button>
           {IsSerachBtn && window.innerWidth < 1024 && (
-            <div class="flex flex-col pt-1">
-              <input
-                onChange={(b) => InputName(b)}
-                class="h-8 w-[300px] mx-1 mt-1 p-2 border rounded border-blue-900"
-              ></input>
-              {ResultName.length > 0 && IsBtnVisible && (
-                <div class="bg-white z-50 rounded-md shadow-lg pt-2 ">
-                  <div class="flex flex-wrap">
+            <div class="flex flex-col pt-2 ">
+              <div class="bg-white rounded-md shadow-lg">
+                <div class="flex flex-wrap">
+                  <input
+                    onChange={(b) => InputBtnName(b)}
+                    class="h-8 w-72 m-1 p-2 border rounded-md border-blue-900"
+                  ></input>
+                  {BtnResultName.length > 0 && (
                     <div class="overflow-scroll h-96">
-<<<<<<< HEAD
                       {BtnResultName.map((n) => {
                         return (
-                          <button
-                            key={n}
-                            onClick={() => NameButton(n)}
-                            class="w-72 m-1 p-2 rounded-md text-blue-900 hover:bg-blue-200"
-                          >
-                            {n}
-                            <div class="text-left">{n}</div>
-                          </button>
+                          <li>
+                            <Link
+                              key={n}
+                              to={`/products/${n}`}
+                              class="block px-4 py-2 text-gray-700 hover:bg-gray-100 active:bg-blue-100 cursor-pointer rounded-md"
+                            >
+                              <div class="text-left">{n}</div>
+                            </Link>
+                        </li>
+                          
                         );
                       })}
-=======
-                      {ResultName.length > 0 && (
-                        <ul
-                          class="py-2 text-sm text-gray-700 dark:text-gray-200"
-                          aria-labelledby="dropdownDelayButton"
-                        >
-                          {ResultName.map((n) => {
-                            return (
-                              <li>
-                                <Link
-                                  key={n}
-                                  to={`/products/${n}`}
-                                  class="block w-72 px-4 py-2 text-blue-900 hover:bg-blue-100 active:bg-blue-200 cursor-pointer rounded-md"
-                                >
-                                  {n}
-                                </Link>
-                              </li>
-                            );
-                          })}
-                        </ul>
-                      )}
->>>>>>> f70af53e61bcbf70a0b216f06887b4348645ed84
                     </div>
-                  </div>
+                  )}
                 </div>
-              )}
+              </div>
             </div>
           )}
         </div>
@@ -168,26 +147,17 @@ const Inputbox = function () {
               <div class="bg-white z-50 rounded-md shadow-lg pt-2 ">
                 <div class="flex flex-wrap">
                   <div class="overflow-scroll h-96">
-                    {ResultName.length > 0 && (
-                      <ul
-                        class="py-2 text-sm text-gray-700 dark:text-gray-200"
-                        aria-labelledby="dropdownDelayButton"
-                      >
-                        {ResultName.map((n) => {
-                          return (
-                            <li>
-                              <Link
-                                key={n}
-                                to={`/products/${n}`}
-                                class="block w-72 px-4 py-2 text-blue-900 hover:bg-blue-100 active:bg-blue-200 cursor-pointer rounded-md"
-                              >
-                                {n}
-                              </Link>
-                            </li>
-                          );
-                        })}
-                      </ul>
-                    )}
+                    {ResultName.map((n) => {
+                      return (
+                        <Link
+                          key={n}
+                          to={`/products/${n}`}
+                          class="w-96 m-1 p-2 rounded-md text-blue-900 hover:bg-blue-200"
+                        >
+                          <div class="text-left">{n}</div>
+                        </Link>
+                      );
+                    })}
                   </div>
                 </div>
               </div>
