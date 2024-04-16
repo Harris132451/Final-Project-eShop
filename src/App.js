@@ -57,67 +57,7 @@ export default function App() {
   const [wishListData, setWishListData] = useState(getWishList["Data"]);
   const [AccountName, setAccountName] = useState(SaveAcc);
   const [IsOpenCart, setIsOpenCart] = useState(false);
-<<<<<<< HEAD
-
-  async function updateCart(product) {
-    let newData = { ...data };
-    let acn = AccountName;
-    if (product === "Paid") {
-      newData[acn]["Cart"] = [];
-    } else if (acn) {
-      let PNameArr = [];
-      newData[acn]["Cart"].forEach((c) => {
-        PNameArr.push(c.name);
-      });
-      if (!PNameArr.includes(product.name)) {
-        newData[acn]["Cart"].push({ ...product, qty: 1 });
-      } else {
-        for (let i = 0; i < newData[acn]["Cart"].length; i++) {
-          if (
-            newData[acn]["Cart"].length > 0 &&
-            newData[acn]["Cart"][i].name === product.name &&
-            product.qty === 0
-          ) {
-            newData[acn]["Cart"].splice(i, 1);
-          } else if (
-            newData[acn]["Cart"].length > 0 &&
-            newData[acn]["Cart"][i].name === product.name
-          ) {
-            newData[acn]["Cart"][i].qty = product.qty;
-          }
-        }
-      }
-    }
-    await setDoc(doc(listRef, "PNS"), {
-      newData,
-    });
-    setData(newData);
-  }
-
-  async function updateAccountName(Name) {
-    console.log(Name);
-    let newData = { ...data };
-    if (!Object.keys(newData).includes(Name) && Name !== null) {
-      newData[Name] = { Cart: [], WishList: [] };
-      await setDoc(doc(listRef, "PNS"), {
-        newData,
-      });
-    }
-    localStorage.setItem("Account", JSON.stringify(Name));
-    SaveAcc = Name;
-    setData(newData);
-    setAccountName(Name);
-  }
-
-  function updateIsOpenCart(Order) {
-    setIsOpenCart(Order);
-  }
-
-  //Weather
-  const [location, setLocation] = useState("");
-=======
   const [IsOpenWishList, setIsOpenWishList] = useState(false);
->>>>>>> f70af53e61bcbf70a0b216f06887b4348645ed84
   const [temperature, setTemperature] = useState("");
   const [weather, setWeather] = useState("");
 
