@@ -5,6 +5,8 @@ import Inputbox from "./Component/input.js";
 import Box from "./Component/ListProductsInBox.js";
 import { FaCaretDown } from "react-icons/fa";
 import { categories } from "./Component/categoriesData.js";
+import { signOut } from "firebase/auth";
+import { auth } from "../firebase/firebase.js";
 
 function Header(props) {
   const temperature = props.temperature;
@@ -69,6 +71,8 @@ function Header(props) {
                         onClick={() => {
                           setOpenLogin(!OpenLogin);
                           props.updateAccountName(null);
+                          signOut(auth);
+                          console.log("Logout success!");
                         }}
                         class="flex text-1xl text-white flex-row mr-2 sm:mr-0"
                       >

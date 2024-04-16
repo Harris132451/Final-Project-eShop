@@ -16,8 +16,10 @@ const Checkout = function ({ updateCart, items, Account }) {
     PriceSum += items[Account][0].qty * items[Account][0].price;
   }
   return (
-    <div class="pt-[20px]">
-      <h2>Total Items & Prices</h2>
+    <div className="pt-[20px] mx-auto lg:max-w-6xl max-w-xl md:max-w-full space-y-4">
+      <h2 className="bg-gray-300 rounded-md p-3 font-bold h-20 content-center text-4xl ">
+        My Cart
+      </h2>
       {items[Account].length > 1 &&
         items[Account].map((p) => {
           return <TotalPriceCount ItemInfo={p} />;
@@ -26,18 +28,29 @@ const Checkout = function ({ updateCart, items, Account }) {
         <TotalPriceCount ItemInfo={items[Account][0]} />
       )}
       {PriceSum > 0 ? (
-        <h5>Total Prices : {PriceSum}</h5>
+        <h5 className="bg-gray-300 rounded-md p-3 font-bold h-20 content-center text-2xl text-center md:text-right">
+          Total Prices : {PriceSum}
+        </h5>
       ) : (
-        <h3>Nothing in Cart !</h3>
+        <h3 className="bg-gray-300 rounded-md p-3 font-bold h-20 content-center text-2xl text-center md:text-right">
+          Nothing in Cart !
+        </h3>
       )}
-      <Link to="/">
-        <button className="bg-gray-500" onClick={PaidDeleteCart}>
-          PAY
-        </button>
-      </Link>
-      <Link to="/">
-        <button className="bg-blue-500">Leave Cart</button>
-      </Link>
+      <div className="bg-gray-300 rounded-md p-3 font-bold h-40 content-center">
+        <Link to="/">
+          <button
+            className="bg-red-400 rounded-md w-full my-2 p-3 text-2xl"
+            onClick={PaidDeleteCart}
+          >
+            CHECKOUT
+          </button>
+        </Link>
+        <Link to="/">
+          <button className="bg-gray-100 rounded-md w-full my-2 p-2 text-xl">
+            Back To Home
+          </button>
+        </Link>
+      </div>
     </div>
   );
 };
