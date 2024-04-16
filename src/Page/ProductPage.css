@@ -1,0 +1,4 @@
+.active-tab {
+    color: blue; /* 文本颜色为蓝色 */
+    border-bottom-color: blue !important; /* 底部边框颜色为蓝色 */
+  }

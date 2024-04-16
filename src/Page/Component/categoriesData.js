@@ -17,12 +17,12 @@ export const categories =
     },
     {
      "id": 4,
-     "Name": "liquor",
+     "Name": "Liquor",
      "Parent": 1
     },
     {
      "id": 5,
-     "Name": "water",
+     "Name": "Water",
      "Parent": 1
     },
     {
