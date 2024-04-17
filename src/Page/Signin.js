@@ -46,7 +46,10 @@ const Signin = function ({ updateAccountName }) {
     signOut(auth);
     signInWithEmailAndPassword(auth, InputID, InputPassword)
       .then(() => {
-        updateAccountName(auth.currentUser.displayName);
+        updateAccountName([
+          auth.currentUser.email,
+          auth.currentUser.displayName,
+        ]);
       })
       .then(() => {
         nav("/");
@@ -92,7 +95,7 @@ const Signin = function ({ updateAccountName }) {
                     }}
                     className="w-full rounded-md border border-stroke bg-transparent mb-6 px-5 py-3 text-base text-black outline-none focus:border-primary focus-visible:shadow-none"
                     type="text"
-                    placeholder="ID"
+                    placeholder="Email"
                   ></input>
                   <input
                     onChange={(p) => {

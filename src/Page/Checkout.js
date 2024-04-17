@@ -4,11 +4,27 @@ import withLoader from "./Component/withLoader";
 import DiscountCode from "./Component/DiscountCode.js";
 import { useState } from "react";
 
-const Checkout = function ({ updateCart, items, Account }) {
-  const [isCodeUse, setIsCodeUse] = useState("false");
+const Checkout = function ({
+  updateCart,
+  items,
+  updateFreeList,
+  freeItems,
+  Account,
+}) {
+  const [isCodeUse, setIsCodeUse] = useState(false);
   function PaidDeleteCart() {
     updateCart("Paid");
   }
+
+  function PaidDeleteFreeList() {
+    updateFreeList("Paid");
+  }
+
+  let freeProduct = [];
+  if (freeItems[Account].length > 1) {
+    freeProduct = freeItems[Account].splice(0, 1);
+  }
+
   let PriceSum = 0;
   if (items[Account].length > 1) {
     items[Account].map((p) => {
@@ -23,13 +39,13 @@ const Checkout = function ({ updateCart, items, Account }) {
   function handleDiscount(code) {
     if (code === "PNSAPP" && PriceSum >= 350) {
       setDiscount("0.9");
-      setIsCodeUse("true");
+      setIsCodeUse(true);
     } else if (code === "APRCNC" && PriceSum >= 200) {
       setDiscount("0.95");
-      setIsCodeUse("true");
+      setIsCodeUse(true);
     } else if (code === "APRHD") {
       setDiscount("0.92");
-      setIsCodeUse("true");
+      setIsCodeUse(true);
     }
   }
 
@@ -41,6 +57,10 @@ const Checkout = function ({ updateCart, items, Account }) {
         <p className="hidden md:block md:w-1/5 text-right">Qty</p>
         <p className="hidden md:block md:w-1/5 text-right">Total</p>
       </div>
+      {freeProduct.length > 0 &&
+        freeProduct.map((p) => {
+          return <TotalPriceCount ItemInfo={p} />;
+        })}
       {items[Account].length > 1 &&
         items[Account].map((p) => {
           return <TotalPriceCount ItemInfo={p} />;
@@ -50,8 +70,17 @@ const Checkout = function ({ updateCart, items, Account }) {
       )}
       <DiscountCode handleDiscount={handleDiscount} IsCodeUse={isCodeUse} />
       {PriceSum > 0 ? (
-        <h5 className="bg-blue-50 rounded-md p-3 font-bold h-20 content-center text-2xl text-center md:text-right">
-          Total Prices : {(PriceSum * Discount).toFixed(1)}
+        <h5 className="bg-blue-50 rounded-md p-3 font-bold h-20 content-center text-3xl text-center md:text-right">
+          Total Prices :{" "}
+          {isCodeUse ? (
+            <>
+              <a className="line-through">{PriceSum.toFixed(1)}</a>
+              {" > "}
+              {(PriceSum * Discount).toFixed(1)}
+            </>
+          ) : (
+            <>{PriceSum.toFixed(1)}</>
+          )}
         </h5>
       ) : (
         <h3 className="bg-blue-50 rounded-md p-3 font-bold h-20 content-center text-2xl text-center md:text-right">
@@ -61,7 +90,7 @@ const Checkout = function ({ updateCart, items, Account }) {
       <div className="bg-blue-50 rounded-md p-3 font-bold h-40 content-center">
         <Link to="/">
           <button
-            className="bg-blue-600 rounded-md w-full my-2 p-3 text-2xl"
+            className="bg-blue-600 rounded-md w-full my-2 p-3 text-2xl hover:text-white"
             onClick={PaidDeleteCart}
           >
             CHECKOUT
