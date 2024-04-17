@@ -11,7 +11,7 @@ const Checkout = function ({
   freeItems,
   Account,
 }) {
-  const [isCodeUse, setIsCodeUse] = useState("false");
+  const [isCodeUse, setIsCodeUse] = useState(false);
   function PaidDeleteCart() {
     updateCart("Paid");
   }
@@ -39,15 +39,13 @@ const Checkout = function ({
   function handleDiscount(code) {
     if (code === "PNSAPP" && PriceSum >= 350) {
       setDiscount("0.9");
-      setIsCodeUse("true");
+      setIsCodeUse(true);
     } else if (code === "APRCNC" && PriceSum >= 200) {
       setDiscount("0.95");
-      setIsCodeUse("true");
+      setIsCodeUse(true);
     } else if (code === "APRHD") {
       setDiscount("0.92");
-      setIsCodeUse("true");
-    } else {
-      setIsCodeUse("invalid");
+      setIsCodeUse(true);
     }
   }
 
@@ -72,9 +70,9 @@ const Checkout = function ({
       )}
       <DiscountCode handleDiscount={handleDiscount} IsCodeUse={isCodeUse} />
       {PriceSum > 0 ? (
-        <h5 className="bg-blue-50 rounded-md p-3 font-bold h-20 content-center text-2xl text-center md:text-right">
+        <h5 className="bg-blue-50 rounded-md p-3 font-bold h-20 content-center text-3xl text-center md:text-right">
           Total Prices :{" "}
-          {isCodeUse === "true" ? (
+          {isCodeUse ? (
             <>
               <a className="line-through">{PriceSum.toFixed(1)}</a>
               {" > "}
