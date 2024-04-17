@@ -74,7 +74,7 @@ const ProductPage = (props) => {
                   </svg>
                 ))}
                 <span className="text-gray-600 ml-3">
-                   5 Reviews
+                   259 Reviews
                 </span>
               </div>
             <p className="leading-relaxed">
