@@ -46,7 +46,10 @@ const Signin = function ({ updateAccountName }) {
     signOut(auth);
     signInWithEmailAndPassword(auth, InputID, InputPassword)
       .then(() => {
-        updateAccountName(auth.currentUser.displayName);
+        updateAccountName([
+          auth.currentUser.email,
+          auth.currentUser.displayName,
+        ]);
       })
       .then(() => {
         nav("/");
