@@ -22,15 +22,14 @@ export const item = [
     warn: '"Consuming alcoholic beverages during pregnancy may cause birth defects. Please consult your physician for guidance."',
   },
   {
-    id: 3,
-    picture:
-      "https://cdn11.bigcommerce.com/s-ji18vmeuwa/products/1176/images/1434/10906-1-Kirin-Ichiban-Shibori-Lager-Beer%25253Fw%25253D1200%252526h%25253D1200%252526sm%25253Dc%252526fmt%25253Dauto__36968.1686739223.1280.1280.jpg?c=1",
-    name: "Kirin Ichiban Pressed Beer",
-    unit: "500MLX4",
-    bigcategories: "Drink",
-    smallcategories: "Liquor",
-    price: 51.9,
-    warn: '"Warning: Drinking distilled water is not recommended for infants under six months old. It may lead to electrolyte imbalance."',
+   "id": 3,
+   "picture": "https://api.pns.hk/medias/zoom-front-434805.jpg?context=bWFzdGVyfHBuc2hrL2ltYWdlc3wxNjI0MDB8aW1hZ2UvanBlZ3xhR0kxTDJobU5TODVPRFl4TkRVNE1EQXhPVFV3TDFCT1UwaExMVFF6TkRnd05TMW1jbTl1ZEM1cWNHY3xiZDQwOTM1YjViOGEyN2FlNGNhNDc0YmIwOTBlNWUyMGMzM2E3MzFhMDNiNzRkZDQwNjYzMDRlZDEzZmQ0NjBj",
+   "name": "Kirin Ichiban Pressed Beer",
+   "unit": "500MLX4",
+   "bigcategories": "Drink",
+   "smallcategories": "Liquor",
+   "price": 51.9,
+   "warn": "\"Warning: Drinking distilled water is not recommended for infants under six months old. It may lead to electrolyte imbalance.\""
   },
   {
     id: 4,
