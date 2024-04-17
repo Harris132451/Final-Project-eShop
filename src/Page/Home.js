@@ -67,26 +67,32 @@ const Home = function (props) {
   const getRecommendedTitle = () => {
     if (weather === "normal") {
       return (
-        <img 
-        src={"https://firebasestorage.googleapis.com/v0/b/generation-group-eshop.appspot.com/o/hot.png?alt=media&token=e465f209-fd0b-4da6-9d1f-922e22a521ae"}
-        alt={"Hot"}
-        className="w-full max-w-4xl mx-auto mt-6 mb-6"
+        <img
+          src={
+            "https://firebasestorage.googleapis.com/v0/b/generation-group-eshop.appspot.com/o/hot.png?alt=media&token=e465f209-fd0b-4da6-9d1f-922e22a521ae"
+          }
+          alt={"Hot"}
+          className="w-full max-w-4xl mx-auto mt-6 mb-6"
         />
       );
     } else if (weather === "cold") {
       return (
         <img
-        src={"https://firebasestorage.googleapis.com/v0/b/generation-group-eshop.appspot.com/o/cold.png?alt=media&token=ece45a25-13a1-450b-a5d5-853f580d310b"}
-        alt={"Cold"}
-        className="w-full max-w-5xl mx-auto mt-6 mb-6"
+          src={
+            "https://firebasestorage.googleapis.com/v0/b/generation-group-eshop.appspot.com/o/cold.png?alt=media&token=ece45a25-13a1-450b-a5d5-853f580d310b"
+          }
+          alt={"Cold"}
+          className="w-full max-w-5xl mx-auto mt-6 mb-6"
         />
       );
     } else {
       return (
         <img
-        src={"https://firebasestorage.googleapis.com/v0/b/generation-group-eshop.appspot.com/o/normal.png?alt=media&token=b8929798-e887-4ec7-9b93-4d9ae961cb3f"}
-        alt={"Cloudy"}
-        className="w-full max-w-5xl mx-auto mt-6 mb-6"
+          src={
+            "https://firebasestorage.googleapis.com/v0/b/generation-group-eshop.appspot.com/o/normal.png?alt=media&token=b8929798-e887-4ec7-9b93-4d9ae961cb3f"
+          }
+          alt={"Cloudy"}
+          className="w-full max-w-5xl mx-auto mt-6 mb-6"
         />
       );
     }
@@ -117,8 +123,8 @@ const Home = function (props) {
                   }
                 }
                 if (!acn) {
-                  props.updateIsOpenWishList(true);
-                } else if (window.innerWidth >= 1024) {
+                  props.updateIsOpenCart(true);
+                } else if (window.innerWidth >= 768) {
                   props.updateIsOpenWishList(true);
                 }
               }}
@@ -180,7 +186,7 @@ const Home = function (props) {
                   }
                   if (!acn) {
                     props.updateIsOpenCart(true);
-                  } else if (window.innerWidth >= 1024) {
+                  } else if (window.innerWidth >= 768) {
                     props.updateIsOpenCart(true);
                   }
                 }}
@@ -197,12 +203,11 @@ const Home = function (props) {
   return (
     <>
       <PromotionSlider />
-      
-      
+
       {getRecommendedTitle()}
-      
+
       <PromotionBlock />
-     
+
       {renderRecommendedProducts()}
     </>
   );

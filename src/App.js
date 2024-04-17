@@ -66,12 +66,15 @@ if (savedFreeList.exists()) {
 
 let saveAcc = JSON.parse(localStorage.getItem("Account"));
 let SaveAcc = saveAcc;
+if (!SaveAcc) {
+  SaveAcc = [];
+}
 
 export default function App() {
   const [cartData, setCartData] = useState(getCart["Data"]);
   const [wishListData, setWishListData] = useState(getWishList["Data"]);
   const [freeListData, setFreeListData] = useState(getFreeList["Data"]);
-  const [AccountName, setAccountName] = useState(SaveAcc);
+  const [Account, setAccount] = useState(SaveAcc);
   const [IsOpenCart, setIsOpenCart] = useState(false);
   const [IsOpenWishList, setIsOpenWishList] = useState(false);
   const [temperature, setTemperature] = useState("");
@@ -111,7 +114,7 @@ export default function App() {
 
   async function updateCart(product) {
     let Data = { ...cartData };
-    let acn = AccountName;
+    let acn = Account[0];
     if (product === "Paid") {
       Data[acn] = [];
     } else if (!Data[acn]) {
@@ -150,7 +153,8 @@ export default function App() {
 
   async function updateWishList(product, order) {
     let Data = { ...wishListData };
-    let acn = AccountName;
+    let acn = Account[0];
+
     if (!Data[acn]) {
       Data[acn] = [{ ...product }];
     } else if (acn) {
@@ -160,9 +164,10 @@ export default function App() {
       });
       if (!PNameArr.includes(product.name)) {
         Data[acn].push({ ...product });
-      } else {
+      }
+      if (order === "Delete") {
         for (let i = 0; i < Data[acn].length; i++) {
-          if (order === "Delete") {
+          if (Data[acn].length > 0 && Data[acn][i].name === product.name) {
             Data[acn].splice(i, 1);
           }
         }
@@ -178,7 +183,7 @@ export default function App() {
 
   async function updateFreeList(product) {
     let Data = { ...freeListData };
-    let acn = AccountName;
+    let acn = Account[0];
     if (product === "Paid") {
       Data[acn] = ["Played"];
     } else if (!Data[acn]) {
@@ -192,12 +197,12 @@ export default function App() {
     setFreeListData(Data);
   }
 
-  // Account
+  // Account Name
 
-  async function updateAccountName(Name) {
+  async function updateAccount(Acc) {
     let AccCartData = { ...cartData };
-    if (!Object.keys(AccCartData).includes(Name) && Name !== null) {
-      AccCartData[Name] = [];
+    if (!Object.keys(AccCartData).includes(Acc[0]) && Acc.length !== 0) {
+      AccCartData[Acc[0]] = [];
       let Data = AccCartData;
       await setDoc(doc(listRef, "Cart"), {
         Data,
@@ -205,8 +210,8 @@ export default function App() {
       setCartData(AccCartData);
     }
     let AccWishListData = { ...wishListData };
-    if (!Object.keys(AccWishListData).includes(Name) && Name !== null) {
-      AccWishListData[Name] = [];
+    if (!Object.keys(AccWishListData).includes(Acc[0]) && Acc.length !== 0) {
+      AccWishListData[Acc[0]] = [];
       let Data = AccWishListData;
       await setDoc(doc(listRef, "WishList"), {
         Data,
@@ -214,17 +219,17 @@ export default function App() {
       setWishListData(AccWishListData);
     }
     let AccFreeListData = { ...freeListData };
-    if (!Object.keys(AccFreeListData).includes(Name) && Name !== null) {
-      AccFreeListData[Name] = [];
+    if (!Object.keys(AccFreeListData).includes(Acc[0]) && Acc.length !== 0) {
+      AccFreeListData[Acc[0]] = [];
       let Data = AccFreeListData;
       await setDoc(doc(listRef, "FreeList"), {
         Data,
       });
       setWishListData(AccFreeListData);
     }
-    localStorage.setItem("Account", JSON.stringify(Name));
-    SaveAcc = Name;
-    setAccountName(Name);
+    localStorage.setItem("Account", JSON.stringify(Acc));
+    SaveAcc = Acc;
+    setAccount(Acc);
   }
 
   function updateIsOpenCart(Order) {
@@ -242,13 +247,14 @@ export default function App() {
           updateCart={updateCart}
           updateWishList={updateWishList}
           updateFreeList={updateFreeList}
-          updateAccountName={updateAccountName}
+          updateAccount={updateAccount}
           updateIsOpenCart={updateIsOpenCart}
           updateIsOpenWishList={updateIsOpenWishList}
           items={cartData}
           wishItems={wishListData}
           freeItems={freeListData}
-          Account={AccountName}
+          Account={Account[0]}
+          AccountName={Account[1]}
           OpenCart={IsOpenCart}
           OpenWishList={IsOpenWishList}
           temperature={temperature}
@@ -262,12 +268,12 @@ export default function App() {
               <Home
                 updateCart={updateCart}
                 updateWishList={updateWishList}
-                updateAccountName={updateAccountName}
+                updateAccountName={updateAccount}
                 items={cartData}
                 wishItems={wishListData}
                 updateIsOpenCart={updateIsOpenCart}
                 updateIsOpenWishList={updateIsOpenWishList}
-                Account={AccountName}
+                Account={Account[0]}
               />
             }
           />
@@ -279,17 +285,17 @@ export default function App() {
                 items={cartData}
                 updateFreeList={updateFreeList}
                 freeItems={freeListData}
-                Account={AccountName}
+                Account={Account[0]}
               />
             }
           />
           <Route
             path="Signin"
-            element={<Signin updateAccountName={updateAccountName} />}
+            element={<Signin updateAccountName={updateAccount} />}
           />
           <Route
             path="Signup"
-            element={<Signup updateAccountName={updateAccountName} />}
+            element={<Signup updateAccountName={updateAccount} />}
           />
           <Route
             path="/:categoryName"
@@ -297,12 +303,12 @@ export default function App() {
               <CategoriesPage
                 updateCart={updateCart}
                 updateWishList={updateWishList}
-                updateAccountName={updateAccountName}
+                updateAccountName={updateAccount}
                 items={cartData}
                 wishItems={wishListData}
                 updateIsOpenCart={updateIsOpenCart}
                 updateIsOpenWishList={updateIsOpenWishList}
-                Account={AccountName}
+                Account={Account[0]}
               />
             }
           />
@@ -312,12 +318,12 @@ export default function App() {
               <SmallCategoriesPage
                 updateCart={updateCart}
                 updateWishList={updateWishList}
-                updateAccountName={updateAccountName}
+                updateAccountName={updateAccount}
                 items={cartData}
                 wishItems={wishListData}
                 updateIsOpenCart={updateIsOpenCart}
                 updateIsOpenWishList={updateIsOpenWishList}
-                Account={AccountName}
+                Account={Account[0]}
               />
             }
           />
@@ -327,12 +333,12 @@ export default function App() {
               <ProductPage
                 updateCart={updateCart}
                 updateWishList={updateWishList}
-                updateAccountName={updateAccountName}
+                updateAccountName={updateAccount}
                 items={cartData}
                 wishItems={wishListData}
                 updateIsOpenCart={updateIsOpenCart}
                 updateIsOpenWishList={updateIsOpenWishList}
-                Account={AccountName}
+                Account={Account[0]}
               />
             }
           />
