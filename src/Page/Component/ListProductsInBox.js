@@ -1,10 +1,12 @@
 import ProductCount from "./productsCount.js";
+import FreeBox from "./freeProductsBox.js";
 
 const Box = function ({
   ItemChangeIncart,
   Items,
   ItemChangeInwishlist,
   WishItems,
+  FreeItems,
   CartAccount,
   OpenCart,
 }) {
@@ -12,12 +14,16 @@ const Box = function ({
     <>
       {OpenCart && (
         <div>
-          {Items[CartAccount].length === 0 ? (
+          {Items[CartAccount].length === 0 &&
+          FreeItems[CartAccount].length < 1 ? (
             <div class="text-center my-56 sm:my-44 text-xl sm:text-[15px] w-[400px] sm:w-[350px]">
               No Product in Cart !
             </div>
           ) : (
             <div class="overflow-scroll bg-white rounded border-solid border-grey shadow-inner border-[0.5px] mt-2 h-[500px] sm:h-[380px]">
+              {FreeItems[CartAccount] && FreeItems[CartAccount].length > 1 && (
+                <FreeBox freeItemsList={FreeItems[CartAccount]} />
+              )}
               {Items[CartAccount].length > 1 &&
                 Items[CartAccount].map((p) => {
                   return (

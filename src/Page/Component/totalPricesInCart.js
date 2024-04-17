@@ -11,7 +11,9 @@ function TotalPriceCount({ ItemInfo }) {
         />
         <p className="md:w-2/5 text-left md:text-left">{ItemInfo.name}</p>
         <p className="md:w-1/5 text-left md:text-right">{ItemInfo.qty}</p>
-        <p className="md:w-1/5 text-left md:text-right">${TotalPrice}</p>
+        <p className="md:w-1/5 text-left md:text-right">
+          ${TotalPrice.toFixed(1)}
+        </p>
       </div>
     </>
   );

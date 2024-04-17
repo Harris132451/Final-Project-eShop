@@ -49,12 +49,28 @@ if (savedWishList.exists()) {
   getWishList = { Data: {} };
 }
 
+const docFreeList = doc(db, "PNS", "FreeList");
+const savedFreeList = await getDoc(docFreeList);
+let getFreeList = savedFreeList.data();
+if (savedFreeList.exists()) {
+  if (Object.keys(getFreeList).length === 0) {
+    let Data = {};
+    await setDoc(doc(listRef, "FreeList"), {
+      Data,
+    });
+    getFreeList = { Data: {} };
+  }
+} else {
+  getFreeList = { Data: {} };
+}
+
 let saveAcc = JSON.parse(localStorage.getItem("Account"));
 let SaveAcc = saveAcc;
 
 export default function App() {
   const [cartData, setCartData] = useState(getCart["Data"]);
   const [wishListData, setWishListData] = useState(getWishList["Data"]);
+  const [freeListData, setFreeListData] = useState(getFreeList["Data"]);
   const [AccountName, setAccountName] = useState(SaveAcc);
   const [IsOpenCart, setIsOpenCart] = useState(false);
   const [IsOpenWishList, setIsOpenWishList] = useState(false);
@@ -158,6 +174,24 @@ export default function App() {
     setWishListData(Data);
   }
 
+  // FreeList
+
+  async function updateFreeList(product) {
+    let Data = { ...freeListData };
+    let acn = AccountName;
+    if (product === "Paid") {
+      Data[acn] = ["Played"];
+    } else if (!Data[acn]) {
+      Data[acn] = ["Played", { ...product, qty: 1 }];
+    } else {
+      Data[acn].push({ ...product, qty: 1 });
+    }
+    await setDoc(doc(listRef, "WishList"), {
+      Data,
+    });
+    setFreeListData(Data);
+  }
+
   // Account
 
   async function updateAccountName(Name) {
@@ -179,6 +213,15 @@ export default function App() {
       });
       setWishListData(AccWishListData);
     }
+    let AccFreeListData = { ...freeListData };
+    if (!Object.keys(AccFreeListData).includes(Name) && Name !== null) {
+      AccFreeListData[Name] = [];
+      let Data = AccFreeListData;
+      await setDoc(doc(listRef, "FreeList"), {
+        Data,
+      });
+      setWishListData(AccFreeListData);
+    }
     localStorage.setItem("Account", JSON.stringify(Name));
     SaveAcc = Name;
     setAccountName(Name);
@@ -198,11 +241,13 @@ export default function App() {
         <Header
           updateCart={updateCart}
           updateWishList={updateWishList}
+          updateFreeList={updateFreeList}
           updateAccountName={updateAccountName}
           updateIsOpenCart={updateIsOpenCart}
           updateIsOpenWishList={updateIsOpenWishList}
           items={cartData}
           wishItems={wishListData}
+          freeItems={freeListData}
           Account={AccountName}
           OpenCart={IsOpenCart}
           OpenWishList={IsOpenWishList}
@@ -232,6 +277,8 @@ export default function App() {
               <Checkout
                 updateCart={updateCart}
                 items={cartData}
+                updateFreeList={updateFreeList}
+                freeItems={freeListData}
                 Account={AccountName}
               />
             }
