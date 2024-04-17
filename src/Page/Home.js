@@ -6,9 +6,6 @@ import { item } from "./Component/product";
 import PromotionBlock from "./Component/PromotionBlock";
 
 const Home = function (props) {
-  const [location, setLocation] = useState("");
-  const [temperature, setTemperature] = useState("");
-  const [updateTime, setUpdateTime] = useState("");
   const [weather, setWeather] = useState("");
   const [randomItems, setRandomItems] = useState([]);
 
@@ -18,18 +15,7 @@ const Home = function (props) {
         "https://data.weather.gov.hk/weatherAPI/opendata/weather.php?dataType=rhrread&lang=en";
       const res = await fetch(weatherAPI);
       const weatherData = await res.json();
-
-      const location = weatherData.temperature.data[1].place;
       const temperature = weatherData.temperature.data[1].value;
-      const updateTime = weatherData.updateTime;
-      const fomatTime = `${updateTime.slice(0, 10)}, ${updateTime.slice(
-        11,
-        16
-      )}`;
-
-      setLocation(location);
-      setTemperature(temperature);
-      setUpdateTime(fomatTime);
 
       if (temperature < 15) {
         setWeather("cold");

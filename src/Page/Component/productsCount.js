@@ -54,7 +54,7 @@ const ProductCount = function ({
 
   let TotalPrice = (count * ItemInfo.price).toFixed(1);
   return (
-    <div class="flex flex-col border-t-grey border-t-[1px] mx-2 w-[370px] md:w-[320px] px-2 pt-3 pb-2 md:pt-3 text-black">
+    <div class="flex flex-col border-t-grey border-t-[1px] mx-2 w-[370px] md:w-[320px] px-2 pt-5 pb-2 md:pt-3 text-black">
       <div class="flex flex-col items-center justify-center md:items-start md:justify-start">
         <img
           src={ItemInfo.picture}
@@ -90,7 +90,7 @@ const ProductCount = function ({
         </div>
       )}
       {!isOpenCart && (
-        <div class="flex justify-end mt-1 md:justify-start">
+        <div class="flex justify-center my-3 md:my-1 md:justify-start">
           <button
             onClick={deleteWishList}
             class="mt-[6.5px] w-7 h-7 md:w-4 md:h-4"
