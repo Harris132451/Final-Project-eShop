@@ -9,13 +9,6 @@ export default function DiscountCode(props) {
     setCode(el.target.value);
   }
 
-  function openTooltip() {
-    <Tooltip
-      anchorSelect="invalidCode"
-      content="Invalid Discount code"
-    ></Tooltip>;
-  }
-
   return (
     <>
       <div className="bg-blue-50 rounded-md my-10 p-3 font-bold flex justify-end content-center flex-wrap md:flex-nowrap text-2xl">
@@ -30,14 +23,21 @@ export default function DiscountCode(props) {
         <button
           className="invalidCode w-full md:w-1/4 p-3 bg-blue-600 rounded-md text-2xl hover:text-white"
           onClick={
-            props.IsCodeUse === "false"
-              ? () => props.handleDiscount(Code)
+            !props.IsCodeUse
+              ? () => {
+                  props.handleDiscount(Code);
+                }
               : null
           }
         >
-          {props.IsCodeUse === "invalid" && openTooltip()}
-          {props.IsCodeUse === "true" ? "Valid Discount code!" : "ENTER"}
+          {props.IsCodeUse ? "Valid Discount code!" : "ENTER"}
         </button>
+        <Tooltip
+          openOnClick={!props.IsCodeUse}
+          anchorSelect=".invalidCode"
+          content="Invalid Discount code"
+          hidden={props.IsCodeUse}
+        ></Tooltip>
       </div>
     </>
   );
