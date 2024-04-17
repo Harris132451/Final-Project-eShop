@@ -65,7 +65,10 @@ function Signup({ updateAccountName }) {
           updateProfile(auth.currentUser, { displayName: InputName });
         })
         .then(() => {
-          updateAccountName(auth.currentUser.displayName);
+          updateAccountName([
+            auth.currentUser.email,
+            auth.currentUser.displayName,
+          ]);
         })
         .then(() => {
           nav("/Signin");

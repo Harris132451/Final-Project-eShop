@@ -76,12 +76,12 @@ const Checkout = function ({
           Total Prices :{" "}
           {isCodeUse === "true" ? (
             <>
-              <a className="line-through">{PriceSum}</a>
+              <a className="line-through">{PriceSum.toFixed(1)}</a>
               {" > "}
               {(PriceSum * Discount).toFixed(1)}
             </>
           ) : (
-            PriceSum
+            <>{PriceSum.toFixed(1)}</>
           )}
         </h5>
       ) : (

@@ -109,8 +109,8 @@ const Home = function (props) {
                   }
                 }
                 if (!acn) {
-                  props.updateIsOpenWishList(true);
-                } else if (window.innerWidth >= 1024) {
+                  props.updateIsOpenCart(true);
+                } else if (window.innerWidth >= 768) {
                   props.updateIsOpenWishList(true);
                 }
               }}
@@ -172,7 +172,7 @@ const Home = function (props) {
                   }
                   if (!acn) {
                     props.updateIsOpenCart(true);
-                  } else if (window.innerWidth >= 1024) {
+                  } else if (window.innerWidth >= 768) {
                     props.updateIsOpenCart(true);
                   }
                 }}

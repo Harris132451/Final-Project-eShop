@@ -80,8 +80,8 @@ const Inputbox = function () {
               <img src="/SerachBtn.png" />
             </div>
           </button>
-          {IsSerachBtn && window.innerWidth < 1024 && (
-            <div class="flex flex-col pt-1">
+          {IsSerachBtn && (
+            <div class="flex flex-col pt-1 lg:hidden">
               <input
                 onChange={(b) => InputName(b)}
                 placeholder="Serach here . . ."
@@ -118,10 +118,11 @@ const Inputbox = function () {
             </div>
           )}
         </div>
-        {window.innerWidth >= 1024 && (
+        <div class="hidden lg:block">
           <div class="flex flex-col pt-6 ">
             <input
               onChange={(b) => InputName(b)}
+              value={Word}
               placeholder="Serach here . . ."
               class="w-72 border-2 border-blue-700  rounded-full bg-blue-800 text-white px-5 py-1 opacity-80 text"
             ></input>
@@ -154,7 +155,7 @@ const Inputbox = function () {
               </div>
             )}
           </div>
-        )}
+        </div>
       </div>
     </div>
   );
