@@ -46,6 +46,8 @@ const Checkout = function ({
     } else if (code === "APRHD") {
       setDiscount("0.92");
       setIsCodeUse("true");
+    } else {
+      setIsCodeUse("invalid");
     }
   }
 
@@ -71,7 +73,16 @@ const Checkout = function ({
       <DiscountCode handleDiscount={handleDiscount} IsCodeUse={isCodeUse} />
       {PriceSum > 0 ? (
         <h5 className="bg-blue-50 rounded-md p-3 font-bold h-20 content-center text-2xl text-center md:text-right">
-          Total Prices : {(PriceSum * Discount).toFixed(1)}
+          Total Prices :{" "}
+          {isCodeUse === "true" ? (
+            <>
+              <a className="line-through">{PriceSum}</a>
+              {" > "}
+              {(PriceSum * Discount).toFixed(1)}
+            </>
+          ) : (
+            PriceSum
+          )}
         </h5>
       ) : (
         <h3 className="bg-blue-50 rounded-md p-3 font-bold h-20 content-center text-2xl text-center md:text-right">
@@ -81,7 +92,7 @@ const Checkout = function ({
       <div className="bg-blue-50 rounded-md p-3 font-bold h-40 content-center">
         <Link to="/">
           <button
-            className="bg-blue-600 rounded-md w-full my-2 p-3 text-2xl"
+            className="bg-blue-600 rounded-md w-full my-2 p-3 text-2xl hover:text-white"
             onClick={PaidDeleteCart}
           >
             CHECKOUT

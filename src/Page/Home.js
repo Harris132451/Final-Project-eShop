@@ -6,9 +6,6 @@ import { item } from "./Component/product";
 import PromotionBlock from "./Component/PromotionBlock";
 
 const Home = function (props) {
-  const [location, setLocation] = useState("");
-  const [temperature, setTemperature] = useState("");
-  const [updateTime, setUpdateTime] = useState("");
   const [weather, setWeather] = useState("");
   const [randomItems, setRandomItems] = useState([]);
 
@@ -18,18 +15,7 @@ const Home = function (props) {
         "https://data.weather.gov.hk/weatherAPI/opendata/weather.php?dataType=rhrread&lang=en";
       const res = await fetch(weatherAPI);
       const weatherData = await res.json();
-
-      const location = weatherData.temperature.data[1].place;
       const temperature = weatherData.temperature.data[1].value;
-      const updateTime = weatherData.updateTime;
-      const fomatTime = `${updateTime.slice(0, 10)}, ${updateTime.slice(
-        11,
-        16
-      )}`;
-
-      setLocation(location);
-      setTemperature(temperature);
-      setUpdateTime(fomatTime);
 
       if (temperature < 15) {
         setWeather("cold");
@@ -67,26 +53,32 @@ const Home = function (props) {
   const getRecommendedTitle = () => {
     if (weather === "normal") {
       return (
-        <img 
-        src={"https://firebasestorage.googleapis.com/v0/b/generation-group-eshop.appspot.com/o/hot.png?alt=media&token=e465f209-fd0b-4da6-9d1f-922e22a521ae"}
-        alt={"Hot"}
-        className="w-full max-w-4xl mx-auto mt-6 mb-6"
+        <img
+          src={
+            "https://firebasestorage.googleapis.com/v0/b/generation-group-eshop.appspot.com/o/hot.png?alt=media&token=e465f209-fd0b-4da6-9d1f-922e22a521ae"
+          }
+          alt={"Hot"}
+          className="w-full max-w-4xl mx-auto mt-6 mb-6"
         />
       );
     } else if (weather === "cold") {
       return (
         <img
-        src={"https://firebasestorage.googleapis.com/v0/b/generation-group-eshop.appspot.com/o/cold.png?alt=media&token=ece45a25-13a1-450b-a5d5-853f580d310b"}
-        alt={"Cold"}
-        className="w-full max-w-5xl mx-auto mt-6 mb-6"
+          src={
+            "https://firebasestorage.googleapis.com/v0/b/generation-group-eshop.appspot.com/o/cold.png?alt=media&token=ece45a25-13a1-450b-a5d5-853f580d310b"
+          }
+          alt={"Cold"}
+          className="w-full max-w-5xl mx-auto mt-6 mb-6"
         />
       );
     } else {
       return (
         <img
-        src={"https://firebasestorage.googleapis.com/v0/b/generation-group-eshop.appspot.com/o/normal.png?alt=media&token=b8929798-e887-4ec7-9b93-4d9ae961cb3f"}
-        alt={"Cloudy"}
-        className="w-full max-w-5xl mx-auto mt-6 mb-6"
+          src={
+            "https://firebasestorage.googleapis.com/v0/b/generation-group-eshop.appspot.com/o/normal.png?alt=media&token=b8929798-e887-4ec7-9b93-4d9ae961cb3f"
+          }
+          alt={"Cloudy"}
+          className="w-full max-w-5xl mx-auto mt-6 mb-6"
         />
       );
     }
@@ -197,12 +189,11 @@ const Home = function (props) {
   return (
     <>
       <PromotionSlider />
-      
-      
+
       {getRecommendedTitle()}
-      
+
       <PromotionBlock />
-     
+
       {renderRecommendedProducts()}
     </>
   );

@@ -1,11 +1,19 @@
 import React from "react";
 import { useState } from "react";
+import { Tooltip } from "react-tooltip";
 
 export default function DiscountCode(props) {
   const [Code, setCode] = useState("");
 
   function handleInput(el) {
     setCode(el.target.value);
+  }
+
+  function openTooltip() {
+    <Tooltip
+      anchorSelect="invalidCode"
+      content="Invalid Discount code"
+    ></Tooltip>;
   }
 
   return (
@@ -19,20 +27,17 @@ export default function DiscountCode(props) {
           type="text"
           placeholder="Enter Discount Code here"
         ></input>
-        {props.IsCodeUse === "true" ? (
-          <button className="w-full md:w-1/4 p-3 bg-blue-600 rounded-md text-2xl">
-            Valid Discount code!
-          </button>
-        ) : (
-          <button
-            className="w-full md:w-1/4 p-3 bg-blue-600 rounded-md text-2xl"
-            onClick={() => {
-              props.handleDiscount(Code);
-            }}
-          >
-            ENTER
-          </button>
-        )}
+        <button
+          className="invalidCode w-full md:w-1/4 p-3 bg-blue-600 rounded-md text-2xl hover:text-white"
+          onClick={
+            props.IsCodeUse === "false"
+              ? () => props.handleDiscount(Code)
+              : null
+          }
+        >
+          {props.IsCodeUse === "invalid" && openTooltip()}
+          {props.IsCodeUse === "true" ? "Valid Discount code!" : "ENTER"}
+        </button>
       </div>
     </>
   );
