@@ -283,7 +283,7 @@ function Header(props) {
             >
               <Link
                 to={`/${bigcategorie.Name}`}
-                className="flex items-center gap-[2px] py-2flex items-center gap-[2px] py-2 font-bold text-lg bg-white text-black px-3 rounded-md transition-colors duration-300 hover:bg-blue-500 hover:text-white transition-delay-150"
+                className="flex items-center gap-[2px] py-2flex py-2 font-bold text-lg bg-white text-black px-3 rounded-md transition-colors duration-300 hover:bg-blue-500 hover:text-white transition-delay-150"
               >
                 <span>
                   <FaCaretDown className="transition-all duration-200 group-hover:rotate-180" />
