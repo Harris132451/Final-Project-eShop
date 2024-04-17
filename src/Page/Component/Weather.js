@@ -4,11 +4,11 @@ function Weather(props) {
 
   return (
     <>
-      <div className="flex mr-6 sm:mr-4">
-        <div class="mr-1 mt-0.5 text-xl text-white sm:text-lg sm:mt-0">
+      <div className="flex mr-6 md:mr-4">
+        <div class="mr-1 mt-0.5 text-xl text-white md:text-lg md:mt-0">
           {temperature}°C
         </div>
-        <div className="h-8 w-8 sm:h-7 sm:w-7">
+        <div className="h-8 w-8 md:h-7 md:w-7">
           {weather === "normal" && (
             <img
               src="https://www.svgrepo.com/show/503805/sun.svg"

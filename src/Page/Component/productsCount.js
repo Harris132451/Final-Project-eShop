@@ -90,10 +90,10 @@ const ProductCount = function ({
         </div>
       )}
       {!isOpenCart && (
-        <div class="flex justify-end mt-1 sm:justify-start">
+        <div class="flex justify-end mt-1 md:justify-start">
           <button
             onClick={deleteWishList}
-            class="mt-[6.5px] w-7 h-7 sm:w-4 sm:h-4"
+            class="mt-[6.5px] w-7 h-7 md:w-4 md:h-4"
           >
             <img src="https://uxwing.com/wp-content/themes/uxwing/download/user-interface/red-trash-can-icon.png" />
           </button>
@@ -101,12 +101,12 @@ const ProductCount = function ({
             {!isProductInCart ? (
               <button
                 onClick={WishListToCart}
-                class="bg-blue-200 mt-1 ml-5 mr-2 p-1 rounded-lg text-[20px] sm:ml-2 sm:mr-0 sm:mt-1 sm:text-[12px] hover:bg-blue-300 active:bg-blue-400"
+                class="bg-blue-200 mt-1 ml-5 mr-2 p-1 rounded-lg text-[20px] md:ml-2 md:mr-0 md:mt-1 md:text-[12px] hover:bg-blue-300 active:bg-blue-400"
               >
                 Add to Cart
               </button>
             ) : (
-              <div class="bg-blue-300 mt-1 ml-5 mr-2 p-1 rounded-lg text-[20px] sm:ml-2 sm:mr-0 sm:mt-1 sm:text-[12px] ">
+              <div class="bg-blue-300 mt-1 ml-5 mr-2 p-1 rounded-lg text-[20px] md:ml-2 md:mr-0 md:mt-1 md:text-[12px] ">
                 Added in Cart
               </div>
             )}
