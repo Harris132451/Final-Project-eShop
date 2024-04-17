@@ -4,11 +4,27 @@ import withLoader from "./Component/withLoader";
 import DiscountCode from "./Component/DiscountCode.js";
 import { useState } from "react";
 
-const Checkout = function ({ updateCart, items, Account }) {
+const Checkout = function ({
+  updateCart,
+  items,
+  updateFreeList,
+  freeItems,
+  Account,
+}) {
   const [isCodeUse, setIsCodeUse] = useState("false");
   function PaidDeleteCart() {
     updateCart("Paid");
   }
+
+  function PaidDeleteFreeList() {
+    updateFreeList("Paid");
+  }
+
+  let freeProduct = [];
+  if (freeItems[Account].length > 1) {
+    freeProduct = freeItems[Account].splice(0, 1);
+  }
+
   let PriceSum = 0;
   if (items[Account].length > 1) {
     items[Account].map((p) => {
@@ -41,6 +57,10 @@ const Checkout = function ({ updateCart, items, Account }) {
         <p className="hidden md:block md:w-1/5 text-right">Qty</p>
         <p className="hidden md:block md:w-1/5 text-right">Total</p>
       </div>
+      {freeProduct.length > 0 &&
+        freeProduct.map((p) => {
+          return <TotalPriceCount ItemInfo={p} />;
+        })}
       {items[Account].length > 1 &&
         items[Account].map((p) => {
           return <TotalPriceCount ItemInfo={p} />;

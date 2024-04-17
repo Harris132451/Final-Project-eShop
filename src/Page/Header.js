@@ -107,7 +107,7 @@ function Header(props) {
                 props.updateIsOpenWishList(!props.OpenWishList);
                 props.updateIsOpenCart(false);
               }}
-              class="flex flex-row h-auto w-7 mr-2 pt-0.5 ml-3 sm:w-6 sm:ml-0 lg:mr-4 xl:mr-12 xl:ml-3"
+              class="flex flex-row h-auto w-7 mr-2 pt-0.5 ml-3 sm:w-6 sm:ml-0 lg:mr-4 xl:mr-12 xl:ml-2"
             >
               <img src="/WishBtn.png" />
               <div class="ml-1 hidden xl:block text-white">WISH</div>
@@ -183,6 +183,7 @@ function Header(props) {
                       Items={props.items}
                       ItemChangeInwishlist={props.updateWishList}
                       WishItems={props.wishItems}
+                      FreeItems={props.freeItems}
                       CartAccount={props.Account}
                       OpenCart={props.OpenCart}
                     />
@@ -246,10 +247,12 @@ function Header(props) {
                       Items={props.items}
                       ItemChangeInwishlist={props.updateWishList}
                       WishItems={props.wishItems}
+                      FreeItems={props.freeItems}
                       CartAccount={props.Account}
                       OpenCart={props.OpenCart}
                     />
-                    {props.items[props.Account].length > 0 && (
+                    {(props.items[props.Account].length > 0 ||
+                      props.freeItems[props.Account].length > 1) && (
                       <ButtonLink
                         to="Checkout"
                         BtnName={
