@@ -71,7 +71,7 @@ const Checkout = function ({
       <DiscountCode handleDiscount={handleDiscount} IsCodeUse={isCodeUse} />
       {PriceSum > 0 ? (
         <h5 className="bg-blue-50 rounded-md p-3 font-bold h-20 content-center text-2xl text-center md:text-right">
-          Total Prices : {(PriceSum * Discount).toFixed(1)}
+          Total Prices : ${(PriceSum * Discount).toFixed(1)}
         </h5>
       ) : (
         <h3 className="bg-blue-50 rounded-md p-3 font-bold h-20 content-center text-2xl text-center md:text-right">
