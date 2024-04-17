@@ -49,6 +49,8 @@ if (savedWishList.exists()) {
   getWishList = { Data: {} };
 }
 
+// FreeProductList firebase data
+
 const docFreeList = doc(db, "PNS", "FreeList");
 const savedFreeList = await getDoc(docFreeList);
 let getFreeList = savedFreeList.data();
