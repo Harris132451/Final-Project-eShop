@@ -52,7 +52,7 @@ const Reviews = () => {
               <div className="flex flex-col items-center mr-4">
                 <Avatar avatarId={review.avatarId} />
                 <div className="font-medium dark:text-white">
-                  <p>{review.user.username}</p>
+                <p>{review.user ? review.user.username : 'Anonymous'}</p>
                 </div>
               </div>
               <div className="flex-grow">

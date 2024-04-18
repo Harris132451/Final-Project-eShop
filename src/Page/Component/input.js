@@ -150,7 +150,7 @@ const Inputbox = function () {
             <input
               onChange={(b) => InputName(b)}
               value={Word}
-              placeholder="Serach here . . ."
+              placeholder="Search here . . ."
               class="w-64 lg:w-72 border-2 border-blue-700  rounded-full bg-blue-800 text-white px-5 py-1 opacity-80 text"
             ></input>
             {ResultName.length > 0 && IsBtnVisible && (
