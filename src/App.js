@@ -349,12 +349,12 @@ export default function App() {
           <Lottery
                 updateCart={updateCart}
                 updateWishList={updateWishList}
-                updateAccountName={updateAccountName}
+                updateAccountName={updateAccount}
                 items={cartData}
                 wishItems={wishListData}
                 updateIsOpenCart={updateIsOpenCart}
                 updateIsOpenWishList={updateIsOpenWishList}
-                Account={AccountName}
+                Account={Account}
               />
         }
         />
