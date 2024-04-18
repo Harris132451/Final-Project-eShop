@@ -343,21 +343,21 @@ export default function App() {
               />
             }
           />
-        <Route 
-        path="/Lottery"
-        element={
-          <Lottery
+          <Route
+            path="/Lottery"
+            element={
+              <Lottery
                 updateCart={updateCart}
                 updateWishList={updateWishList}
-                updateAccountName={updateAccountName}
+                updateAccountName={updateAccount}
                 items={cartData}
                 wishItems={wishListData}
                 updateIsOpenCart={updateIsOpenCart}
                 updateIsOpenWishList={updateIsOpenWishList}
-                Account={AccountName}
+                Account={Account[0]}
               />
-        }
-        />
+            }
+          />
         </Routes>
       </BrowserRouter>
       <Footer />

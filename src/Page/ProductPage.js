@@ -69,10 +69,6 @@ const ProductPage = (props) => {
                     <path d="M12 2L9.15 8.36L2 9.27L7.24 14.14L6.18 21.01L12 17.77L17.82 21.01L16.76 14.14L22 9.27L14.85 8.36L12 2Z" />
                   </svg>
                 ))}
-<<<<<<< HEAD
-                <span className="text-gray-600 ml-3">
-                   259 Reviews
-=======
                 <span className="text-gray-600 ml-3">5 Reviews</span>
               </div>
               <p className="leading-relaxed">{product.warn}</p>
@@ -85,7 +81,6 @@ const ProductPage = (props) => {
               <div className="flex items-center justify-between mt-6 pb-5 border-b-2 border-gray-200 mb-5">
                 <span className="title-font font-medium text-2xl text-gray-900">
                   ${product.price}
->>>>>>> a3272dc34d53becd5fd6f0ae1c4dd311c45dfdd0
                 </span>
                 <div className="flex items-center">
                   <button
