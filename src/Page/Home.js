@@ -4,6 +4,7 @@ import withLoader from "./Component/withLoader";
 import { Link } from "react-router-dom";
 import { item } from "./Component/product";
 import PromotionBlock from "./Component/PromotionBlock";
+import SlotBtn from "./Component/SlotBtn";
 
 const Home = function (props) {
   const [weather, setWeather] = useState("");
@@ -195,6 +196,8 @@ const Home = function (props) {
       <PromotionBlock />
 
       {renderRecommendedProducts()}
+
+      <SlotBtn />
     </>
   );
 };
