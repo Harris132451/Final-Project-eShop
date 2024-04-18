@@ -2,19 +2,24 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import { Tooltip } from "react-tooltip";
 
-export default function SlotBtn() {
+export default function SlotBtn(props) {
   const nav = useNavigate();
   return (
     <>
       <div
         data-tooltip-id="SlotBtn"
-        className="fixed left-10 top-1/2 h-24 w-24 z-10 cursor-pointer"
+        className="fixed left-10 top-1/2 h-32 w-32 z-10 cursor-pointer"
       >
         <button
-          className="bg-white hover:bg-blue-400 rounded-full"
-          onClick={() => nav("/Lottery")}
+          onClick={
+            () => (props.Signin === "true" ? nav("/Lottery") : nav("/Signin")) //True is string or boolem?
+          }
         >
-          <img src="/SlotMachine.png" alt="SlotMachine" />
+          <img
+            className="h-28 w-28"
+            src="/SlotMachine2.png"
+            alt="SlotMachine"
+          />
         </button>
       </div>
       <Tooltip
