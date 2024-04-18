@@ -356,7 +356,7 @@ export default function App() {
                 wishItems={wishListData}
                 updateIsOpenCart={updateIsOpenCart}
                 updateIsOpenWishList={updateIsOpenWishList}
-                Account={Account[0]}
+                Account={Account}
               />
             }
           />
