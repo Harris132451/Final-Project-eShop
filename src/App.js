@@ -9,7 +9,6 @@ import Signin from "./Page/Signin.js";
 import Signup from "./Page/Signup.js";
 import CategoriesPage from "./Page/Component/categoriesPage.js";
 import SmallCategoriesPage from "./Page/Component/smallCategoriesPage.js";
-import Lottery from "./Page/Component/Lottery.js";
 import ScrollButton from "./Page/Component/ScrollBtn.js";
 import { collection, doc, setDoc, getDoc } from "firebase/firestore";
 import { db } from "./firebase/firebase.js";
@@ -345,21 +344,7 @@ export default function App() {
               />
             }
           />
-          <Route
-            path="/Lottery"
-            element={
-              <Lottery
-                updateCart={updateCart}
-                updateWishList={updateWishList}
-                updateAccountName={updateAccount}
-                items={cartData}
-                wishItems={wishListData}
-                updateIsOpenCart={updateIsOpenCart}
-                updateIsOpenWishList={updateIsOpenWishList}
-                Account={Account}
-              />
-            }
-          />
+        
         </Routes>
       </BrowserRouter>
       <Footer />
