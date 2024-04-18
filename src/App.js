@@ -227,7 +227,7 @@ export default function App() {
       await setDoc(doc(listRef, "FreeList"), {
         Data,
       });
-      setWishListData(AccFreeListData);
+      setFreeListData(AccFreeListData);
     }
     localStorage.setItem("Account", JSON.stringify(Acc));
     SaveAcc = Acc;

@@ -17,7 +17,7 @@ const Box = function ({
     setIsLoading(true);
     const timer = setTimeout(() => {
       setIsLoading(false);
-    }, 100);
+    }, 50);
 
     return () => {
       clearTimeout(timer);
@@ -28,7 +28,9 @@ const Box = function ({
     <>
       {OpenCart && (
         <div>
-          {Items[CartAccount].length === 0 &&
+          {Items[CartAccount] &&
+          FreeItems[CartAccount] &&
+          Items[CartAccount].length === 0 &&
           FreeItems[CartAccount].length < 1 ? (
             <div class="text-center my-56 md:my-44 text-xl md:text-[15px] w-[400px] md:w-[350px]">
               No Product in Cart !
@@ -48,7 +50,8 @@ const Box = function ({
                     FreeItems[CartAccount].length > 1 && (
                       <FreeBox freeItemsList={FreeItems[CartAccount]} />
                     )}
-                  {Items[CartAccount].length > 1 &&
+                  {Items[CartAccount] &&
+                    Items[CartAccount].length > 1 &&
                     Items[CartAccount].map((p) => {
                       return (
                         <ProductCount
@@ -58,7 +61,7 @@ const Box = function ({
                         />
                       );
                     })}
-                  {Items[CartAccount].length === 1 && (
+                  {Items[CartAccount] && Items[CartAccount].length === 1 && (
                     <ProductCount
                       ItemQtyChangeIncart={ItemChangeIncart}
                       ItemInfo={Items[CartAccount][0]}
@@ -73,7 +76,7 @@ const Box = function ({
       )}
       {!OpenCart && (
         <div>
-          {WishItems[CartAccount].length === 0 ? (
+          {WishItems[CartAccount] && WishItems[CartAccount].length === 0 ? (
             <div class="text-center my-56 md:my-44 text-xl md:text-[15px] w-[400px] md:w-[350px]">
               No Product in Wish List !
             </div>
@@ -88,7 +91,8 @@ const Box = function ({
                 </div>
               ) : (
                 <div class="overflow-scroll bg-white rounded border-solid border-grey shadow-inner border-[0.5px] mt-2 h-[520px] md:h-[420px]">
-                  {WishItems[CartAccount].length > 1 &&
+                  {WishItems[CartAccount] &&
+                    WishItems[CartAccount].length > 1 &&
                     WishItems[CartAccount].map((p) => {
                       return (
                         <ProductCount
@@ -99,14 +103,15 @@ const Box = function ({
                         />
                       );
                     })}
-                  {WishItems[CartAccount].length === 1 && (
-                    <ProductCount
-                      ItemQtyChangeIncart={ItemChangeIncart}
-                      ItemChangeInwishlist={ItemChangeInwishlist}
-                      ItemInfo={WishItems[CartAccount][0]}
-                      isOpenCart={OpenCart}
-                    />
-                  )}
+                  {WishItems[CartAccount] &&
+                    WishItems[CartAccount].length === 1 && (
+                      <ProductCount
+                        ItemQtyChangeIncart={ItemChangeIncart}
+                        ItemChangeInwishlist={ItemChangeInwishlist}
+                        ItemInfo={WishItems[CartAccount][0]}
+                        isOpenCart={OpenCart}
+                      />
+                    )}
                 </div>
               )}
             </div>

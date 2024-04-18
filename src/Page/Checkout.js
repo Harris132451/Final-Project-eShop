@@ -61,6 +61,7 @@ const Checkout = function ({
       </div>
       {freeProduct.length > 0 &&
         freeProduct.map((p) => {
+          p.price = 0;
           return <TotalPriceCount ItemInfo={p} />;
         })}
       {items[Account].length > 1 &&

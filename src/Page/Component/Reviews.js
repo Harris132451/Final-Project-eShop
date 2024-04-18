@@ -45,7 +45,7 @@ const Reviews = () => {
 
   return (
     <>
-      <div className="flex flex-col items-center justify-center px-10 py-10 mx-auto bg-white shadow-lg max-w-4xl truncate inline-block rounded-xl">
+      <div className="flex flex-col items-center justify-center px-10 py-10 mx-auto bg-white shadow-lg max-w-4xl truncate rounded-xl">
         <div className="container px-10 py-5 mx-auto bg-white  rounded-xl max-w-4xl truncate inline-block">
           {reviewsData.map((review, index) => (
             <article key={index} className="flex items-start mb-8">

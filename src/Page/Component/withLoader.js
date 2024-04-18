@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import Loader from './Loading/Loader';
+import React, { useState, useEffect } from "react";
+import Loader from "./Loading/Loader";
 
 const withLoader = (WrappedComponent) => {
   return (props) => {
@@ -8,7 +8,7 @@ const withLoader = (WrappedComponent) => {
     useEffect(() => {
       const timer = setTimeout(() => {
         setIsLoading(false);
-      }, 1000);
+      }, 300);
 
       return () => {
         clearTimeout(timer);
@@ -16,9 +16,7 @@ const withLoader = (WrappedComponent) => {
     }, []);
 
     return (
-      <div>
-        {isLoading ? <Loader /> : <WrappedComponent {...props} />}
-      </div>
+      <div>{isLoading ? <Loader /> : <WrappedComponent {...props} />}</div>
     );
   };
 };

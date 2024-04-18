@@ -29,6 +29,13 @@ const Inputbox = function () {
     setResultName(NameArr);
   }, [Word]);
 
+  function ProductBtnOnClick() {
+    setWord("");
+    setResultName([]);
+    setIsBtnVisible(false);
+    setIsSerachBtn(false);
+  }
+
   const inputRef = useRef(null);
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -52,12 +59,10 @@ const Inputbox = function () {
       setWindowWidth(window.innerWidth);
     };
     window.addEventListener("resize", handleResize);
-    if (window.innerWidth >= 1024) {
-      setIsSerachBtn(false);
-    } else {
-      setWord("");
-      setResultName([]);
-    }
+
+    setWord("");
+    setResultName([]);
+
     return () => {
       window.removeEventListener("resize", handleResize);
     };
@@ -105,7 +110,7 @@ const Inputbox = function () {
                     {isLoading ? (
                       <img
                         src="https://www.dcinfotech.com/html/admin/uploads/blog/1577516586loading.gif"
-                        class="w-[80px] h-auto ml-2"
+                        class="w-[50px] h-auto ml-3"
                       />
                     ) : (
                       <div class="overflow-scroll h-96">
@@ -119,6 +124,9 @@ const Inputbox = function () {
                                 <li>
                                   <Link
                                     key={n}
+                                    onClick={() => {
+                                      ProductBtnOnClick();
+                                    }}
                                     to={`/products/${n}`}
                                     class="pb-2 border-b-2 border-grey block w-72 px-4 py-2 text-blue-900 hover:bg-blue-100 active:bg-blue-200 cursor-pointer rounded-md"
                                   >
@@ -165,6 +173,9 @@ const Inputbox = function () {
                               <li>
                                 <Link
                                   key={n}
+                                  onClick={() => {
+                                    ProductBtnOnClick();
+                                  }}
                                   to={`/products/${n}`}
                                   class="block w-72 px-4 py-2 text-blue-900 hover:bg-blue-100 active:bg-blue-200 cursor-pointer rounded-md"
                                 >

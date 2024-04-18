@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { AccountList } from "./Component/AL.js";
 import { auth } from "../firebase/firebase.js";
 import { signInWithEmailAndPassword, signOut } from "firebase/auth";
+import withLoader from "./Component/withLoader";
 
 const Signin = function ({ updateAccountName }) {
   const [InputID, setInputID] = useState("");
@@ -134,4 +135,4 @@ const Signin = function ({ updateAccountName }) {
   );
 };
 
-export default Signin;
+export default withLoader(Signin);
