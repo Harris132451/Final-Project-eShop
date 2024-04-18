@@ -50,6 +50,8 @@ if (savedWishList.exists()) {
   getWishList = { Data: {} };
 }
 
+// FreeProductList firebase data
+
 const docFreeList = doc(db, "PNS", "FreeList");
 const savedFreeList = await getDoc(docFreeList);
 let getFreeList = savedFreeList.data();
@@ -226,7 +228,7 @@ export default function App() {
       await setDoc(doc(listRef, "FreeList"), {
         Data,
       });
-      setWishListData(AccFreeListData);
+      setFreeListData(AccFreeListData);
     }
     localStorage.setItem("Account", JSON.stringify(Acc));
     SaveAcc = Acc;

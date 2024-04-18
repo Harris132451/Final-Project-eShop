@@ -12,6 +12,8 @@ function Header(props) {
   const temperature = props.temperature;
   const weather = props.weather;
 
+  console.log(props.freeItems);
+
   function ButtonLink({ to, BtnName }) {
     return <Link to={to}>{BtnName}</Link>;
   }
@@ -41,7 +43,7 @@ function Header(props) {
           <ButtonLink
             to="/"
             BtnName={
-              <button class="w-28 pt-4 md:w-40 md:pt-1 lg:w-44 lg:pt-0">
+              <button class="w-32 pt-3 md:w-40 md:pt-1 lg:w-44 lg:pt-0">
                 <img
                   src="https://api.pns.hk/medias/PNS-logo-2X.png?context=bWFzdGVyfHBuc2hrL2ltYWdlc3w4MDE0fGltYWdlL3BuZ3xhREZsTDJnNU5DOHhNRFl4TmprNU9EazROVGMxT0M5UVRsTmZiRzluYjE4eVdDNXdibWN8Nzg4ODYyOWY1NDEwM2VhMjNkMjJiN2M5ODkxMzQzMjVkYWNkMWQ1NWJhMDk5OWIwZTgzMGViMGE2YzljNTllZQ"
                   alt="logo"
@@ -174,7 +176,7 @@ function Header(props) {
                     />
                   </button>
                 </div>
-                {props.items[props.Account] && (
+                {props.wishItems[props.Account] && (
                   <>
                     <Box
                       ItemChangeIncart={props.updateCart}
@@ -249,22 +251,24 @@ function Header(props) {
                       CartAccount={props.Account}
                       OpenCart={props.OpenCart}
                     />
-                    {(props.items[props.Account].length > 0 ||
-                      props.freeItems[props.Account].length > 1) && (
-                      <ButtonLink
-                        to="Checkout"
-                        BtnName={
-                          <button
-                            class="bg-blue-200 mt-4 ml-[150px] md:w-[110px] md:h-[35px] md:ml-[125px] font-bold rounded-xl shadow-md hover:bg-blue-300 hover:shadow-none active:bg-blue-400"
-                            onClick={() => {
-                              props.updateIsOpenCart(!props.OpenCart);
-                            }}
-                          >
-                            Get Total
-                          </button>
-                        }
-                      />
-                    )}
+                    {props.items[props.Account] &&
+                      props.freeItems[props.Account] &&
+                      (props.items[props.Account].length > 0 ||
+                        props.freeItems[props.Account].length > 1) && (
+                        <ButtonLink
+                          to="Checkout"
+                          BtnName={
+                            <button
+                              class="bg-blue-200 mt-4 ml-[150px] md:w-[110px] md:h-[35px] md:ml-[125px] font-bold rounded-xl shadow-md hover:bg-blue-300 hover:shadow-none active:bg-blue-400"
+                              onClick={() => {
+                                props.updateIsOpenCart(!props.OpenCart);
+                              }}
+                            >
+                              Get Total
+                            </button>
+                          }
+                        />
+                      )}
                   </>
                 )}
               </div>
@@ -283,7 +287,7 @@ function Header(props) {
             >
               <Link
                 to={`/${bigcategorie.Name}`}
-                className="flex items-center gap-[2px] py-2flex py-2 font-bold text-lg bg-white text-black px-3 rounded-md transition-colors duration-300 hover:bg-blue-500 hover:text-white transition-delay-150"
+                className="flex items-center gap-[2px] py-2 font-bold text-lg bg-white text-black px-3 rounded-md transition-colors duration-300 hover:bg-blue-500 hover:text-white transition-delay-150"
               >
                 <span>
                   <FaCaretDown className="transition-all duration-200 group-hover:rotate-180" />

@@ -2,6 +2,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { auth } from "../firebase/firebase.js";
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
+import withLoader from "./Component/withLoader";
 
 function Signup({ updateAccountName }) {
   const [InputName, setInputName] = useState("");
@@ -63,12 +64,6 @@ function Signup({ updateAccountName }) {
         .then(() => {
           //Update Username
           updateProfile(auth.currentUser, { displayName: InputName });
-        })
-        .then(() => {
-          updateAccountName([
-            auth.currentUser.email,
-            auth.currentUser.displayName,
-          ]);
         })
         .then(() => {
           nav("/Signin");
@@ -172,4 +167,4 @@ function Signup({ updateAccountName }) {
   );
 }
 
-export default Signup;
+export default withLoader(Signup);
