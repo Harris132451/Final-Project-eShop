@@ -7,6 +7,7 @@ import ProductPage from "./Page/ProductPage.js";
 import Checkout from "./Page/Checkout.js";
 import Signin from "./Page/Signin.js";
 import Signup from "./Page/Signup.js";
+import { item } from "./Page/Component/product.js";
 import CategoriesPage from "./Page/Component/categoriesPage.js";
 import SmallCategoriesPage from "./Page/Component/smallCategoriesPage.js";
 import Lottery from "./Page/Component/Lottery.js";
@@ -184,23 +185,33 @@ export default function App() {
 
   // FreeList
 
-  async function updateFreeList(product) {
+  async function updateFreeList(order) {
     let Data = { ...freeListData };
     let acn = Account[0];
-    if (product === "Paid") {
+    if (order === "Paid" && Data[acn]) {
       Data[acn] = ["Played"];
-    } else if (!Data[acn]) {
-      Data[acn] = ["Played", { ...product, qty: 1 }];
-    } else {
-      Data[acn].push({ ...product, qty: 1 });
     }
-    await setDoc(doc(listRef, "WishList"), {
+    if (order === "Gift" && Data[acn] && Data[acn].length < 1) {
+      Data[acn] = ["Played"];
+      Data[acn].push({
+        ...item[Math.floor(Math.random() * 36)],
+        qty: 1,
+      });
+      Data[acn].push({
+        ...item[Math.floor(Math.random() * 36)],
+        qty: 1,
+      });
+      alert(
+        "Thank you for joining us 🥳 \nFor new member, 2 welcome gifts have been ready in your shoppinng cart🎉"
+      );
+    }
+    await setDoc(doc(listRef, "FreeList"), {
       Data,
     });
     setFreeListData(Data);
   }
 
-  // Account Name
+  // Account Name && FreeList
 
   async function updateAccount(Acc) {
     let AccCartData = { ...cartData };
@@ -271,9 +282,11 @@ export default function App() {
               <Home
                 updateCart={updateCart}
                 updateWishList={updateWishList}
+                updateFreeList={updateFreeList}
                 updateAccountName={updateAccount}
                 items={cartData}
                 wishItems={wishListData}
+                freeItems={freeListData}
                 updateIsOpenCart={updateIsOpenCart}
                 updateIsOpenWishList={updateIsOpenWishList}
                 Account={Account[0]}
@@ -347,18 +360,7 @@ export default function App() {
           />
           <Route
             path="/Lottery"
-            element={
-              <Lottery
-                updateCart={updateCart}
-                updateWishList={updateWishList}
-                updateAccountName={updateAccount}
-                items={cartData}
-                wishItems={wishListData}
-                updateIsOpenCart={updateIsOpenCart}
-                updateIsOpenWishList={updateIsOpenWishList}
-                Account={Account}
-              />
-            }
+            element={<Lottery updateFreeList={updateFreeList} />}
           />
         </Routes>
       </BrowserRouter>

@@ -62,6 +62,8 @@ const Inputbox = function () {
 
     setWord("");
     setResultName([]);
+    setIsBtnVisible(false);
+    setIsSerachBtn(false);
 
     return () => {
       window.removeEventListener("resize", handleResize);
@@ -101,7 +103,7 @@ const Inputbox = function () {
             <div class="flex flex-col pt-1 lg:hidden">
               <input
                 onChange={(b) => InputName(b)}
-                placeholder="Serach here . . ."
+                placeholder="Search here . . ."
                 class="text-lg h-10 w-[300px] mx-1 p-2 border-2 rounded border-blue-700"
               ></input>
               {ResultName.length > 0 && IsBtnVisible && (
@@ -150,7 +152,7 @@ const Inputbox = function () {
             <input
               onChange={(b) => InputName(b)}
               value={Word}
-              placeholder="Serach here . . ."
+              placeholder="Search here . . ."
               class="w-64 lg:w-72 border-2 border-blue-700  rounded-full bg-blue-800 text-white px-5 py-1 opacity-80 text"
             ></input>
             {ResultName.length > 0 && IsBtnVisible && (

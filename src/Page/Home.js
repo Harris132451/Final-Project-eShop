@@ -197,7 +197,14 @@ const Home = function (props) {
 
       {renderRecommendedProducts()}
 
-      <SlotBtn />
+      {!props.Account && (
+        <SlotBtn LinkName="/Signin" updateFreeList={props.updateFreeList} />
+      )}
+
+      {props.freeItems[props.Account] &&
+        props.freeItems[props.Account][0] !== "Played" && (
+          <SlotBtn LinkName="/" updateFreeList={props.updateFreeList} />
+        )}
     </>
   );
 };

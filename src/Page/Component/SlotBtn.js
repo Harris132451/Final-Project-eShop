@@ -4,22 +4,18 @@ import { Tooltip } from "react-tooltip";
 
 export default function SlotBtn(props) {
   const nav = useNavigate();
+  function GetFreeGift() {
+    nav(props.LinkName);
+    props.updateFreeList("Gift");
+  }
   return (
     <>
       <div
         data-tooltip-id="SlotBtn"
         className="fixed left-10 top-1/2 h-32 w-32 z-10 cursor-pointer"
       >
-        <button
-          onClick={
-            () => (props.Signin === "true" ? nav("/Lottery") : nav("/Signin")) //True is string or boolem?
-          }
-        >
-          <img
-            className="h-28 w-28"
-            src="/SlotMachine2.png"
-            alt="SlotMachine"
-          />
+        <button onClick={() => GetFreeGift()}>
+          <img className="h-20 w-20" src="/Gift.png" alt="SlotMachine" />
         </button>
       </div>
       <Tooltip
