@@ -10,7 +10,6 @@ import Signup from "./Page/Signup.js";
 import { item } from "./Page/Component/product.js";
 import CategoriesPage from "./Page/Component/categoriesPage.js";
 import SmallCategoriesPage from "./Page/Component/smallCategoriesPage.js";
-import Lottery from "./Page/Component/Lottery.js";
 import ScrollButton from "./Page/Component/ScrollBtn.js";
 import { collection, doc, setDoc, getDoc } from "firebase/firestore";
 import { db } from "./firebase/firebase.js";
@@ -357,10 +356,6 @@ export default function App() {
                 Account={Account[0]}
               />
             }
-          />
-          <Route
-            path="/Lottery"
-            element={<Lottery updateFreeList={updateFreeList} />}
           />
         </Routes>
       </BrowserRouter>

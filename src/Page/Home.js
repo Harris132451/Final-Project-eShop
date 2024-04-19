@@ -3,8 +3,8 @@ import PromotionSlider from "./Component/Slider";
 import withLoader from "./Component/withLoader";
 import { Link } from "react-router-dom";
 import { item } from "./Component/product";
-import PromotionBlock from "./Component/PromotionBlock";
 import SlotBtn from "./Component/SlotBtn";
+import PromotionBlock from "./Component/PromotionBlock";
 
 const Home = function (props) {
   const [weather, setWeather] = useState("");
