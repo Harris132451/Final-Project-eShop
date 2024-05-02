@@ -73,6 +73,8 @@ if (!SaveAcc) {
   SaveAcc = [];
 }
 
+alert("This is only for Final Project for study. \nNot for business use.");
+
 export default function App() {
   const [cartData, setCartData] = useState(getCart["Data"]);
   const [wishListData, setWishListData] = useState(getWishList["Data"]);

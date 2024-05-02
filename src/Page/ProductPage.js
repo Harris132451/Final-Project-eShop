@@ -69,27 +69,23 @@ const ProductPage = (props) => {
                     <path d="M12 2L9.15 8.36L2 9.27L7.24 14.14L6.18 21.01L12 17.77L17.82 21.01L16.76 14.14L22 9.27L14.85 8.36L12 2Z" />
                   </svg>
                 ))}
-                <span className="text-gray-600 ml-3">
-                   259 Reviews
+                <span className="text-gray-600 ml-3">259 Reviews</span>
+              </div>
+
+              <p className="leading-relaxed my-6">{product.warn}</p>
+
+              <div className="flex mt-6 items-center pb-5 border-b-2 border-gray-200 mb-5">
+                <div className="flex">
+                  <span className="mr-3">Unit</span>
+                  <span className="mr-4">{product.unit}</span>
+                </div>
+              </div>
+
+              <div className="flex items-center justify-between mt-6 pb-5 border-b-2 border-gray-200 mb-5">
+                <span className="title-font font-medium text-2xl text-gray-900">
+                  ${product.price}
                 </span>
-              </div>
-
-              <p className="leading-relaxed my-6">
-              {product.warn}
-            </p>
-
-            <div className="flex mt-6 items-center pb-5 border-b-2 border-gray-200 mb-5">
-              <div className="flex">
-                <span className="mr-3">Unit</span>
-                <span className="mr-4">{product.unit}</span>
-              </div>
-            </div>
-
-            <div className="flex items-center justify-between mt-6 pb-5 border-b-2 border-gray-200 mb-5">
-            <span className="title-font font-medium text-2xl text-gray-900">
-          ${product.price}
-        </span>
-            <div className="flex items-center">
+                <div className="flex items-center">
                   <button
                     onClick={() => {
                       let newData = { ...props.wishItems };
@@ -107,7 +103,7 @@ const ProductPage = (props) => {
                         }
                       }
                       if (!acn) {
-                        props.updateIsOpenCart(true);
+                        props.updateIsOpenWishList(true);
                       } else if (window.innerWidth >= 768) {
                         props.updateIsOpenWishList(true);
                       }
@@ -164,10 +160,8 @@ const ProductPage = (props) => {
                     Add to cart
                   </button>
                 </div>
-            </div>
-                
-                
-          
+              </div>
+
               <div className="flex items-center justify-between mt-6 pb-5 border-b-2 border-gray-200 mb-5">
                 <div className="flex items-center space-x-2">
                   <img

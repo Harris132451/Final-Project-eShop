@@ -14,7 +14,9 @@ const Checkout = function ({
   const [isCodeUse, setIsCodeUse] = useState(false);
   function PaidDeleteCart() {
     updateCart("Paid");
-    updateFreeList("Paid");
+    if (freeItems[Account] && freeItems[Account].length > 0) {
+      updateFreeList("Paid");
+    }
   }
 
   let freeProduct = [];
@@ -81,9 +83,13 @@ const Checkout = function ({
           )}
         </h5>
       ) : (
-        <h3 className="bg-blue-50 rounded-md p-3 font-bold h-20 content-center text-2xl text-center md:text-right">
-          Nothing in Cart !
-        </h3>
+        <div className="bg-blue-50 rounded-md p-3 font-bold h-20 content-center text-2xl text-center md:text-right">
+          {freeItems[Account].length > 1 ? (
+            <div>$ 0.0</div>
+          ) : (
+            <h3>Nothing in Cart !</h3>
+          )}
+        </div>
       )}
       <div className="bg-blue-50 rounded-md p-3 font-bold h-40 content-center">
         <Link to="/">

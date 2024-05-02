@@ -65,7 +65,7 @@ const SmallCategoriesPage = (props) => {
                         }
                       }
                       if (!acn) {
-                        props.updateIsOpenCart(true);
+                        props.updateIsOpenWishList(true);
                       } else if (window.innerWidth >= 768) {
                         props.updateIsOpenWishList(true);
                       }
