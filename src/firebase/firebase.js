@@ -11,13 +11,13 @@ import { getAuth } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyAlfQxAV01MKSUnffMtmq6bTksAcXSNuSA",
-  authDomain: "generation-group-eshop.firebaseapp.com",
-  projectId: "generation-group-eshop",
-  storageBucket: "generation-group-eshop.appspot.com",
-  messagingSenderId: "551318279692",
-  appId: "1:551318279692:web:44d464660b5437ef994029",
-  measurementId: "G-LWZBK7E1JY",
+  apiKey: "AIzaSyD9alnhyrODBzH-6KzvZY5LnxQLgG4wSz8",
+  authDomain: "eshop-6e5eb.firebaseapp.com",
+  projectId: "eshop-6e5eb",
+  storageBucket: "eshop-6e5eb.appspot.com",
+  messagingSenderId: "393840775935",
+  appId: "1:393840775935:web:ed6f0194129569b4e372ca",
+  measurementId: "G-LNDC9FV9M1",
 };
 
 // Initialize Firebase
